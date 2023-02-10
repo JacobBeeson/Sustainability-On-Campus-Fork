@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="tetstylesheet.css">
+        <link rel="stylesheet" href="SuStylesheet.css">
         <script>
             function validateform(){
                 let userN = document.forms["regForm"]["username"].value;
@@ -26,8 +26,8 @@
                     <h1>register for PlaceHolder Name</h1>
                     Username: <input type="text" name="username" required><br>
                     Password: <input type="password" placeholder="password" name="password" required><br>
-                    confirm password: <input type="password" placeholder="confirm password" name="cpassword" required><br>
-                  Pet name: <input type="text" name="petName" required> <br>
+                    Confirm Password: <input type="password" placeholder="confirm password" name="cpassword" required><br>
+                  Pet Name: <input type="text" name="petName" required> <br>
                     <button type="submit">Register</button>
                 </form>
             </div>

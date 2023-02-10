@@ -80,7 +80,7 @@ mysqli_close($conn);
 
             <?php }else{?>
                 <div>
-                <h1>Welcome To Tetris</h1>
+                <h1>Welcome To PlaceHolder name</h1>
                 <?php if($notRegistered){ ?>
                     <p> error username already exists or is invalid </p>
                 <?php } elseif($notLogged&&$logAttempt){ ?>
