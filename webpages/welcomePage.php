@@ -15,10 +15,51 @@ $lname = $_POST["lname"];
 $cpassword = $_POST["cpassword"];
 $display = $_POST["display"];
 
+/*
 $dbusername = "";//connects to the database 
 $dbpassword = "";
 $dbname = "";
+$conn = mysqli_connect("localhost", $dbusername, $dbpassword, $dbname);
 
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error()); //gives reason for connection error 
+}
+
+$logAttempt = false;
+$notLogged = true;
+
+
+if (isset($fname)){ //registers a new user 
+    $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO Users VALUES ('$username', '$fname', '$lname', '$hashPassword', $display);";
+    if (mysqli_query($conn, $sql) ) {
+        $notRegistered = false;
+    } else {
+        $notRegistered = true;
+    }
+}
+
+
+if(isset($username)&&$notRegistered!=true){ //logs in a user 
+    $logAttempt = true;
+    $sql = "SELECT * FROM Users";
+    $result = mysqli_query($conn,$sql);
+    if (mysqli_num_rows($result) > 0) {
+        while( $row = mysqli_fetch_assoc($result) ) {
+            if (($row["UserName"] == $username) && (password_verify($password, $row["Password"]))){
+                $_SESSION["userName"] = $username;
+                $notLogged = false;
+                break;
+            }
+        }
+    }
+}
+
+
+
+
+mysqli_close($conn);
+*/
 ?>
 <html>
     <head>
@@ -28,7 +69,7 @@ $dbname = "";
            <div class="main">
             <?php if (isset($_SESSION["userName"])) {?>
                 <div>
-                    <form action="tetris.php" method="get">
+                    <form action="characterPage.php" method="get">
                         <h1>Welcome To Placeholder Name</h1>
                         <button>Click here to play</button>
                     </form>
