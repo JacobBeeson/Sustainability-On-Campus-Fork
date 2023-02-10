@@ -4,7 +4,7 @@ session_start();
 if(isset($_POST["logOut"])){ //logs out user if log out button pressed
     session_unset();
     session_destroy();
-    header("Location: index.php");
+    header("Location: welcomePage.php");
     exit();
 }
 $username = $_POST["username"]; //these get all the data from the login form 
@@ -73,7 +73,7 @@ mysqli_close($conn);
                         <h1>Welcome To Placeholder Name</h1>
                         <button>Click here to play</button>
                     </form>
-                        <form action="index.php" method="post">
+                        <form action="welcomePage.php" method="post">
                         <button name="logOut">log out</button>
                     </form>
                 </div>
@@ -86,7 +86,7 @@ mysqli_close($conn);
                 <?php } elseif($notLogged&&$logAttempt){ ?>
                     <P> username or password incorrect </p>
                 <?php } ?>
-                    <form action="index.php" method="post" id="login">
+                    <form action="welcomePage.php" method="post" id="login">
                         username: <input type="text" placeholder="Username" name="username" required><br>
                         password: <input type="password" placeholder="Password" name="password" required><br>
                         <button type="submit">Login</button><br>

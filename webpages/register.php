@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="SuStylesheet.css">
+        <link rel="stylesheet" href="SusStylesheet.css">
         <script>
             function validateform(){
                 let userN = document.forms["regForm"]["username"].value;
@@ -27,7 +27,7 @@
                     Username: <input type="text" name="username" required><br>
                     Password: <input type="password" placeholder="password" name="password" required><br>
                     Confirm Password: <input type="password" placeholder="confirm password" name="cpassword" required><br>
-                  Pet Name: <input type="text" name="petName" required> <br>
+                    Pet Name: <input type="text" name="petName" required> <br>
                     <button type="submit">Register</button>
                 </form>
             </div>
