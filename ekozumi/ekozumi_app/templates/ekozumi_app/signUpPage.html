@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/SusStylesheet.css' %}">
+        <script>
+            function validateform(){
+                let userN = document.forms["regForm"]["username"].value;
+                let passW = document.forms["regForm"]["password"].value;
+                let CpassW = document.forms["regForm"]["cpassword"].value;
+                
+                if(passw == CpassW){
+                    return true;
+                } else {
+                    alert("passwords must match");
+                    return false;
+                }
+
+                
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="top">
+                <h1 id="title" class="hidden"><span id="logo" class="animated fadeInDown">EKOZUMI </h1>
+            </div>
+            <div class="login-box animated fadeInUp">
+                <div class="box-header">
+                    <h2>Sign up</h2>
+                </div>
+                <form name="regForm" action="{% url 'ekozumi-login' %}" method="post" onsubmit="return validateform()">
+                    <label for="username" class="">Username</label>
+                    <br>
+                    <input type="text" placeholder="ecoKid123" name="username" required>
+                    <br>
+                    <label for="password" class="">Password</label>
+                    <br>
+                    <input type="password" placeholder="password" name="password" required>
+                    <br>
+                    <label for="password" class="">Confirm Password</label>
+                    <br>
+                    <input type="password" placeholder="confirm password" name="cpassword" required>
+                    <br>
+                    <label for="petName" class="">Pet Name</label>
+                    <br>
+                    <input type="text" placeholder="mittens" name="petName" required> 
+                    <br>
+                    <button type="submit">Register</button>
+                </form>
+                
+            </div>
+        </div>
+    </body>
+</html>
