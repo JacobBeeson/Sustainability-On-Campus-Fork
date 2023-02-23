@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <title>Ekozumi</title>
     </head> 
     <body>
         <div class="top">
@@ -11,17 +12,10 @@
             <div class="box-header">
                 <h2>Log In</h2>
             </div>
-            <form action="welcomePage.php" method="post" id="login">
-                <label for="username" class="">Username</label>
-                <br>
-                <input type="text" id="username">
-                <br>
-                <label for="password">Password</label>
-                <br>
-                <input type="password" id="password">
-                <br>
-                <button type="submit">Sign In</button>
-                <br>
+            <form method="post" id="login">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Log In</button>
                 <a href="{% url 'ekozumi-register' %}"><p class="small">Sign up now!</p></a>
             </form>        
         </div>

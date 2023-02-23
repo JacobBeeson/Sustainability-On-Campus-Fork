@@ -1,0 +1,13 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <title>Ekozumi</title>
+    </head> 
+    <body>
+        <div class="top">
+            <h1>Hello {{user}}</h1>
+            <p>Displaying pet {{user.profile.petID}}</p>
+        </div>
+    </body>
+</html>
