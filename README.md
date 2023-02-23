@@ -1,6 +1,6 @@
 # Ekozumi
 
-Welcome to Sustainable Tamagotchi - the game where you can nurture your virtual pet and learn about sustainability at the same time!
+Welcome to Ekozumi - the game where you can nurture your virtual pet and learn about sustainability at the same time!
 
 ## Description
 
