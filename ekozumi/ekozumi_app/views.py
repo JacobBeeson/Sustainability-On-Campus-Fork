@@ -1,9 +1,57 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .forms import SignUpForm, ZumiCreationForm
+from .models import Pet
+from django.contrib.auth import authenticate, login
+ 
+def registrationPage(request):
+    '''
+    Contains the logic for when a user registers
+    '''
+    # True when there is a post request
+    if request.method == 'POST':
+        # Processes the form
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  
 
-# Create your views here.
-def login(request):
-    return render(request, "ekozumi_app/loginPage.html")
+            # load the profile instance created by the signal
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
 
-def register(request):
-    return render(request, "ekozumi_app/signUpPage.html")
+            # login user after signing up
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+
+            # redirect user to zumi creation page
+            return redirect('zumi_creation')
+    else:
+        form = SignUpForm()
+    return render(request, 'ekozumi_app/register.html', {'form': form})
+
+def homePage(request):
+    return render(request, "ekozumi_app/home.html")
+
+def zumiCreationPage(request):
+    '''
+    View for creating as zumi
+    '''
+    if request.method == 'POST':
+        form = ZumiCreationForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            # Creates a new pet
+            pet = Pet(petName = cleaned_data['petName'], petType = cleaned_data['petType'],)
+            pet.save()
+            # Links pet and user
+            current_user = request.user
+            current_user.profile.petID=pet
+            current_user.save()
+
+            return redirect('home_page')
+    else:
+        form = ZumiCreationForm()
+    return render(request, "ekozumi_app/zumi_creation.html", {'form':form})
+
+def puzzlePage(request):
+    return render(request, "ekozumi_app/puzzle.html")

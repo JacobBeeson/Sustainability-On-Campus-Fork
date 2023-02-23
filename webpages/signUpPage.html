@@ -1,6 +1,7 @@
+{% load static %}
 <html>
     <head>
-        <link rel="stylesheet" href="SusStylesheet.css">
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css%}">
         <script>
             function validateform(){
                 let userN = document.forms["regForm"]["username"].value;
@@ -19,15 +20,14 @@
         </script>
     </head>
     <body>
-        <div class="container">
             <div class="top">
-                <h1 id="title" class="hidden"><span id="logo" class="animated fadeInDown">EKOZUMI </h1>
+                <h1>EKOZUMI </h1>
             </div>
-            <div class="login-box animated fadeInUp">
+            <div class="box">
                 <div class="box-header">
                     <h2>Sign up</h2>
                 </div>
-                <form name="regForm" action="loginPage.html" method="post" onsubmit="return validateform()">
+                <form name="regForm" action="{% url 'ekozumi-login' %}" method="post" onsubmit="return validateform()">
                     <label for="username" class="">Username</label>
                     <br>
                     <input type="text" placeholder="ecoKid123" name="username" required>
@@ -48,6 +48,5 @@
                 </form>
                 
             </div>
-        </div>
     </body>
 </html>
