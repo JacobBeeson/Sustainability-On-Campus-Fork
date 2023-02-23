@@ -4,7 +4,7 @@ Welcome to Sustainable Tamagotchi - the game where you can nurture your virtual 
 
 ## Description
 
-Sustainable Tamagotchi is a Django application designed to educate users about sustainable living in a fun and engaging way. Users can create an account, adopt a virtual pet, and take care of it by feeding, playing with, and educating it on sustainable practices. Additionally, users can compete with other players to see who has the most sustainable pet.
+Ekozumi is a Django application designed to educate users about sustainable living in a fun and engaging way. Users can create an account, adopt a virtual pet, and take care of it by feeding it after completing puzzles, exploring campus and battling enemies.
 
 ## Installation
 
