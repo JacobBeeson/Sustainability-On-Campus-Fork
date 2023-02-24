@@ -11,8 +11,13 @@ function getLocation() {
 
 function showPosition(position) {
     /* works out what perecentage from the bottom and the left the user is */
-    var Y_coordinate =  Math.round(((position.coords.latitude - 50.726705)/0.015542)*100 )  
-    var X_coordinate =  Math.round(((position.coords.longitude + 3.546502)/0.022987)*100 )  
+    var Y_coordinate =  Math.round(((position.coords.latitude-50.731797)/0.011093)*100 )  
+    var X_coordinate =  Math.round(((position.coords.longitude + 3.540081)/0.015715)*100 )  
+
+    if (X_coordinate > 100) {X_coordinate = 100}
+    else if (X_coordinate < 0 ) {X_coordinate = 0}
+    if (Y_coordinate > 100) {Y_coordinate = 100}
+    else if (Y_coordinate < 0) {Y_coordinate = 0}
 
     var x = document.getElementById("pet-pos");
     x.style.bottom = Y_coordinate +  "%";
@@ -20,23 +25,31 @@ function showPosition(position) {
     
 }
 
-/* top left = 
-lat 50.742247, long -3.546502
+/* left = 
+50.737611, -3.540081
 
-bottom of page = 
-50.726705, -3.543878
+bottom  = 
+50.730797, -3.525755
 
-far right of page = 
-50.736281, -3.523515
+right = 
+50.734776, -3.524366
 
-bottom right = 
-50.726705 -3.523515
+top = 
+50.741890, -3.527762
 
-50.742247-50.726705 = 0.015542
+50.741890 - 50.730797 = 0.011093
 
 
--3.523515 - -3.546502 = 0.022987
+-3.524366 - -3.540081 = 0.015715
 
-((lat-50.726705)/0.015542)*100 
-((long + 3.546502)/0.022987)*100 */
+
+
+
+50.740300, -3.529748
+
+
+50.735953, -3.525891
+
+((position.coords.latitude-50.730797)/0.011093)*100 
+((position.coords.longitude + 3.540081)/0.015715)*100 */
 
