@@ -9,5 +9,6 @@ urlpatterns = [
     path("home/", views.homePage, name="home_page"),
     path("zumi_creation/", views.zumiCreationPage, name="zumi_creation"),
     path("puzzle/", views.puzzlePage, name="puzzle"),
+    path("map/", views.mapPage, name="map"),
     path("logout/", views.logoutPage, name="logout"),
 ]

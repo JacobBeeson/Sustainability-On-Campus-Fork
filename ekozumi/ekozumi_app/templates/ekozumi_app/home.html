@@ -28,7 +28,9 @@
         <form action="{% url 'puzzle' %}">
           <button class="btn" id="btn" type="submit"><i class="fa fa-puzzle-piece"></i></button>
         </form>
-        <button class="btn" id="btn"><i class="fa fa-street-view"></i></button>
+        <form action="{% url 'map' %}">
+          <button class="btn" id="btn" type="submit"><i class="fa fa-street-view"></i></button>
+        </form>
         <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
       </div>
     </div>

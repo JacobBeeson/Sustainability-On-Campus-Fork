@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+     <head>
+         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+         <script type="text/javascript" src="{% static 'ekozumi_app/map.js' %}"></script>
+     </head>
+     <body onload="getLocation()">
+         <div class="map-box">
+             <img src="{% static 'Images/map5.png' %}" id="map">
+             <div class="pet-pos" id="pet-pos"><img src="{% static 'Images/hedge-hog-normal.png' %}"></div>
+           </div>
+         <div class="box" id="location-box">
+             <div class="box-header">
+                 <h2>location</h2>
+             </div>
+             <p id="location">looks like theres nothing here </p>
+         </div>
+     </body>
+</html>
