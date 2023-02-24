@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
  
 def registrationPage(request):
     '''
@@ -29,9 +30,11 @@ def registrationPage(request):
         form = SignUpForm()
     return render(request, 'ekozumi_app/register.html', {'form': form})
 
+@login_required()
 def homePage(request):
     return render(request, "ekozumi_app/home.html")
 
+@login_required()
 def zumiCreationPage(request):
     '''
     View for creating as zumi
@@ -53,5 +56,6 @@ def zumiCreationPage(request):
         form = ZumiCreationForm()
     return render(request, "ekozumi_app/zumi_creation.html", {'form':form})
 
+@login_required()
 def puzzlePage(request):
     return render(request, "ekozumi_app/puzzle.html")
