@@ -164,3 +164,34 @@ body {
 #puzzle-notice {
     font-size: 150%;
 }
+
+/* css specific to map */
+
+#Map {
+  	width: 100%;
+}
+
+#location-box {
+	top: 0% !important;
+}
+
+
+#map-char {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.map-box {
+	position: relative;
+	text-align: center;
+	border: 10px solid #665851;
+}
+
+.pet-pos {
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
