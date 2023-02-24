@@ -67,3 +67,7 @@ def zumiCreationPage(request):
 @login_required()
 def puzzlePage(request):
     return render(request, "ekozumi_app/puzzle.html")
+
+@login_required()
+def mapPage(request):
+    return render(request, "ekozumi_app/map.html")
