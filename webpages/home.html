@@ -1,15 +1,13 @@
-{% load static %}
+
 <html>
   <head>
-      <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+      <link rel="stylesheet" href="Ekozumi_Stylesheet.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
   <body>
 
     <div class="top-bar">
-      <form action="{% url 'logout' %}">
-        <button id ="logout" name="logout" type="submit">log out</button>
-      </form>  
+      <button id ="logout" name="logout">log out</button>
     </div>
 
     <div class="top">
@@ -20,14 +18,12 @@
         <div class="box-header">
             <h2>{{user}}'s Zumi</h2>
         </div>
-        <img id="character" src="{% static 'Images/hedge-hog-normal.png' %}" alt="character image">      
+        <img id="character" src="hedge-hog-normal.png" alt="character image">      
     </div>
 
     <div id="footer"> 
       <div class="navbar">
-        <form action="{% url 'puzzle' %}">
-          <button class="btn" id="btn" type="submit"><i class="fa fa-puzzle-piece"></i></button>
-        </form>
+        <button class="btn" id="btn"><i class="fa fa-puzzle-piece"></i></button>
         <button class="btn" id="btn"><i class="fa fa-street-view"></i></button>
         <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
       </div>

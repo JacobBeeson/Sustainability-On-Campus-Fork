@@ -20,5 +20,5 @@ from django.urls import path, include
 # to ekozumi app
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("ekozumi/", include('ekozumi_app.urls'))
+    path("ekozumi/", include('ekozumi_app.urls')),
 ]
