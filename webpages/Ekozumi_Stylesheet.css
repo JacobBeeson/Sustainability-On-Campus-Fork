@@ -195,3 +195,52 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
+/* css specific to character home page*/
+#logout{
+	position:fixed;
+	right:15px;
+	top:15px;
+	width: 10%;
+	height: 2%;
+	font-size: 20px;
+ }
+
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+	line-height: 4;
+    text-align: center;
+	box-sizing: border-box;
+}
+
+#navbar{ 
+	padding-top: 300px;
+}
+
+#btn {
+	width: 18%;
+	height: 50%;
+	background-color: white; /* Blue background */
+    border: none; /* Remove borders */
+    color: black; /* White text */
+    padding: 30px 30px; /* Some padding */
+    font-size: 45px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+	border-radius: 12px;
+}
+
+#character {
+	font-size: 100px;
+	width: 50%;
+}
+
+#btn:hover {
+    background-color: #111;
+}
+
+
+
+

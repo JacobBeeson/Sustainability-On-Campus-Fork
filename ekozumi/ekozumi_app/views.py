@@ -3,6 +3,7 @@ from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
  
 def registrationPage(request):
     '''
@@ -29,6 +30,13 @@ def registrationPage(request):
     else:
         form = SignUpForm()
     return render(request, 'ekozumi_app/register.html', {'form': form})
+
+def logoutPage(request):
+    '''
+    Logs user out of account and redirects to login page
+    '''
+    logout(request)
+    return redirect('login')
 
 @login_required()
 def homePage(request):
