@@ -191,7 +191,7 @@ body {
 
 .pet-pos {
 	position: absolute;
-	bottom: 50%;
-	left: 95%;
+	bottom: 60%;
+	left: 5%;
 	transform: translate(-50%, -50%);
 }
