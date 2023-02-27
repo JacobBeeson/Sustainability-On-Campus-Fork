@@ -1,0 +1,255 @@
+body {
+	background: url("background.jpg") no-repeat center center fixed;
+	background-size: cover;
+	font-size: 250%;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;
+}
+
+
+/*have a div with class "top" at the start of body to allow for shadow at top of page  */
+
+.top {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+
+.top h1{
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+	font-size: 3.2em;
+	color: white;
+	text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	margin: 0 auto;
+	padding-top: 10%;
+	max-width: 70%;
+	text-align: center;
+	position: relative;
+}
+
+
+/* have a div with class "box" for inner box */
+
+.box {
+    background-color: white;
+	max-width: 50%;
+	margin: 0 auto;
+	position: relative;
+	top: 10%;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+	text-align: center;
+}
+
+/* have a div within box that is class "box-header" and has a h2 tag for header of inner box */
+
+.box .box-header {
+	background-color: #665851;
+	margin-top: 0;
+}
+
+.box .box-header h2 {
+	text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 1.4em;
+	line-height: 2.8em;
+}
+
+
+/* all text must be type label */
+
+.box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: #888;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+/* all input must be type input */
+
+.box input {
+	margin-bottom: 5%;
+	padding: 2%;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #888;
+}
+
+/* all links must be type a */
+
+.box a {
+    font-size: 0.8em;
+	margin: 20px 0 0;
+	text-decoration: none;
+	color: #666;
+}
+
+.box a:hover {
+	color: #aeaeae;
+}
+
+/* all buttons must be type button */
+
+.box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 2%;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: #665851;
+	cursor:pointer;
+	outline: none;
+}
+
+.box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+/* css specific to puzzle */
+
+.box .box-header #anagram {
+	text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 1.4em;
+	line-height: 2.8em;
+}
+
+.box #button {
+    margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 2%;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: #665851;
+	cursor:pointer;
+	outline: none;
+}
+
+#txt {
+    background-color: #665851;
+	margin-top: 0;
+    text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 50%;
+	line-height: 2.8em;
+    text-align: center;
+}
+
+#puzzle-notice {
+    font-size: 150%;
+}
+
+/* css specific to map */
+
+#Map {
+  	width: 100%;
+}
+
+#location-box {
+	top: 0% !important;
+}
+
+
+#map-char {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.map-box {
+	position: relative;
+	text-align: center;
+	border: 10px solid #665851;
+}
+
+.pet-pos {
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* css specific to character home page*/
+#logout{
+	position:fixed;
+	right:15px;
+	top:15px;
+	width: 10%;
+	height: 2%;
+	font-size: 20px;
+ }
+
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+	line-height: 4;
+    text-align: center;
+	box-sizing: border-box;
+}
+
+#navbar{ 
+	padding-top: 300px;
+}
+
+#btn {
+	width: 18%;
+	height: 50%;
+	background-color: white; /* Blue background */
+    border: none; /* Remove borders */
+    color: black; /* White text */
+    padding: 30px 30px; /* Some padding */
+    font-size: 45px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+	border-radius: 12px;
+}
+
+#character {
+	font-size: 100px;
+	width: 50%;
+}
+
+#btn:hover {
+    background-color: #111;
+}
+
+/*To make the character selector carousel look good*/
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+	filter:none !important;
+}
+
+.carousel-inner img {
+	margin: auto;
+}
+
+
+

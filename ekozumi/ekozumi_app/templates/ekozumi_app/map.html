@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+     <head>
+         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+         <script type="text/javascript" src="{% static 'ekozumi_app/map.js' %}"></script>
+     </head>
+     <body onload="getLocation()">
+         <div class="map-box">
+             <img src="{% static 'Images/map5.png' %}" id="map">
+             <div class="pet-pos" id="pet-pos"><img src="{% static 'Images/hedge-hog-normal.png' %}"></div>
+           </div>
+         <div class="box" id="location-box">
+             <div class="box-header">
+                 <h2>location</h2>
+             </div>
+             <p id="location">looks like theres nothing here </p>
+         </div>
+
+         <div id="footer"> 
+            <div class="navbar">
+              <button class="btn" id="btn"><i class="fa fa-home"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+              <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
+            </div>
+          </div>
+     </body>
+</html>
