@@ -4,6 +4,8 @@ from .models import Pet
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+
+ZUMI_IMAGES = {"Hedgehog":"Images/hedge-hog-normal.png", "Badger":"Images/hedge-hog-happy.png", "Frog":"Images/hedge-hog-happy.png", "Bat":"Images/hedge-hog-happy.png", "Weasel":"Images/hedge-hog-happy.png", "Rabbit":"Images/hedge-hog-happy.png"}
  
 def registrationPage(request):
     '''
@@ -40,7 +42,10 @@ def logoutPage(request):
 
 @login_required()
 def homePage(request):
-    return render(request, "ekozumi_app/home.html")
+    current_user = request.user
+    zumi_type = current_user.profile.petID.petType
+    print("static Images/" + ZUMI_IMAGES[zumi_type])
+    return render(request, "ekozumi_app/home.html", {'image_source':ZUMI_IMAGES[zumi_type]})
 
 @login_required()
 def zumiCreationPage(request):
