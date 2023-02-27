@@ -1,4 +1,7 @@
+<!-- Map page, where users must navigate to certain geo locations,
+once they arrive in a certain location they can fight an enemy -->
 {% load static %}
+<!DOCTYPE html>
 <html>
      <head>
          <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
@@ -19,7 +22,7 @@
 
          <div id="footer"> 
             <div class="navbar">
-              <button class="btn" id="btn"><i class="fa fa-home"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
               <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
               <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
               <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
