@@ -1,3 +1,9 @@
+"""
+Views load HTML webpages, and perform any logic needed for post requests
+and displaying user specific information
+
+Authors: Christian Wood, Oscar Klemenz
+"""
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet

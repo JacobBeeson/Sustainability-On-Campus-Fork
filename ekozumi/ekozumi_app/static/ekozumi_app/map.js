@@ -1,3 +1,7 @@
+/** Map logic for map.html
+ * 
+ *  Author: Lucas Enefer
+ */
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
