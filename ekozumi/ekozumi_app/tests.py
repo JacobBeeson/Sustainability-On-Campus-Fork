@@ -4,8 +4,9 @@ Tests for ekozumi_app
 Author: Oscar Klemenz
 """
 from django.test import TestCase
-from .forms import SignUpForm
+from .forms import SignUpForm, ZumiCreationForm
 from django.contrib.auth import authenticate, login
+from .models import Pet
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -57,11 +58,45 @@ class SignUpFormTest(TestCase):
         form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"", "password2":""})
         self.assertFalse(form.is_valid())
 
+class ZumiCreationTest(TestCase):
+    """
+    Tests the zumi creation form
+    """
+
+    def testValidZumi(self):
+        """
+        Checks if a user can create a pet
+        """
+        form = ZumiCreationForm(data={"petName":'testPet', "petType":"HEDGEHOG"})
+        self.assertTrue(form.is_valid())
+    
+    def testInvalidZumi(self):
+        """
+        Checks if pet does not have a name it cannot be created
+        """
+        form = ZumiCreationForm(data={"petName":'', "petType":"HEDGEHOG"})
+        self.assertFalse(form.is_valid())
 
 class ViewResponseTest(TestCase):
     """
     Checks the HTTP response of webpages
     """
+    def setUp(self):
+        """
+        Forces user to be logged in, as some pages will force redirect user
+        if not logged in, also creates a pet for the user
+        """
+        # User form
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        user = form.save()
+
+        # Creates a new pet
+        pet = Pet(petName = 'petTest', petType = 'Hedgehog')
+        pet.save()
+        # Links pet and user
+        user.profile.petID=pet
+
+        self.client.force_login(user)
 
     def testLoginView(self):
         """
@@ -81,9 +116,26 @@ class ViewResponseTest(TestCase):
         """
         test the character creation view
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
-        user = form.save()
-        self.client.force_login(user)
-
         response = self.client.get('/ekozumi/zumi_creation/')
+        self.assertEqual(response.status_code, 200)
+    
+    def testHomeView(self):
+        """
+        test the home view
+        """
+        response = self.client.get('/ekozumi/home/')
+        self.assertEqual(response.status_code, 200)
+    
+    def testPuzzleView(self):
+        """
+        test the puzzle view
+        """
+        response = self.client.get('/ekozumi/puzzle/')
+        self.assertEqual(response.status_code, 200)
+    
+    def testMapView(self):
+        """
+        test the map view
+        """
+        response = self.client.get('/ekozumi/map/')
         self.assertEqual(response.status_code, 200)

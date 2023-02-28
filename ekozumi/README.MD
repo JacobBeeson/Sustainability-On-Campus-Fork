@@ -19,6 +19,16 @@ Our ekozumi web app can be accessed by searching `127.0.0.1:8000/ekozumi`. This 
 If you are a developer on the ekozumi app you may access the admin panel by searching `127.0.0.1:8000/admin` once the server has started.
 This will give you a login prompt, which once logged in you may view and modify models for our application
 
+## Testing
+
+To test our application:
+
+1. Open the terminal in the ekozumi directory
+2. Run the command:
+    - For Linux/Mac: `python3 manage.py test`
+    - For Windows: `py manage.py test`
+3. Once the command has run the server will start
+
 
 ## Important Backend Directories and Files
 
