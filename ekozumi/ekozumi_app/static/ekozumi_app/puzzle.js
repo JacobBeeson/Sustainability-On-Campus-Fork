@@ -1,3 +1,7 @@
+/** Puzzle logic, for puzzle.html
+ * 
+ *  Author: Elliot Wride
+ */
 var anagram;
 function startTime()
 {

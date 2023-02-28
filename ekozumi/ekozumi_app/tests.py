@@ -1,3 +1,8 @@
+"""
+Tests for ekozumi_app
+
+Author: Oscar Klemenz
+"""
 from django.test import TestCase
 from .forms import SignUpForm
 from django.contrib.auth import authenticate, login

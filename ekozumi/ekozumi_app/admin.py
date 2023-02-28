@@ -6,6 +6,6 @@ allowing for easy modification
 from django.contrib import admin
 from .models import Profile, Pet
 
-# Register your models here.
+# Models which are displayed in the admin panel
 admin.site.register(Profile)
 admin.site.register(Pet)

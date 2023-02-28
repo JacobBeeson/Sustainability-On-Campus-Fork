@@ -1,3 +1,8 @@
+"""
+Forms that will be used on different pages in our app
+
+Authors: Christian Wood, Oscar Klemenz
+"""
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import *

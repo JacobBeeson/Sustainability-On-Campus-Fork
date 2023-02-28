@@ -1,3 +1,8 @@
+"""
+Defines the models for our database
+
+Authors: Christian Wood, Olivia Kerschen
+"""
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -39,6 +44,9 @@ class Profile(models.Model):
         return self.user.username
 
 class AdminUser(models.Model):
+    '''
+    Possible way to implement admins for our application
+    '''
     userID = models.IntegerField(primary_key=True)
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=100)
