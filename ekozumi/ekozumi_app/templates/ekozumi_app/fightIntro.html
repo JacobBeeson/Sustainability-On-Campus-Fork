@@ -7,7 +7,8 @@ Author: Elliot Wride
 <html>
     
     <head>
-        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}"> 
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <title>Ekozumi</title>
     </head>
     
     <body>
@@ -16,8 +17,8 @@ Author: Elliot Wride
             I'M MR EVIL CIGARETTE BUTT! 4.5 TRILLION OF ME ARE LITTERED EACH YEAR! CIGARETTE FILTERS DO NOT DECOMPOSE AND KILL MILLIONS OF FISH AND TURTLES EACH YEAR! MWHAHAHAHAHAHAHAHAhahahaaa.
         </div>
         <div class="box">
-            <a href='fighthtml'>
-            <button style="position: relative;  vertical-align: middle; margin-top: 30;" onclick="">FIGHT!</button> 
+            <a href="{% url 'fight' %}">
+            <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 
             </a>      
         </div>>
         <div class="box2" style="bottom: 0; position: absolute; text-align: left;">
