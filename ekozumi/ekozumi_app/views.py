@@ -50,7 +50,7 @@ def logoutPage(request):
 def homePage(request):
     current_user = request.user
     zumi_type = current_user.profile.petID.petType
-    print("static Images/" + ZUMI_IMAGES[zumi_type])
+
     return render(request, "ekozumi_app/home.html", {'image_source':ZUMI_IMAGES[zumi_type]})
 
 @login_required()
