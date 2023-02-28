@@ -90,3 +90,7 @@ def fightIntroPage(request):
 @login_required()
 def fightOutroPage(request):
     return render(request, "ekozumi_app/fightOutro.html")
+
+@login_required()
+def fightPage(request):
+    return render(request, "ekozumi_app/whack-a-mole.html")
