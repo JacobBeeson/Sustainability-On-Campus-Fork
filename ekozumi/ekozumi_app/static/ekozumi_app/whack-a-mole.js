@@ -12,8 +12,8 @@ const holes = [...document.querySelectorAll('.holes')]
 const health1 = document.querySelector('.health span')
 let health = 100
 
-const whack = new Audio("sounds/whack.mp3")
-const music = new Audio("sounds/background-tune.mp3")
+const whack = new Audio("../../static/Sounds/whack.mp3")
+const music = new Audio("../../static/Sounds/background-tune.mp3")
 
 var seconds = 60;
 

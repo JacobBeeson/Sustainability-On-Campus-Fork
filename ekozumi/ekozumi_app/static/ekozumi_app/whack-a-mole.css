@@ -69,7 +69,7 @@ body{
     height: 60px;
     width: 55px;
     position: absolute;
-    background-image: url(images/hammer.png);
+    background-image: url(../../static/Images/hammer.png);
     background-size: 100% 100%;
     transform: translate(-20%, -20%);
     transition: transform .1s;
