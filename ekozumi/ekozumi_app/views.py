@@ -82,3 +82,11 @@ def puzzlePage(request):
 @login_required()
 def mapPage(request):
     return render(request, "ekozumi_app/map.html")
+
+@login_required()
+def fightIntroPage(request):
+    return render(request, "ekozumi_app/fightIntro.html")
+
+@login_required()
+def fightOutroPage(request):
+    return render(request, "ekozumi_app/fightOutro.html")

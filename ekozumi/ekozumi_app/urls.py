@@ -17,4 +17,7 @@ urlpatterns = [
     path("puzzle/", views.puzzlePage, name="puzzle"),
     path("map/", views.mapPage, name="map"),
     path("logout/", views.logoutPage, name="logout"),
+    path("fight_intro/", views.fightIntroPage, name="intro"),
+    path("fight_outro/", views.fightOutroPage, name="intro"),
+
 ]
