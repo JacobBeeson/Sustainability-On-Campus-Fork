@@ -3,8 +3,8 @@
  *  Author: Jacob Beeson
  */
 
-var moleImage = "../Images/evil-ciggy.png"
-var whackedMoleImage =  "../Images/evil-ciggy.png"
+var moleImage = "../../static/Images/hedge-hog-happy.png"
+var whackedMoleImage =  "../../static/Images/hedge-hog-angry.png"
 
 const cursor = document.querySelector('.cursor')
 const holes = [...document.querySelectorAll('.holes')]
@@ -23,7 +23,8 @@ function startTimer() {
     document.getElementById("seconds").textContent = pad(seconds);
     if (seconds == 0) {
       clearInterval(countdown);
-      alert("LOST GAME, LINK TO LOOSING PAGE HERE"); 
+      alert("LOST GAME, Click 'ok' to return home");
+      window.location = "../home"
     }
   }, 1000);
 }
@@ -56,7 +57,8 @@ function run(){
             }, 500)
         }else{
             hole.removeChild(img)
-            alert("WIN DISPLAY HERE/ LINK TO NEXT PAGE");
+            alert("YOU HAVE DEFEATED THE BOSS! Click 'ok' to progress");
+            window.location = "../fight_outro";
         }
     })
 
