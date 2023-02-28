@@ -3,10 +3,12 @@
  *  Author: Lucas Enefer
  */
 function getLocation() {
+    document.getElementById('battleButton').style.visibility = 'hidden';
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     }  else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        var text = document.getElementById("location");
+        text.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
@@ -19,7 +21,7 @@ function showPosition(position) {
     if (X_coordinate > 95) {X_coordinate = 95}
     else if (X_coordinate < 5 ) {X_coordinate = 5}
     if (Y_coordinate > 95) {Y_coordinate = 95}
-    else if (Y_coordinate < 5) {Y_coordinate = 5}
+    else if (Y_coordinate < 0) {Y_coordinate = -5}
 
 
     /*changes pet position on map */
@@ -27,11 +29,19 @@ function showPosition(position) {
     x.style.bottom = Y_coordinate +  "%";
     x.style.left = X_coordinate + "%";
 
+    /*demo boss*/
+    min_X = 50;
+    max_X = 60;
+    min_Y = 55;
+    max_Y = 65;
+
     /*checks if Boss in area */
     if (X_coordinate>= min_X && X_coordinate <= max_X && Y_coordinate>= min_Y && Y_coordinate<= max_Y){
         var text = document.getElementById("location");
         text.innerHTML = "looks like there is something here!";
+        document.getElementById('battleButton').style.visibility = 'visible' ;
     }
+    
 
 }
 
