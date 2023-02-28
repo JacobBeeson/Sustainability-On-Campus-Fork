@@ -1,5 +1,5 @@
 body {
-	background: url("loginpage.jfif") no-repeat center center fixed;
+	background: url("background.jpg") no-repeat center center fixed;
 	background-size: cover;
 	font-size: 250%;
 	font-family: 'Lato', sans-serif;
@@ -241,6 +241,14 @@ body {
     background-color: #111;
 }
 
+/*To make the character selector carousel look good*/
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+	filter:none !important;
+}
 
+.carousel-inner img {
+	margin: auto;
+}
 
 
