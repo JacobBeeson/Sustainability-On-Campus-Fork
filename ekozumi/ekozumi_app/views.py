@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-ZUMI_IMAGES = {"Hedgehog":"Images/hedge-hog-normal.png", "Badger":"Images/hedge-hog-happy.png", "Frog":"Images/hedge-hog-happy.png", "Bat":"Images/hedge-hog-happy.png", "Weasel":"Images/hedge-hog-happy.png", "Rabbit":"Images/hedge-hog-happy.png"}
+ZUMI_IMAGES = {"Hedgehog":"Images/hedge-hog-happy.png", "Badger":"Images/badger-happy.png", "Frog":"Images/frog-happy.png", "Bat":"Images/bat-happy.png", "Weasel":"Images/weasel-happy.png", "Rabbit":"Images/rabbit-happy.png"}
  
 def registrationPage(request):
     '''
