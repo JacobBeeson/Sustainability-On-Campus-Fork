@@ -92,6 +92,9 @@ def puzzlePage(request):
 
 @login_required()
 def mapPage(request):
+    """
+    Page for map navigation
+    """
     current_user = request.user
     current_zumi = current_user.profile.petID
     zumi_type = current_zumi.petType
@@ -108,30 +111,65 @@ def mapPage(request):
     
 @login_required()
 def fightIntroPage(request):
-    current_user = request.user
-    current_zumi = current_user.profile.petID
-    zumi_type = current_zumi.petType
-    zumi_image = ZUMI_IMAGES[zumi_type][1]
-    baddie_image = BADDIE_IMAGES["Ciggy"][0]
-    return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
+    """
+    Intro to the fight
+    """
+    # Checks the user has come from the map page
+    previous_url = request.META.get('HTTP_REFERER')
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
+        # Gets the correct images for the dialogue
+        current_user = request.user
+        current_zumi = current_user.profile.petID
+        zumi_type = current_zumi.petType
+        zumi_image = ZUMI_IMAGES[zumi_type][1]
+        baddie_image = BADDIE_IMAGES["Ciggy"][0]
+        return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
+    else:
+        return redirect('home_page')
 
 @login_required()
 def fightOutroPage(request):
-    current_user = request.user
-    current_zumi = current_user.profile.petID
-    zumi_type = current_zumi.petType
-    zumi_image = ZUMI_IMAGES[zumi_type][1]
-    baddie_image = BADDIE_IMAGES["Ciggy"][0]
-    return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
+    """
+    Outro dialogue for the fight
+    """
+    # Checks the user has come from the fight page
+    previous_url = request.META.get('HTTP_REFERER')
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight/"):
+        # Gets the correct images for the fight
+        current_user = request.user
+        current_zumi = current_user.profile.petID
+        zumi_type = current_zumi.petType
+        zumi_image = ZUMI_IMAGES[zumi_type][1]
+        baddie_image = BADDIE_IMAGES["Ciggy"][0]
+        return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
+    else:
+        return redirect('home_page')
 
 @login_required()
 def fightPage(request):
-    baddie_images = BADDIE_IMAGES["Ciggy"]
-    return render(request, "ekozumi_app/whack-a-mole.html", {'baddie_normal_source':baddie_images[0], 'baddie_angry_source':baddie_images[1]})
+    """
+    View for fight with enemy
+    """
+    # Checks user has come from the fight intro page
+    previous_url = request.META.get('HTTP_REFERER')
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
+        baddie_images = BADDIE_IMAGES["Ciggy"]
+        return render(request, "ekozumi_app/whack-a-mole.html", {'baddie_normal_source':baddie_images[0], 'baddie_angry_source':baddie_images[1]})
+    else:
+        return redirect('home_page')
 
 @login_required()
 def feedZumiPage(request):
-    current_zumi = request.user.profile.petID
-    current_zumi.lastFed = django.utils.timezone.now()
-    current_zumi.save()
+    """
+    Page for feeding zumi after fight
+    """
+    # Checks user has come from fight, and nowhere else
+    # Stops zumi being fed at anytime
+    previous_url = request.META.get('HTTP_REFERER')
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_outro/"):
+        # Feeds zumi
+        current_zumi = request.user.profile.petID
+        current_zumi.lastFed = django.utils.timezone.now()
+        current_zumi.save()
+    
     return redirect('home_page')
