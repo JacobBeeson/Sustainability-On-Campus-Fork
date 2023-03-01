@@ -29,10 +29,10 @@ function showPosition(position) {
     x.style.left = X_coordinate + "%";
 
     /*demo boss*/
-    min_X = 50;
-    max_X = 60;
-    min_Y = 55;
-    max_Y = 65;
+    min_X = 40;
+    max_X = 50;
+    min_Y = 45;
+    max_Y = 75;
 
     /*checks if Boss in area */
     if (X_coordinate>= min_X && X_coordinate <= max_X && Y_coordinate>= min_Y && Y_coordinate<= max_Y){
