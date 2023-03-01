@@ -117,10 +117,6 @@ class ViewResponseTest(TestCase):
         """
         test the character creation view
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
-        user = form.save()
-        self.client.force_login(user)
-
         response = self.client.get('/ekozumi/zumi_creation/')
         self.assertEqual(response.status_code, 200)
 
