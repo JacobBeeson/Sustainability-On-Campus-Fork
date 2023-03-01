@@ -3,9 +3,6 @@
  *  Author: Jacob Beeson
  */
 
-var moleImage = "../../static/Images/hedge-hog-happy.png"
-var whackedMoleImage =  "../../static/Images/hedge-hog-angry.png"
-
 const cursor = document.querySelector('.cursor')
 const holes = [...document.querySelectorAll('.holes')]
 
@@ -83,7 +80,9 @@ window.addEventListener('mouseup', () => {
     cursor.classList.remove('active')
 })  
 
-function startGame(){
+function startGame(i1,i2){
+    moleImage = i1
+    whackedMoleImage = i2
     music.volume = 0.2;
     music.play()
     var elem = document.getElementById("startButton");

@@ -117,6 +117,7 @@ class ViewResponseTest(TestCase):
         """
         test the character creation view
         """
+
         response = self.client.get('/ekozumi/zumi_creation/')
         self.assertEqual(response.status_code, 200)
 

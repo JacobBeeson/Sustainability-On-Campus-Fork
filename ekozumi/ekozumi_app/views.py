@@ -13,7 +13,8 @@ Authors: Christian Wood, Oscar Klemenz
 """
 
 ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png", "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png", "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
- 
+BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], "Pipe":["Images/pipe-normal.png", "Images/pipe-angry.png"]}
+
 def registrationPage(request):
     '''
     Contains the logic for when a user registers
@@ -91,16 +92,46 @@ def puzzlePage(request):
 
 @login_required()
 def mapPage(request):
-    return render(request, "ekozumi_app/map.html")
-
+    current_user = request.user
+    current_zumi = current_user.profile.petID
+    zumi_type = current_zumi.petType
+    #if its been more than 48 hours since last fed
+    if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
+        zumi_image = ZUMI_IMAGES[zumi_type][2]
+    #if its been more than 24 hours since last fed
+    elif current_zumi.lastFed + django.utils.timezone.timedelta(1) < django.utils.timezone.now():
+        zumi_image = ZUMI_IMAGES[zumi_type][1]
+    #if its been under 24 hours since last fed
+    else:
+        zumi_image = ZUMI_IMAGES[zumi_type][0]
+    return render(request, "ekozumi_app/map.html", {'image_source':zumi_image})
+    
 @login_required()
 def fightIntroPage(request):
-    return render(request, "ekozumi_app/fightIntro.html")
+    current_user = request.user
+    current_zumi = current_user.profile.petID
+    zumi_type = current_zumi.petType
+    zumi_image = ZUMI_IMAGES[zumi_type][1]
+    baddie_image = BADDIE_IMAGES["Ciggy"][0]
+    return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
 
 @login_required()
 def fightOutroPage(request):
-    return render(request, "ekozumi_app/fightOutro.html")
+    current_user = request.user
+    current_zumi = current_user.profile.petID
+    zumi_type = current_zumi.petType
+    zumi_image = ZUMI_IMAGES[zumi_type][1]
+    baddie_image = BADDIE_IMAGES["Ciggy"][0]
+    return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, 'baddie_source':baddie_image})
 
 @login_required()
 def fightPage(request):
-    return render(request, "ekozumi_app/whack-a-mole.html")
+    baddie_images = BADDIE_IMAGES["Ciggy"]
+    return render(request, "ekozumi_app/whack-a-mole.html", {'baddie_normal_source':baddie_images[0], 'baddie_angry_source':baddie_images[1]})
+
+@login_required()
+def feedZumiPage(request):
+    current_zumi = request.user.profile.petID
+    current_zumi.lastFed = django.utils.timezone.now()
+    current_zumi.save()
+    return redirect('home_page')
