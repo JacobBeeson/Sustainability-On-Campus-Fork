@@ -2,6 +2,7 @@
  * 
  *  Author: Elliot Wride
  */
+
 var anagram;
 function startTime()
 {

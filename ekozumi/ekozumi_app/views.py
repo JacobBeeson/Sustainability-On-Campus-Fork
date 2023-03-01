@@ -1,17 +1,18 @@
-"""
-Views load HTML webpages, and perform any logic needed for post requests
-and displaying user specific information
-
-Authors: Christian Wood, Oscar Klemenz
-"""
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+import django.utils.timezone 
 
-ZUMI_IMAGES = {"Hedgehog":"Images/hedge-hog-happy.png", "Badger":"Images/badger-happy.png", "Frog":"Images/frog-happy.png", "Bat":"Images/bat-happy.png", "Weasel":"Images/weasel-happy.png", "Rabbit":"Images/rabbit-happy.png"}
+"""
+Views load HTML webpages, and perform any logic needed for post requests
+and displaying user specific information
+Authors: Christian Wood, Oscar Klemenz
+"""
+
+ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png", "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png", "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
  
 def registrationPage(request):
     '''
@@ -49,9 +50,18 @@ def logoutPage(request):
 @login_required()
 def homePage(request):
     current_user = request.user
-    zumi_type = current_user.profile.petID.petType
-
-    return render(request, "ekozumi_app/home.html", {'image_source':ZUMI_IMAGES[zumi_type]})
+    current_zumi = current_user.profile.petID
+    zumi_type = current_zumi.petType
+    #if its been more than 48 hours since last fed
+    if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
+        zumi_image = ZUMI_IMAGES[zumi_type][2]
+    #if its been more than 24 hours since last fed
+    elif current_zumi.lastFed + django.utils.timezone.timedelta(1) < django.utils.timezone.now():
+        zumi_image = ZUMI_IMAGES[zumi_type][1]
+    #if its been under 24 hours since last fed
+    else:
+        zumi_image = ZUMI_IMAGES[zumi_type][0]
+    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image})
 
 @login_required()
 def zumiCreationPage(request):

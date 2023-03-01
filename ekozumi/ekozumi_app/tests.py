@@ -1,12 +1,12 @@
-"""
-Tests for ekozumi_app
-
-Author: Oscar Klemenz
-"""
 from django.test import TestCase
 from .forms import SignUpForm, ZumiCreationForm
 from django.contrib.auth import authenticate, login
 from .models import Pet
+
+"""
+Tests for ekozumi_app
+Author: Oscar Klemenz
+"""
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -69,7 +69,7 @@ class ZumiCreationTest(TestCase):
         """
         form = ZumiCreationForm(data={"petName":'testPet', "petType":"HEDGEHOG"})
         self.assertTrue(form.is_valid())
-    
+
     def testInvalidZumi(self):
         """
         Checks if pet does not have a name it cannot be created
@@ -81,6 +81,7 @@ class ViewResponseTest(TestCase):
     """
     Checks the HTTP response of webpages
     """
+
     def setUp(self):
         """
         Forces user to be logged in, as some pages will force redirect user
@@ -116,23 +117,27 @@ class ViewResponseTest(TestCase):
         """
         test the character creation view
         """
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        user = form.save()
+        self.client.force_login(user)
+
         response = self.client.get('/ekozumi/zumi_creation/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testHomeView(self):
         """
         test the home view
         """
         response = self.client.get('/ekozumi/home/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testPuzzleView(self):
         """
         test the puzzle view
         """
         response = self.client.get('/ekozumi/puzzle/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testMapView(self):
         """
         test the map view

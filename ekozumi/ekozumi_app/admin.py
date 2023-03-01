@@ -7,5 +7,6 @@ from django.contrib import admin
 from .models import Profile, Pet
 
 # Models which are displayed in the admin panel
+# Register your models here.
 admin.site.register(Profile)
 admin.site.register(Pet)

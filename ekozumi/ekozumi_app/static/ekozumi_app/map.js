@@ -23,7 +23,6 @@ function showPosition(position) {
     if (Y_coordinate > 95) {Y_coordinate = 95}
     else if (Y_coordinate < 0) {Y_coordinate = -5}
 
-
     /*changes pet position on map */
     var x = document.getElementById("pet-pos");
     x.style.bottom = Y_coordinate +  "%";
@@ -41,8 +40,6 @@ function showPosition(position) {
         text.innerHTML = "looks like there is something here!";
         document.getElementById('battleButton').style.visibility = 'visible' ;
     }
-    
-
 }
 
 /* duck pond: bottom=20-25% left=10-15% 

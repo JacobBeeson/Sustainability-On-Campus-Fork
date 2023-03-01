@@ -49,19 +49,6 @@ body {
 	text-align: center;
 }
 
-.box2 {
-    background-color: white;
-    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
-    border-radius: 5px;
-    padding-bottom: 30px;
-    position: relative;
-    margin: 0 auto;
-    width:1500px;
-    max-width:100%;  
-    overflow-x: auto;  
-    
-}
-
 /* have a div within box that is class "box-header" and has a h2 tag for header of inner box */
 
 .box .box-header {
@@ -160,6 +147,19 @@ body {
 	background-color: #665851;
 	cursor:pointer;
 	outline: none;
+}
+
+.box2 {
+    background-color: white;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+    border-radius: 5px;
+    padding-bottom: 30px;
+    position: relative;
+    margin: 0 auto;
+    width:1500px;
+    max-width:100%;  
+    overflow-x: auto;  
+
 }
 
 #txt {
@@ -263,5 +263,6 @@ body {
 .carousel-inner img {
 	margin: auto;
 }
+
 
 

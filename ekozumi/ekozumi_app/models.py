@@ -1,13 +1,13 @@
-"""
-Defines the models for our database
-
-Authors: Christian Wood, Olivia Kerschen
-"""
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 import django.utils.timezone 
+
+"""
+Defines the models for our database
+Authors: Christian Wood, Olivia Kerschen
+"""
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"

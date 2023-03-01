@@ -86,12 +86,12 @@ body{
     text-align: center;
     margin: 50px auto;
   }
-  
+
 #timer span {
     display: inline-block;
     min-width: 50px;
   }
-  
+
   #startButton {
     background-color: #031703;
     border: none;
