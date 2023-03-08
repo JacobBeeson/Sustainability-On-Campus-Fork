@@ -49,7 +49,7 @@ class Monster(models.Model):
     '''
     mosterID = models.AutoField(primary_key=True)
     monsterName = models.CharField(max_length=50)
-    dayOfAppearance = models.DateField()
+    dayOfAppearance = models.DateField(unique=True)
     monsterImage = models.CharField(max_length=50)
     monsterAngryImage = models.CharField(max_length=50)
     monsterIntroDialogue = models.CharField(max_length=500)

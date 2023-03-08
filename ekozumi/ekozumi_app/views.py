@@ -16,6 +16,10 @@ Authors: Christian Wood, Oscar Klemenz
 ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png", "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png", "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
 BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], "Pipe":["Images/pipe-normal.png", "Images/pipe-angry.png"]}
 
+# Default monster is used if a game keeper has not created a monster for a given day
+defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png", monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
+                         playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder", playerOutroDialogue="Player placeholder")
+
 def registrationPage(request):
     '''
     Contains the logic for when a user registers
@@ -130,7 +134,13 @@ def fightIntroPage(request):
     current_zumi = current_user.profile.petID
     zumi_type = current_zumi.petType
     zumi_image = ZUMI_IMAGES[zumi_type][1]
-    monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+    
+    # Gets todays monster
+    try:
+        monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+    # If it doesn't exist uses a placeholder
+    except Monster.DoesNotExist:
+        monster = defaultMonster
     return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
 
 @login_required()
@@ -145,7 +155,12 @@ def fightOutroPage(request):
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
         zumi_image = ZUMI_IMAGES[zumi_type][1]
-        monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # Gets todays monster
+        try:
+            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Monster.DoesNotExist:
+            monster = defaultMonster
         return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, "monster":monster})
     else:
         return redirect('home_page')
@@ -158,7 +173,12 @@ def fightPage(request):
     # Checks user has come from the fight intro page
     previous_url = request.META.get('HTTP_REFERER')
     if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
-        monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # Gets todays monster
+        try:
+            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Monster.DoesNotExist:
+            monster = defaultMonster
         return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
     else:
         return redirect('home_page')
