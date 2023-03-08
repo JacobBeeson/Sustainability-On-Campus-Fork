@@ -2,6 +2,7 @@ from django.test import TestCase
 from .forms import SignUpForm, ZumiCreationForm
 from django.contrib.auth import authenticate, login
 from .models import Pet
+from django.urls import reverse
 
 """
 Tests for ekozumi_app
@@ -77,6 +78,28 @@ class ZumiCreationTest(TestCase):
         form = ZumiCreationForm(data={"petName":'', "petType":"HEDGEHOG"})
         self.assertFalse(form.is_valid())
 
+
+class ZumiFeedTest(TestCase):
+    """
+    Tests that the zumi has been fed
+    """
+
+    def setUp(self):
+        """
+        Forces user to be logged in, as some pages will force redirect user
+        if not logged in, also creates a pet for the user
+        """
+        # User form
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        user = form.save()
+
+        # Creates a new pet
+        pet = Pet(petName = 'petTest', petType = 'Hedgehog')
+        pet.save()
+        # Links pet and user
+        user.profile.petID=pet
+
+
 class ViewResponseTest(TestCase):
     """
     Checks the HTTP response of webpages
@@ -141,3 +164,25 @@ class ViewResponseTest(TestCase):
         """
         response = self.client.get('/ekozumi/map/')
         self.assertEqual(response.status_code, 200)
+
+    def testFightIntroView(self):
+        """
+        test the fight intro page
+        """
+        response = self.client.post(reverse('intro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/map/')
+        self.assertEqual(response.status_code, 200)
+    
+    def testFightView(self):
+        """
+        test the fight page
+        """
+        response = self.client.post(reverse('fight'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight_intro/')
+        self.assertEqual(response.status_code, 200)
+    
+    def testFightOutroView(self):
+        """
+        test the fight outro page
+        """
+        response = self.client.post(reverse('outro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        self.assertEqual(response.status_code, 200)
+    
