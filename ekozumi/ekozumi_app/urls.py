@@ -1,12 +1,12 @@
-from django.urls import path
-from . import views
-from django.contrib.auth import views as auth_views
-
 """
 Defines all of the URL patterns for our application, in each path
 the string is what should lead the URL 127.0.0.1:8000/ekozumi/
 Authors: Christian Wood, Oscar Klemenz
 """
+
+from django.contrib.auth import views as auth_views
+from django.urls import path
+from . import views
 
 # Currently 127.0.0.1:8000/ekozumi/ will go to the login page
 urlpatterns = [

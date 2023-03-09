@@ -13,8 +13,8 @@ Author: Elliot Write
 
     <body>
         <div class="box2" style="top: auto; text-align: right;">
-            <img src="{%static baddie_source%}" alt="" width="170" height="170"  style="float: right; ">
-            how did you defeat me!!!!!!!!
+            <img src="{%static monster.monsterImage%}" alt="" width="170" height="170"  style="float: right; ">
+            {{monster.monsterOutroDialogue}}
         </div>
         <div class="box" style="margin-top: 40%;" >
             you can now feed your hungry pet <br>
@@ -22,7 +22,7 @@ Author: Elliot Write
         </div>
         <div class="box2" style="bottom: 0; position: absolute;  text-align: left;">
             <img src="{%static zumi_source%}" alt="" width="120" height="120"  style="float: left;">
-            haha you have been defeated 
+            {{monster.playerOutroDialogue}}
         </div>
 
     </body>

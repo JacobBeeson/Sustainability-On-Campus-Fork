@@ -1,13 +1,12 @@
+"""
+Defines the models for our database
+Authors: Christian Wood, Olivia Kerschen, Oscar Klemenz
+"""
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-import django.utils.timezone 
-
-"""
-Defines the models for our database
-Authors: Christian Wood, Olivia Kerschen
-"""
+import django.utils.timezone
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
@@ -17,7 +16,8 @@ BAT = "Bat"
 WEASEL = "Weasel"
 RABBIT = "Rabbit"
 
-PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"), (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
+PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"),
+               (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
 
 class Pet(models.Model):
     '''
@@ -42,6 +42,24 @@ class Profile(models.Model):
     petID = models.ForeignKey(Pet, null=True, on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username
+
+class Monster(models.Model):
+    '''
+    Contains info about each monster
+    '''
+    monsterID = models.AutoField(primary_key=True)
+    monsterName = models.CharField(max_length=50)
+    dayOfAppearance = models.DateField(unique=True)
+    monsterImage = models.CharField(max_length=50)
+    monsterAngryImage = models.CharField(max_length=50)
+    monsterIntroDialogue = models.CharField(max_length=500)
+    playerIntroDialogue = models.CharField(max_length=500)
+    monsterOutroDialogue = models.CharField(max_length=500)
+    playerOutroDialogue = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.monsterName
+
 
 class AdminUser(models.Model):
     '''
