@@ -1,13 +1,12 @@
-from django.test import TestCase
-from .forms import SignUpForm, ZumiCreationForm
-from django.contrib.auth import authenticate, login
-from .models import Pet
-from django.urls import reverse
-
 """
 Tests for ekozumi_app
 Author: Oscar Klemenz
 """
+
+from django.test import TestCase
+from django.urls import reverse
+from .forms import SignUpForm, ZumiCreationForm
+from .models import Pet
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -19,44 +18,51 @@ class SignUpFormTest(TestCase):
         """
         Checks if a user can sign up using a valid password
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertTrue(form.is_valid())
 
     def testInvalidPassword(self):
         """
         Checks that the form rejects invalid passwords
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"password", "password2":"password"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"password", "password2":"password"})
         self.assertFalse(form.is_valid())
 
     def testDuplicateUsers(self):
         """
         Checks that two users cant be created with the same username
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         form.save()
-        form2 = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form2 = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                 "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertFalse(form2.is_valid())
-    
+
     def testEmptyUsernameField(self):
         """
         Checks that a username is required
         """
-        form = SignUpForm(data={"username":'', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertFalse(form.is_valid())
 
     def testEmptyEmailField(self):
         """
         Checks that a email is required
         """
-        form = SignUpForm(data={"username":'testUser', "email":"", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertFalse(form.is_valid())
 
     def testEmptyPasswordField(self):
         """
         Checks that a password is required
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"", "password2":""})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"", "password2":""})
         self.assertFalse(form.is_valid())
 
 class ZumiCreationTest(TestCase):
@@ -90,7 +96,8 @@ class ZumiFeedTest(TestCase):
         if not logged in, also creates a pet for the user
         """
         # User form
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         user = form.save()
 
         # Creates a new pet
@@ -111,7 +118,8 @@ class ViewResponseTest(TestCase):
         if not logged in, also creates a pet for the user
         """
         # User form
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         user = form.save()
 
         # Creates a new pet
@@ -128,7 +136,7 @@ class ViewResponseTest(TestCase):
         """
         response = self.client.get('/ekozumi/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testRegistrationView(self):
         """
         test the register view
@@ -169,20 +177,22 @@ class ViewResponseTest(TestCase):
         """
         test the fight intro page
         """
-        response = self.client.post(reverse('intro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/map/')
+        response = self.client.post(reverse('intro'),
+                                    {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/map/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testFightView(self):
         """
         test the fight page
         """
-        response = self.client.post(reverse('fight'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight_intro/')
+        response = self.client.post(reverse('fight'),
+                                    {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight_intro/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testFightOutroView(self):
         """
         test the fight outro page
         """
-        response = self.client.post(reverse('outro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        response = self.client.post(reverse('outro'),
+                                    {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
         self.assertEqual(response.status_code, 200)
-    

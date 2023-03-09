@@ -1,13 +1,12 @@
-from django.db import models
-from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-import django.utils.timezone 
-
 """
 Defines the models for our database
 Authors: Christian Wood, Olivia Kerschen, Oscar Klemenz
 """
+from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+import django.utils.timezone
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
@@ -17,7 +16,8 @@ BAT = "Bat"
 WEASEL = "Weasel"
 RABBIT = "Rabbit"
 
-PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"), (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
+PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"),
+               (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
 
 class Pet(models.Model):
     '''
