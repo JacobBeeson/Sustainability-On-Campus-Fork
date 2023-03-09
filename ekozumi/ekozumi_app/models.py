@@ -47,7 +47,7 @@ class Monster(models.Model):
     '''
     Contains info about each monster
     '''
-    mosterID = models.AutoField(primary_key=True)
+    monsterID = models.AutoField(primary_key=True)
     monsterName = models.CharField(max_length=50)
     dayOfAppearance = models.DateField(unique=True)
     monsterImage = models.CharField(max_length=50)

@@ -3,10 +3,12 @@ Tests for ekozumi_app
 Author: Oscar Klemenz
 """
 
+from datetime import datetime
 from django.test import TestCase
 from django.urls import reverse
+from django.db.utils import IntegrityError
 from .forms import SignUpForm, ZumiCreationForm
-from .models import Pet
+from .models import Pet, Monster
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -106,6 +108,60 @@ class ZumiFeedTest(TestCase):
         # Links pet and user
         user.profile.petID=pet
 
+class MonsterCreationTest(TestCase):
+    """
+    Testing for the momster model
+
+    Checks to make sure game keepers can create monsters
+    """
+    def setUp(self):
+        """
+        Set up non-modified monster object used by all test methods
+        """
+        Monster.objects.create(monsterName="test", dayOfAppearance=datetime.now().date(),
+                               monsterImage="Images/ciggy-normal.png", 
+                               monsterAngryImage="Images/ciggy-angry.png",
+                               monsterIntroDialogue="test monster intro dialogue",
+                               playerIntroDialogue="test player intro dialogue",
+                               monsterOutroDialogue="test monster outro dialogue",
+                               playerOutroDialogue="test player outro dialogue")
+
+    def testValidMonsterName(self):
+        """
+        Validates monster object name
+        """
+        monster = Monster.objects.get(monsterID=1)
+        monsterName = monster.monsterName
+        self.assertEqual("test", monsterName)
+    
+    def testValidMonsterImage(self):
+        """
+        Validates monster image
+        """
+        monster = Monster.objects.get(monsterID=1)
+        monsterImage = monster.monsterImage
+        self.assertEqual("Images/ciggy-normal.png", monsterImage)
+
+    def testDuplicateMonsterDate(self):
+        """
+        Validates that game keepers cannot create
+        two monsters on the same day
+        """
+        try:
+            Monster.objects.create(monsterName="test", dayOfAppearance=datetime.now().date(),
+                                monsterImage="Images/ciggy-normal.png", 
+                                monsterAngryImage="Images/ciggy-angry.png",
+                                monsterIntroDialogue="test monster intro dialogue",
+                                playerIntroDialogue="test player intro dialogue",
+                                monsterOutroDialogue="test monster outro dialogue",
+                                playerOutroDialogue="test player outro dialogue")
+            self.fail()
+        except IntegrityError:
+            pass
+
+        
+
+        
 
 class ViewResponseTest(TestCase):
     """
