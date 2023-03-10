@@ -1,0 +1,30 @@
+<!-- 
+Intro for the boss fight
+Author: Elliot Wride
+-->
+{% load static %}
+<html>
+
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <title>Ekozumi</title>
+    </head>
+
+    <body>
+        <div class="box2" style="top: auto; text-align: right;">
+            <img src="{%static monster.monsterImage%}" alt="" width="20%" height="20%"  style="float: right; ">
+            {{monster.monsterIntroDialogue}}
+        </div>
+        <div class="box">
+            <a href="{% url 'fight' %}">
+            <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 
+            </a>      
+        </div>
+        <div class="box2" style="bottom: 0; position: absolute; text-align: left;">
+            <img src="{%static zumi_source%}" alt="" width="20%" height="20%"  style="float: left;">
+            {{monster.playerIntroDialogue}}
+        </div>
+
+    </body>
+
+</html>
