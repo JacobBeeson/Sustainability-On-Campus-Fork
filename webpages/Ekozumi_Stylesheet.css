@@ -49,19 +49,6 @@ body {
 	text-align: center;
 }
 
-.box2 {
-    background-color: white;
-    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
-    border-radius: 5px;
-    padding-bottom: 30px;
-    position: relative;
-    margin: 0 auto;
-    width:1500px;
-    max-width:100%;  
-    overflow-x: auto;  
-    
-}
-
 /* have a div within box that is class "box-header" and has a h2 tag for header of inner box */
 
 .box .box-header {
@@ -160,6 +147,19 @@ body {
 	background-color: #665851;
 	cursor:pointer;
 	outline: none;
+}
+
+.box2 {
+    background-color: white;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+    border-radius: 5px;
+    padding-bottom: 30px;
+    position: relative;
+    margin: 0 auto;
+    width:1500px;
+    max-width:100%;  
+    overflow-x: auto;  
+
 }
 
 #txt {
@@ -264,4 +264,39 @@ body {
 	margin: auto;
 }
 
+
+/*css for leaderboard */
+
+.leaderboard {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 8%;
+  margin: auto;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard th{
+  padding-left: 2%;
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:250%;
+  font-weight: 100;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+.leaderboard td {
+	padding-left: 2%;
+	border-top: 1px solid #C1C3D1;
+	border-bottom: 1px solid #C1C3D1;
+	color:#666B85;
+	font-size:150%;
+	font-weight:normal;
+	text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+  }
 
