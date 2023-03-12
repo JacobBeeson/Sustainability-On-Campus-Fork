@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="Ekozumi_Stylesheet.css" />
+        <script type="text/javascript" src="puzzle.js"></script>
+    </head>
+    <body onload="puzzle()">
+        <div id="txt"></div>
+        <div class="top">
+            <h1 id="puzzle-notice">
+                New Anagram Puzzle Releases 
+                at 8:00 Daily!
+            </h1>
+        </div>
+        <div class="box" id="puzzle">
+            <div class="box-header" ><h2 id="anagram">A</h2></div>
+            <label> Enter answer here</label>
+            <form action="" name="f1">
+            <div class="element-input">
+                <input class="large" type="text" name="nw" style ="margin-bottom: 10px;">
+            </div>
+            <div class="submit"> 
+                <input id="button" type="button"  value="Submit" onclick="checkSolve()">
+            </div>
+            </form>
+            <label id="hint" ></label>
+        </div> 
+    </body>
+</html>
