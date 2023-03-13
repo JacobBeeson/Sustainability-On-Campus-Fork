@@ -15,6 +15,9 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
+        '''
+        Meta info about form
+        '''
         model = User
         fields = ('username', 'email', 'password1', 'password2', )
 

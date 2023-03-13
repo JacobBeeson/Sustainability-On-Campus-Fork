@@ -1,6 +1,6 @@
 <!-- 
 Puzzle page, where users have to figure out an anagram to get a hint 
-Author: Elliot Wride
+Authors: Elliot Wride, Christian Wood
 -->
 
 {% load static %}
@@ -8,6 +8,10 @@ Author: Elliot Wride
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            var hint="{{hint}}";
+            var anagram="{{anagramWord}}";
+        </script>
         <script type="text/javascript" src="{% static 'ekozumi_app/puzzle.js' %}"></script>
         <title>Ekozumi</title>
     </head>
@@ -38,7 +42,7 @@ Author: Elliot Wride
                 <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
                 <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
                 <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
-                <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
+                <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
             </div>
         </div>
     </body>

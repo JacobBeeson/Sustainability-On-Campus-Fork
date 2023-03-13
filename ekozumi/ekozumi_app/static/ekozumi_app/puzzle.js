@@ -1,6 +1,6 @@
 /** Puzzle logic, for puzzle.html
  * 
- *  Author: Elliot Wride
+ *  Author: Elliot Wride, Christian Wood
  */
 
 var anagram;
@@ -26,8 +26,6 @@ function startTime()
 }
 
 function puzzle(){
-    anagrams = ["RECYCLE"];
-    anagram = anagrams[0]; //to be decided by date maybe linked list struct
     letters = [];
     for(var i = 0; i<anagram.length; i++){
         letters[i]=anagram.charAt(i);
@@ -42,8 +40,9 @@ function puzzle(){
     startTime();
 }
 
-function checkTime(i)  //formats single digits
+function checkTime(i) 
 {
+    //formats single digits
     if (i<10)
         {
             i="0" + i;
@@ -54,8 +53,8 @@ function checkTime(i)  //formats single digits
 function checkSolve(){
     answer = (document.f1.nw.value).toUpperCase(); //to ignore case of letters
 
-    if (answer == anagram){
+    if (answer == anagram.toUpperCase()){
         alert("You did it!")
-        document.getElementById('hint').innerHTML="Get Innovative";
+        document.getElementById('hint').innerHTML=hint;
     }
 }
