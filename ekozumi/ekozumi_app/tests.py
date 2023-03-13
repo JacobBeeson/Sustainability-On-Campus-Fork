@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.db.utils import IntegrityError
 from .forms import SignUpForm, ZumiCreationForm
-from .models import Pet, Monster
+from .models import Pet, Monster, Location
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -156,6 +156,45 @@ class MonsterCreationTest(TestCase):
             self.fail()
         except IntegrityError:
             pass
+
+class LocationCreationTest(TestCase):
+    """
+    Testing for the location model
+    Checks to make sure game keepers can create locations
+    """
+    def setUp(self):
+        """
+        Sets up a valid location for testing
+        """
+        Location.objects.create(locationName="Innovation", dayOfAppearance=datetime.now().date(),
+                                minLatitude=50, maxLatitude=55,
+                                minLongitude=40, maxLongitude=45, locationHint="Get Innovative",
+                                anagramWord="Forestry")
+    
+
+    def testValidLocationName(self):
+        """
+        Validates a location and its name have been correctly created
+        """
+        location = Location.objects.get(locationID=1)
+        locationName = location.locationName
+        self.assertEqual("Innovation", locationName)
+    
+    def testDuplicateLocationDate(self):
+        """
+        Validates that game keepers cannot create
+        two locations on the same day
+        """
+        try:
+            Location.objects.create(locationName="Innovation", dayOfAppearance=datetime.now().date(),
+                        minLatitude=50, maxLatitude=55,
+                        minLongitude=40, maxLongitude=45, locationHint="Get Innovative",
+                        anagramWord="Forestry")
+            self.fail()
+        except IntegrityError:
+            pass
+
+
 
 class ViewResponseTest(TestCase):
     """
