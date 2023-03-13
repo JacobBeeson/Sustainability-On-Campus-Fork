@@ -121,7 +121,7 @@ def mapPage(request):
     try:
         location = Location.objects.get(dayOfAppearance = datetime.now().date())
         # If it doesn't exist uses a placeholder
-    except Monster.DoesNotExist:
+    except Location.DoesNotExist:
         location = defaultLocation
     #if its been more than 48 hours since last fed
     if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
