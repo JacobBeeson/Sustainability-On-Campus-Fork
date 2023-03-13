@@ -1,7 +1,7 @@
 <!-- 
 Map page, where users must navigate to certain geo locations,
 once they arrive in a certain location they can fight an enemy 
-Author: Lucas Enefer
+Author: Lucas Enefer, Christian Wood
 -->
 
 {% load static %}
@@ -9,13 +9,19 @@ Author: Lucas Enefer
   <head>
     <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="{% static 'ekozumi_app/map.js' %}"></script>
+    <script>
+      var minLatitude={{location.minLatitude}};
+      var maxLatitude={{location.maxLatitude}};
+      var minLongitude={{location.minLongitude}};
+      var maxLongitude={{location.maxLongitude}};
+    </script>
+    <script src="{% static 'ekozumi_app/map.js'%}"></script>
     <title>Ekozumi</title>
   </head>
   
-  <body onload="getLocation()">
+  <body onload='getLocation()'>
     <div class="map-box">
-      <img src="{% static 'Images/map5.png' %}" id="map">
+      <img src="{% static 'Images/map5.png'%}" id="map">
       <div class="pet-pos" id="pet-pos"><img src="{%static image_source%}"></div>
     </div>
     <div class="box" id="location-box">

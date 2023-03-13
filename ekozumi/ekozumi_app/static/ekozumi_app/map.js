@@ -1,8 +1,9 @@
 /** Map logic for map.html
  * 
- *  Author: Lucas Enefer
+ *  Author: Lucas Enefer, Christian Wood
  */
-function getLocation() {
+
+function getLocation(){
     document.getElementById('battleButton').style.visibility = 'hidden';
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -12,36 +13,37 @@ function getLocation() {
     }
 }
 
-function showPosition(position) {
+function showPosition(position){
     /* works out what perecentage from the bottom and the left the user is */
-    var Y_coordinate =  Math.round(((position.coords.latitude-50.731797)/0.011093)*100 )  
-    var X_coordinate =  Math.round(((position.coords.longitude + 3.540081)/0.015715)*100 )  
+    var x_coordinate =  Math.round(((position.coords.longitude + 3.540081)/0.015715)*100)
+    var y_coordinate =  Math.round(((position.coords.latitude-50.731797)/0.011093)*100)
+    console.log("Current position is: (%f, %f)", position.coords.longitude, position.coords.latitude)
+    console.log("Location today is from: (%f, %f) to (%f, %f)", minLongitude, minLatitude, maxLongitude, maxLatitude)
+    console.log("=======================")
 
     /* checks if outside bounds of map */ 
-    if (X_coordinate > 95) {X_coordinate = 95}
-    else if (X_coordinate < 5 ) {X_coordinate = 5}
-    if (Y_coordinate > 95) {Y_coordinate = 95}
-    else if (Y_coordinate < 0) {Y_coordinate = -5}
+    if (x_coordinate > 95) {x_coordinate = 95}
+    else if (x_coordinate < 5 ) {x_coordinate = 5}
+    if (y_coordinate > 95) {y_coordinate = 95}
+    else if (y_coordinate < 0) {y_coordinate = -5}
 
     /*changes pet position on map */
     var x = document.getElementById("pet-pos");
-    x.style.bottom = Y_coordinate +  "%";
-    x.style.left = X_coordinate + "%";
+    x.style.bottom = y_coordinate +  "%";
+    x.style.left = x_coordinate + "%";
 
-    /*demo boss*/
-    min_X = 40;
-    max_X = 50;
-    min_Y = 45;
-    max_Y = 75;
+    min_x = ((minLongitude + 3.540081)/0.015715)*100;
+    max_x = ((maxLongitude + 3.540081)/0.015715)*100;
+    min_y = ((minLatitude - 50.731797)/0.011093)*100;
+    max_y = ((maxLatitude - 50.731797)/0.011093)*100;
+
+    console.log("Today's location is from (%d, %d) to (%d, %d)", min_x, min_y, max_x, max_y)
+    console.log("Current position is: (%d, %d)", x_coordinate, y_coordinate)
 
     /*checks if Boss in area */
-    if (X_coordinate>= min_X && X_coordinate <= max_X && Y_coordinate>= min_Y && Y_coordinate<= max_Y){
+    if (x_coordinate>= min_x && x_coordinate <= max_x && y_coordinate>= min_y && y_coordinate<= max_y){
         var text = document.getElementById("location");
         text.innerHTML = "looks like there is something here!";
         document.getElementById('battleButton').style.visibility = 'visible' ;
     }
 }
-
-/* duck pond: bottom=20-25% left=10-15% 
-    east park bridge: bottom=55-60% left=65-70%
-    exeter nature reserve: bottom=60-70% left=5-15%*/

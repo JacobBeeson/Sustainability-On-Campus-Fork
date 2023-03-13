@@ -5,8 +5,8 @@ Authors: Christian Wood, Oscar Klemenz
 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import *
 from django import forms
-from .models import Pet, PET_CHOICES
 
 class SignUpForm(UserCreationForm):
     '''
@@ -15,9 +15,6 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        '''
-        Meta info about form
-        '''
         model = User
         fields = ('username', 'email', 'password1', 'password2', )
 
@@ -37,7 +34,7 @@ class ZumiCreationForm(forms.Form):
     petName = forms.CharField(label="Zumi name", max_length=50)
     petType = forms.CharField(max_length=9, label='Zumi type',
                               widget=forms.RadioSelect(choices=PET_CHOICES), initial='HEDGEHOG'  )
-
+    
     class Meta:
         '''
         Meta info about form

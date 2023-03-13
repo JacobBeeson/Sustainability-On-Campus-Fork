@@ -1,9 +1,7 @@
 """
 Configuration for ekozumi_app
 """
-
 from django.apps import AppConfig
-
 
 class EkozumiAppConfig(AppConfig):
     '''

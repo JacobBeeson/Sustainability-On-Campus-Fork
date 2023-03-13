@@ -4,14 +4,14 @@ and displaying user specific information
 Authors: Christian Wood, Oscar Klemenz
 """
 
-from datetime import datetime
 from django.shortcuts import render, redirect
+from .forms import SignUpForm, ZumiCreationForm
+from .models import Pet, Monster, Location, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import django.utils.timezone
-from .forms import SignUpForm, ZumiCreationForm
-from .models import Pet, Monster
+from datetime import datetime
 
 ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png",
                            "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png",
@@ -26,6 +26,8 @@ BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], 
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png", monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
                          playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder", playerOutroDialogue="Player placeholder")
+# Default location is used if a game keeper has not created a location for a given day
+defaultLocation = Location(locationName="Innovation", minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45, locationHint="Get Innovative")
 
 def registrationPage(request):
     '''
@@ -116,6 +118,11 @@ def mapPage(request):
     current_user = request.user
     current_zumi = current_user.profile.petID
     zumi_type = current_zumi.petType
+    try:
+        location = Location.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+    except Location.DoesNotExist:
+        location = defaultLocation
     #if its been more than 48 hours since last fed
     if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
         zumi_image = ZUMI_IMAGES[zumi_type][2]
@@ -125,7 +132,7 @@ def mapPage(request):
     #if its been under 24 hours since last fed
     else:
         zumi_image = ZUMI_IMAGES[zumi_type][0]
-    return render(request, "ekozumi_app/map.html", {'image_source':zumi_image})
+    return render(request, "ekozumi_app/map.html", {'image_source':zumi_image, 'location':location})
 
 @login_required()
 def fightIntroPage(request):
@@ -134,28 +141,20 @@ def fightIntroPage(request):
     """
     # Checks the user has come from the map page
     previous_url = request.META.get('HTTP_REFERER')
-    #if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
-    #    current_user = request.user
-    #    current_zumi = current_user.profile.petID
-    #    zumi_type = current_zumi.petType
-    #    zumi_image = ZUMI_IMAGES[zumi_type][1]
-    #    monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-    #    return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
-    #else:
-    #    return redirect('home_page')
-    current_user = request.user
-    current_zumi = current_user.profile.petID
-    zumi_type = current_zumi.petType
-    zumi_image = ZUMI_IMAGES[zumi_type][1]
-
-    # Gets todays monster
-    try:
-        monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-    # If it doesn't exist uses a placeholder
-    except Monster.DoesNotExist:
-        monster = defaultMonster
-    return render(request, "ekozumi_app/fightIntro.html",
-                  {'zumi_source':zumi_image, "monster":monster})
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
+        current_user = request.user
+        current_zumi = current_user.profile.petID
+        zumi_type = current_zumi.petType
+        zumi_image = ZUMI_IMAGES[zumi_type][1]
+        # Gets todays monster
+        try:
+            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Monster.DoesNotExist:
+            monster = defaultMonster
+        return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
+    else:
+        return redirect('home_page')   
 
 @login_required()
 def fightOutroPage(request):
@@ -208,8 +207,18 @@ def feedZumiPage(request):
     previous_url = request.META.get('HTTP_REFERER')
     if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_outro/"):
         # Feeds zumi
-        current_zumi = request.user.profile.petID
+        current_user = request.user
+        current_user.profile.score += 5
+        current_user.save()
+        current_zumi = current_user.profile.petID
         current_zumi.lastFed = django.utils.timezone.now()
         current_zumi.save()
-
     return redirect('home_page')
+
+@login_required()
+def leaderboardPage(request):
+    '''
+    Page containing the leaderboard
+    '''
+    topscorers = Profile.objects.exclude(petID__isnull=True).order_by('-score')[0:10]
+    return render(request, "ekozumi_app/leaderboard.html", {"topscorers":topscorers})

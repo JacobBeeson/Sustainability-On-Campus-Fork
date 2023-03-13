@@ -2,11 +2,12 @@
 Defines the models for our database
 Authors: Christian Wood, Olivia Kerschen, Oscar Klemenz
 """
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-import django.utils.timezone
+import django.utils.timezone 
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
@@ -60,6 +61,21 @@ class Monster(models.Model):
     def __str__(self):
         return self.monsterName
 
+class Location(models.Model):
+    '''
+    Contains info about each location
+    '''
+    locationID = models.AutoField(primary_key=True)
+    locationName = models.CharField(max_length=50)
+    dayOfAppearance = models.DateField(unique=True)
+    minLongitude = models.FloatField()
+    maxLongitude = models.FloatField()
+    minLatitude = models.FloatField()
+    maxLatitude = models.FloatField()
+    locationHint = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.locationName
 
 class AdminUser(models.Model):
     '''
@@ -69,6 +85,7 @@ class AdminUser(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
+
     def __str__(self):
         return self.username
 
