@@ -1,0 +1,46 @@
+<!-- 
+Map page, where users must navigate to certain geo locations,
+once they arrive in a certain location they can fight an enemy 
+Author: Lucas Enefer, Christian Wood
+-->
+
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+      var minLatitude={{location.minLatitude}};
+      var maxLatitude={{location.maxLatitude}};
+      var minLongitude={{location.minLongitude}};
+      var maxLongitude={{location.maxLongitude}};
+    </script>
+    <script src="{% static 'ekozumi_app/map.js'%}"></script>
+    <title>Ekozumi</title>
+  </head>
+  
+  <body onload='getLocation()'>
+    <div class="map-box">
+      <img src="{% static 'Images/map5.png'%}" id="map">
+      <div class="pet-pos" id="pet-pos"><img src="{%static image_source%}"></div>
+    </div>
+    <div class="box" id="location-box">
+      <div class="box-header">
+        <h2>location</h2>
+      </div>
+      <p id="location">looks like theres nothing here </p>
+      <button id="battleButton" onclick="location.href='../fight_intro'">Fight boss</button >
+    </div>
+
+    <div id="footer"> 
+      <div class="navbar">
+        <div class="navbar">
+          <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
+          <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+          <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+          <button class="btn" id="btn"><i class="fa fa-trophy"></i></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
