@@ -27,7 +27,8 @@ BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], 
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png", monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
                          playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder", playerOutroDialogue="Player placeholder")
 # Default location is used if a game keeper has not created a location for a given day
-defaultLocation = Location(locationName="Innovation", minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45, locationHint="Get Innovative")
+# Default location is used if a game keeper has not created a location for a given day
+defaultLocation = Location(locationName="Innovation", minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45, locationHint="Get Innovative", anagramWord="Forestry")
 
 def registrationPage(request):
     '''
@@ -108,7 +109,13 @@ def puzzlePage(request):
     '''
     Page containing the daily puzzle
     '''
-    return render(request, "ekozumi_app/puzzle.html")
+    try:
+        hint, anagramWord= Location.objects.values("locationHint", "anagramWord").get(dayOfAppearance = datetime.now().date())
+     # If it doesn't exist uses a placeholder
+    except Location.DoesNotExist:
+        hint = defaultLocation.locationHint
+        anagramWord = defaultLocation.anagramWord
+    return render(request, "ekozumi_app/puzzle.html", {"hint":hint, "anagramWord":anagramWord})
 
 @login_required()
 def mapPage(request):
