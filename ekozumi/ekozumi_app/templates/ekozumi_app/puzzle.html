@@ -1,13 +1,15 @@
 <!-- 
-Puzzle page, where users have to figure out an anagram to get a hint 
+Puzzle page, where users have to figure out an anagram to get a hint
+
 Authors: Elliot Wride, Christian Wood
 -->
-
 {% load static %}
-<html>
+<html lang="en">
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Game keeper defined variables, the anaragram the player must solve, and the location
+             hint they will recieve upon completion -->
         <script>
             var hint="{{hint}}";
             var anagram="{{anagramWord}}";
@@ -15,6 +17,7 @@ Authors: Elliot Wride, Christian Wood
         <script type="text/javascript" src="{% static 'ekozumi_app/puzzle.js' %}"></script>
         <title>Ekozumi</title>
     </head>
+    <!-- puzzle() displays the anagram that the user must complete -->
     <body onload="puzzle()">
         <div id="txt"></div>
         <div class="top">
@@ -31,6 +34,7 @@ Authors: Elliot Wride, Christian Wood
                 <input class="large" type="text" name="nw" style ="margin-bottom: 10px;">
             </div>
             <div class="submit"> 
+                <!-- OnClick the users answer is checked by puzzle.js -->
                 <input id="button" type="button"  value="Submit" onclick="checkSolve()">
             </div>
             </form>

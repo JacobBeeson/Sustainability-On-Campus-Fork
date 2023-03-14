@@ -1,10 +1,11 @@
 <!-- 
-Once registering users will be fowarded to this page to create their pet 
+Pet creation page, once users have registered their account they will then
+be fowarded to this page to create their zumi
+
 Author: Christian Wood
 -->
-
 {% load static %}
-<html>
+<html lang="en">
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,6 +23,7 @@ Author: Christian Wood
                 <h2>Create your Zumi</h2>
             </div>
             <form method="post" id="login">
+                <!-- ZumiCreationForm inserted here -->
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div id="myCarousel" class="carousel slide" data-interval="false">                          

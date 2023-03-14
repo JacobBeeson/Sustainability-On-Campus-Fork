@@ -1,10 +1,11 @@
 <!-- 
 Character homepage, users can see their pet, and navigate to game pages
+
 Author: Olivia Kerschen
 -->
 
 {% load static %}
-<html>
+<html lang="en">
   <head>
       <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,8 +24,10 @@ Author: Olivia Kerschen
     </div>
     <div class="box">
         <div class="box-header">
+          <!-- Name of the pet of the user who is logged in -->
           <h2>{{user.profile.petID.petName}}</h2>
         </div>
+        <!-- Image source defined in views.py, image depends on how well fed zumi is -->
         <img id="character" src="{%static image_source%}" alt="character image">    
     </div>
 
