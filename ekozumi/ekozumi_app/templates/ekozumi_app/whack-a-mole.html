@@ -1,5 +1,6 @@
 <!--
 Whack-a-mole game html for enemy boss fight
+
 Author: Jacob Beeson
 -->
 {% load static %}
@@ -15,9 +16,12 @@ Author: Jacob Beeson
 <body>
     <h1 class="health">HEALTH: <span>100</span></h1>
     <h2 id="timer">Time before global warming kills you: <span id="seconds">60</span> seconds</h2>
+    <!-- startGame() has django variables passed into it, this will be the gamekeeper defined monster, which the plater had
+         dialogue with -->
     <button type='button' id="startButton" onclick='startGame("{%static monster.monsterImage%}", "{%static monster.monsterAngryImage%}")'>Start Game</button>
 
     <div class="ground">
+        <!-- Locations where the monater can appear -->
         <div class="holes"></div>
         <div class="holes"></div>
         <div class="holes"></div>
