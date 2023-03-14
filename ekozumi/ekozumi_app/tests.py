@@ -37,18 +37,18 @@ class SignUpFormTest(TestCase):
         """
         Checks that two users cant be created with the same username
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", 
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
                                 "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         form.save()
-        form2 = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", 
+        form2 = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
                                  "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertFalse(form2.is_valid())
-    
+
     def testEmptyUsernameField(self):
         """
         Checks that a username is required
         """
-        form = SignUpForm(data={"username":'', "email":"testEmail@email.com", 
+        form = SignUpForm(data={"username":'', "email":"testEmail@email.com",
                                 "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         self.assertFalse(form.is_valid())
 
@@ -56,7 +56,7 @@ class SignUpFormTest(TestCase):
         """
         Checks that a email is required
         """
-        form = SignUpForm(data={"username":'testUser', "email":"", "password1":"ekozumi###3474t", 
+        form = SignUpForm(data={"username":'testUser', "email":"", "password1":"ekozumi###3474t",
                                 "password2":"ekozumi###3474t"})
         self.assertFalse(form.is_valid())
 
@@ -64,7 +64,7 @@ class SignUpFormTest(TestCase):
         """
         Checks that a password is required
         """
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", 
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
                                 "password1":"", "password2":""})
         self.assertFalse(form.is_valid())
 
@@ -99,7 +99,8 @@ class ZumiFeedTest(TestCase):
         if not logged in, also creates a pet for the user
         """
         # User form
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
+                                "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         user = form.save()
 
         # Creates a new pet
@@ -118,7 +119,7 @@ class MonsterCreationTest(TestCase):
         Set up non-modified monster object used by all test methods
         """
         Monster.objects.create(monsterName="test", dayOfAppearance=datetime.now().date(),
-                               monsterImage="Images/ciggy-normal.png", 
+                               monsterImage="Images/ciggy-normal.png",
                                monsterAngryImage="Images/ciggy-angry.png",
                                monsterIntroDialogue="test monster intro dialogue",
                                playerIntroDialogue="test player intro dialogue",
@@ -148,7 +149,7 @@ class MonsterCreationTest(TestCase):
         """
         try:
             Monster.objects.create(monsterName="test", dayOfAppearance=datetime.now().date(),
-                                   monsterImage="Images/ciggy-normal.png", 
+                                   monsterImage="Images/ciggy-normal.png",
                                    monsterAngryImage="Images/ciggy-angry.png",
                                    monsterIntroDialogue="test monster intro dialogue",
                                    playerIntroDialogue="test player intro dialogue",
@@ -171,7 +172,7 @@ class LocationCreationTest(TestCase):
                                 minLatitude=50, maxLatitude=55,
                                 minLongitude=40, maxLongitude=45, locationHint="Get Innovative",
                                 anagramWord="Forestry")
-    
+
 
     def testValidLocationName(self):
         """
@@ -180,17 +181,18 @@ class LocationCreationTest(TestCase):
         location = Location.objects.get(locationID=1)
         locationName = location.locationName
         self.assertEqual("Innovation", locationName)
-    
+
     def testDuplicateLocationDate(self):
         """
         Validates that game keepers cannot create
         two locations on the same day
         """
         try:
-            Location.objects.create(locationName="Innovation", dayOfAppearance=datetime.now().date(),
-                        minLatitude=50, maxLatitude=55,
-                        minLongitude=40, maxLongitude=45, locationHint="Get Innovative",
-                        anagramWord="Forestry")
+            Location.objects.create(locationName="Innovation",
+                                    dayOfAppearance=datetime.now().date(),
+                                    minLatitude=50, maxLatitude=55,
+                                    minLongitude=40, maxLongitude=45, locationHint="Get Innovative",
+                                    anagramWord="Forestry")
             self.fail()
         except IntegrityError:
             pass
@@ -208,7 +210,7 @@ class ViewResponseTest(TestCase):
         if not logged in, also creates a pet for the user
         """
         # User form
-        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com", 
+        form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
                                 "password1":"ekozumi###3474t", "password2":"ekozumi###3474t"})
         user = form.save()
 
@@ -226,7 +228,7 @@ class ViewResponseTest(TestCase):
         """
         response = self.client.get('/ekozumi/')
         self.assertEqual(response.status_code, 200)
-    
+
     def testRegistrationView(self):
         """
         test the register view
@@ -267,23 +269,26 @@ class ViewResponseTest(TestCase):
         """
         test the fight intro page
         """
-        response = self.client.post(reverse('intro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/map/')
+        response = self.client.post(reverse('intro'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/map/')
         self.assertEqual(response.status_code, 200)
 
     def testFightView(self):
         """
         test the fight page
         """
-        response = self.client.post(reverse('fight'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight_intro/')
+        response = self.client.post(reverse('fight'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight_intro/')
         self.assertEqual(response.status_code, 200)
 
     def testFightOutroView(self):
         """
         test the fight outro page
         """
-        response = self.client.post(reverse('outro'), {}, HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        response = self.client.post(reverse('outro'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
         self.assertEqual(response.status_code, 200)
-        
+
     def testLeaderboardView(self):
         """
         test the leaderboard view

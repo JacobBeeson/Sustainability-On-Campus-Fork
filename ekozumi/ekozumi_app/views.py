@@ -25,10 +25,14 @@ BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], 
                         "Images/pipe-angry.png"]}
 
 # Default monster is used if a game keeper has not created a monster for a given day
-defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png", monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
-                         playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder", playerOutroDialogue="Player placeholder")
+defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
+                         monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
+                         playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder",
+                         playerOutroDialogue="Player placeholder")
 # Default location is used if a game keeper has not created a location for a given day
-defaultLocation = Location(locationName="Innovation", minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45, locationHint="Get Innovative", anagramWord="Forestry")
+defaultLocation = Location(locationName="Innovation",
+                           minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45,
+                           locationHint="Get Innovative", anagramWord="Forestry")
 
 def registrationPage(request):
     """

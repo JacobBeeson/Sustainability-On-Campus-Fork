@@ -6,12 +6,12 @@ Authors: Christian Wood, Oscar Klemenz
 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import *
 from django import forms
+from .models import User, Pet, PET_CHOICES
 
 class SignUpForm(UserCreationForm):
     """
-    - Form for registering users, 
+    - Form for registering users
     - Displayed on register.html
 
     Args:
@@ -22,8 +22,7 @@ class SignUpForm(UserCreationForm):
         (Inbuilt) Password1 : Chosen password of user
         (Inbuilt) Password2 : Confirms user has entered correct password
     """
-    
-    
+
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -58,11 +57,11 @@ class ZumiCreationForm(forms.Form):
         petName (CharField) : Name of users zumi
         petType (CharField) : Type of zumi, defined by PET_CHOICES dictionary
     """
-    
+
     petName = forms.CharField(label="Zumi name", max_length=50)
     petType = forms.CharField(max_length=9, label='Zumi type',
                               widget=forms.RadioSelect(choices=PET_CHOICES), initial='HEDGEHOG'  )
-    
+
     class Meta:
         """
         - Meta information about this form, model is set to Pet,

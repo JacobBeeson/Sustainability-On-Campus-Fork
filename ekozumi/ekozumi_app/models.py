@@ -7,7 +7,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-import django.utils.timezone 
+import django.utils.timezone
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
@@ -39,7 +39,7 @@ class Pet(models.Model):
     Returns:
         String : Displays name of pet on admin site
     """
-    
+
     petID = models.AutoField(primary_key=True)
     petName = models.CharField(max_length=50)
     lastFed = models.DateTimeField(default=django.utils.timezone.now())
@@ -64,7 +64,7 @@ class Profile(models.Model):
     Returns:
         String : Displays name of user on admin site
     """
-    
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
     petID = models.ForeignKey(Pet, null=True, on_delete=models.CASCADE)
@@ -93,7 +93,7 @@ class Monster(models.Model):
     Returns:
         String : Displays name of monster on admin site
     """
-    
+
     monsterID = models.AutoField(primary_key=True)
     monsterName = models.CharField(max_length=50)
     dayOfAppearance = models.DateField(unique=True)
@@ -169,7 +169,7 @@ def user_is_created(sender, instance, created, **kwargs):
         created (Bool): If a user has just been created,
                         and requires a profile model to be setup
     """
-    
+
     if created:
         Profile.objects.create(user=instance)
     else:
