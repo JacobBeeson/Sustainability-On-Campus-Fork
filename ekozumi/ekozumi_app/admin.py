@@ -1,6 +1,10 @@
 """
-This file is mainly used to display our models on the admin page
-allowing for easy modification
+Admin is used to register models on the admin panel,
+this will then allow gamekeepers to access these models and
+modify them.
+
+This allows game keepers to create daily challenges,
+and sustainablility dialogue for monster battles
 """
 
 from django.contrib import admin

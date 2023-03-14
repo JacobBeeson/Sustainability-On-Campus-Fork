@@ -1,6 +1,7 @@
 """
 Defines all of the URL patterns for our application, in each path
 the string is what should lead the URL 127.0.0.1:8000/ekozumi/
+
 Authors: Christian Wood, Oscar Klemenz
 """
 

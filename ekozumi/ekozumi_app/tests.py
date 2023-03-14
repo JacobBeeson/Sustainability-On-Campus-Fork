@@ -1,5 +1,6 @@
 """
 Tests for ekozumi_app
+
 Author: Oscar Klemenz
 """
 
