@@ -183,7 +183,12 @@ def mapPage(request):
     #if its been under 24 hours since last fed
     else:
         zumi_image = ZUMI_IMAGES[zumi_type][0]
-    return render(request, "ekozumi_app/map.html", {'image_source':zumi_image, 'location':location})
+    # Checks if battle has been completed today
+    notFedToday = True
+    if(current_zumi.lastFed.date() == django.utils.timezone.now().date()):
+        notFedToday = False
+    print(notFedToday)
+    return render(request, "ekozumi_app/map.html", {'image_source':zumi_image, 'location':location, 'notFedToday':notFedToday})
 
 @login_required()
 def fightIntroPage(request):
