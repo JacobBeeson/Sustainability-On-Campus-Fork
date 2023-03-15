@@ -38,7 +38,7 @@ Author: Lucas Enefer, Christian Wood, Oscar Klemenz
           Environmental threat has been defeated today!
         {% endif %}
       </p>
-      <!-- Button only appears if user is in the correct location -->
+      <!-- Button only appears if user is in the correct location, button only clickable if boss battle hasn't already been completed today -->
       <button id="battleButton" {% if notFedToday %} onclick="location.href='../fight_intro'" {% endif %}>Fight {% if notFedToday %}boss{%else%}already complete{%endif%}</button >
     </div>
 
