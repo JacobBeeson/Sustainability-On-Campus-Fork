@@ -44,7 +44,6 @@ function showPosition(position){
     if (x_coordinate>= min_x && x_coordinate <= max_x && y_coordinate>= min_y && y_coordinate<= max_y){
         var text = document.getElementById("location");
         /* Message based upon if enemy has been defeated for this day */
-        console.log(notFedToday);
         if (notFedToday)
         {
             text.innerHTML = "looks like there is something here!";
