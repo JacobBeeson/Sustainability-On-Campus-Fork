@@ -8,11 +8,12 @@ and sustainablility dialogue for monster battles
 """
 
 from django.contrib import admin
-from .models import Profile, Pet, Monster, Location
+from .models import Profile, Pet, Monster, Megaboss, Location
 
 # Models which are displayed in the admin panel
 # Register your models here.
 admin.site.register(Profile)
 admin.site.register(Pet)
 admin.site.register(Monster)
+admin.site.register(Megaboss)
 admin.site.register(Location)

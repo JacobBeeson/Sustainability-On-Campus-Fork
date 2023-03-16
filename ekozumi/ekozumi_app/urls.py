@@ -21,6 +21,9 @@ urlpatterns = [
     path("fight_intro/", views.fightIntroPage, name="intro"),
     path("fight_outro/", views.fightOutroPage, name="outro"),
     path("fight/", views.fightPage, name="fight"),
+    path("megaboss_fight_intro/", views.fightIntroPage, name="megaboss_intro"),
+    path("megaboss_fight_outro/", views.fightOutroPage, name="megaboss_outro"),
+    path("megaboss_fight/", views.fightPage, name="megaboss_fight"),
     path("feed/", views.feedZumiPage, name="feed"),
     path("leaderboard/", views.leaderboardPage, name="leaderboard"),
 ]
