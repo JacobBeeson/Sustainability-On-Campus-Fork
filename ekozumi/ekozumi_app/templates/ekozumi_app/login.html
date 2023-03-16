@@ -1,0 +1,30 @@
+<!-- 
+Main login page
+
+Authors: Elliot Wride, Lucas Enefer, Chrstian Wood, Oscar Klemenz
+-->
+{% load static %}
+<html lang="en">
+    <head>
+        <title>Ekozumi</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+    </head> 
+    <body>
+        <div class="top">
+            <h1> EKOZUMI </h1>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h2>Log In</h2>
+            </div>
+            <form method="post" id="login">
+                <!-- Loads django.auth login form -->
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Log In</button>
+                <a href="{% url 'ekozumi-register' %}"><p class="small">Sign up now!</p></a>
+            </form>        
+        </div>
+    </body>
+</html>
