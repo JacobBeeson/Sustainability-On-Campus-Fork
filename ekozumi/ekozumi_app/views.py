@@ -57,6 +57,13 @@ def registrationPage(request):
             # load the profile instance created by the signal
             user.save()
             raw_password = form.cleaned_data.get('password1')
+            
+            #send welcome email
+            subject = 'Welcome to Ekozumi!'
+            message = 'Your account has been registered with Ekozumi, have fun exploring!'
+            from_email = 'ekozumiap@gmail.com'
+            recipient_list = [user.email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             # login user after signing up
             user = authenticate(username=user.username, password=raw_password)
