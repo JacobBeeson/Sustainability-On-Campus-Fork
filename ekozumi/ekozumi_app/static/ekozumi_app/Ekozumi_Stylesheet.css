@@ -38,6 +38,7 @@ body {
 /* have a div with class "box" for inner box */
 
 .box {
+    animation: slidein 1s ease-in-out;
     background-color: white;
 	max-width: 50%;
 	margin: 0 auto;
@@ -150,6 +151,7 @@ body {
 }
 
 .box2 {
+    animation: slidein 1s ease-in-out;
     background-color: white;
     box-shadow: 0 5px 50px rgba(0,0,0,0.4);
     border-radius: 5px;
@@ -298,4 +300,19 @@ body {
 	font-weight:normal;
 	text-align:center;
 	text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+  }
+
+
+
+/* page transitions */
+
+
+
+@keyframes slidein {
+    0% {
+      top: 200%;
+    }
+    100% {
+      top: 10%;
+    }
   }
