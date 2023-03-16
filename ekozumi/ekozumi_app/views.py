@@ -264,7 +264,7 @@ def fightPage(request):
     """
     # Checks user has come from the fight intro page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/" or previous_url ==  "http://127.0.0.1:8000/ekozumi/lose/"):
         # Gets todays monster
         try:
             monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
@@ -313,3 +313,15 @@ def leaderboardPage(request):
     """
     topscorers = Profile.objects.exclude(petID__isnull=True).order_by('-score')[0:10]
     return render(request, "ekozumi_app/leaderboard.html", {"topscorers":topscorers})
+
+@login_required()
+def losePage(request):
+    '''
+        todo: redirect users on whack a mole if they lose to lose page
+              - check previous url situation as fight itself needs to be accessible from lose page 
+    '''
+    previous_url = request.META.get('HTTP_REFERER')
+    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight/"):
+        return render(request, "ekozumi_app/youLose.html")
+    else:
+        return redirect('home_page')

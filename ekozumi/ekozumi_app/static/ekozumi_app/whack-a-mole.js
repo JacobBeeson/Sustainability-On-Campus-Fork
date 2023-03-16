@@ -21,7 +21,7 @@ function startTimer() {
     if (seconds == 0) {
       clearInterval(countdown);
       alert("LOST GAME, Click 'ok' to return home");
-      window.location = "../home"
+      window.location = "../lose"
     }
   }, 1000);
 }
