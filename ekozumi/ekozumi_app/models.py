@@ -42,7 +42,7 @@ class Pet(models.Model):
 
     petID = models.AutoField(primary_key=True)
     petName = models.CharField(max_length=50)
-    lastFed = models.DateTimeField(default=django.utils.timezone.now())
+    lastFed = models.DateTimeField(default=django.utils.timezone.now()-django.utils.timezone.timedelta(1))
     petType = models.CharField(max_length=9, choices=PET_CHOICES)
 
     def __str__(self):

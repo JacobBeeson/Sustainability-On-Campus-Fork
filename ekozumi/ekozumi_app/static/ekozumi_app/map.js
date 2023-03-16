@@ -43,7 +43,15 @@ function showPosition(position){
     /*checks if Boss in area */
     if (x_coordinate>= min_x && x_coordinate <= max_x && y_coordinate>= min_y && y_coordinate<= max_y){
         var text = document.getElementById("location");
-        text.innerHTML = "looks like there is something here!";
+        /* Message based upon if enemy has been defeated for this day */
+        if (notFedToday)
+        {
+            text.innerHTML = "looks like there is something here!";
+        }
+        else
+        {
+            text.innerHTML = "You have already defeated this boss!";
+        }
         document.getElementById('battleButton').style.visibility = 'visible' ;
     }
 }
