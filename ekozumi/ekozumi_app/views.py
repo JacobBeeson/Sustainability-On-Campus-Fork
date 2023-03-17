@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.contrib.auth import logout
+from urllib.parse import urlparse
 import django.utils.timezone
 from datetime import datetime
 
@@ -213,7 +214,8 @@ def fightIntroPage(request):
     """
     # Checks the user has come from the map page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/map/"):
         current_user = request.user
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
@@ -242,7 +244,8 @@ def fightOutroPage(request):
     """
     # Checks the user has come from the fight page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
         current_user = request.user
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
@@ -272,7 +275,8 @@ def fightPage(request):
     """
     # Checks user has come from the fight intro page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/" or previous_url ==  "http://127.0.0.1:8000/ekozumi/lose/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight_intro/" or previous_path ==  "/ekozumi/lose/"):
         # Gets todays monster
         try:
             monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
@@ -298,7 +302,8 @@ def feedZumiPage(request):
     # Checks user has come from fight, and nowhere else
     # Stops zumi being fed at anytime
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_outro/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight_outro/"):
         # Feeds zumi
         current_user = request.user
         current_user.profile.score += 5
@@ -324,12 +329,21 @@ def leaderboardPage(request):
 
 @login_required()
 def losePage(request):
-    '''
-        todo: redirect users on whack a mole if they lose to lose page
-              - check previous url situation as fight itself needs to be accessible from lose page 
-    '''
+    """
+    Page for when a player loses, allows players to
+    restart boss battle or return to home page.
+    Can only be accessed from fight.html
+
+    Args:
+        request (HttpRequest)
+
+    Returns:
+        redirect(): If player comes from /fight/ they are redirected to
+                    you youLose.html if not they return to home page
+    """
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
         return render(request, "ekozumi_app/youLose.html")
     else:
         return redirect('home_page')
