@@ -10,6 +10,7 @@ from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet, Monster, Location, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.contrib.auth import logout
 import django.utils.timezone
 from datetime import datetime
