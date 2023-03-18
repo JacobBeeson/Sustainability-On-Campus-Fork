@@ -16,15 +16,11 @@ from urllib.parse import urlparse
 import django.utils.timezone
 from datetime import datetime
 
-ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png",
-                           "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png",
-                            "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png",
-                            "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png",
-                            "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png",
-                            "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png",
-                            "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
-BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], "Pipe":["Images/pipe-normal.png",
-                        "Images/pipe-angry.png"]}
+ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"],
+               "Fox":["Images/fox-happy.png", "Images/fox-normal.png", "Images/fox-sad.png"],
+               "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"],
+               "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
+               "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
@@ -142,7 +138,7 @@ def zumiCreationPage(request):
             return redirect('home_page')
     else:
         form = ZumiCreationForm()
-    return render(request, "ekozumi_app/zumi_creation.html", {'form':form})
+    return render(request, "ekozumi_app/zumi_creation.html", {"form":form})
 
 @login_required()
 def puzzlePage(request):

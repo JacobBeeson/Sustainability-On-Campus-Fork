@@ -26,6 +26,9 @@ Author: Christian Wood
                 <!-- ZumiCreationForm inserted here -->
                 {% csrf_token %}
                 {{ form.as_p }}
+                <div>
+                    <img src="{%static 'Images/characters.png'%}">
+                </div>
                 <button type="submit">Create Zumi</button>
             </form>
         </div>
