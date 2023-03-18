@@ -3,8 +3,9 @@ var round = 1;
 var attempts = 0;
 
 function loadQuiz(){
-    // sets colour back to defualt 
+    // sets colour and boss back to default 
     document.getElementById("box-header").style.backgroundColor = "#665851"
+    document.getElementById("character").src = normalBoss; 
 
     //checks which round it is and displays appropriate questions and answers 
     switch(round){
@@ -160,8 +161,9 @@ function checkAnswer(){
         switch(round){
             case 1:
                 if (checkedValue==Q1Correct){
-                    // changes header colour to green
+                    // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
+                    document.getElementById("character").src = angryBoss; 
                     //runs calulate score after 2 seconds 
                     setTimeout(calScore,2000); 
                 } else {
@@ -170,8 +172,9 @@ function checkAnswer(){
                 break;
             case 2:
                 if (checkedValue==Q2Correct){
-                    // changes header colour to green
+                    // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
+                    document.getElementById("character").src = angryBoss; 
                     //runs calulate score after 2 seconds 
                     setTimeout(calScore,3000); 
                 } else {
@@ -181,8 +184,9 @@ function checkAnswer(){
                 break;
             case 3:
                 if (checkedValue==Q3Correct){
-                    // changes header colour to green
+                    // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
+                    document.getElementById("character").src = angryBoss; 
                     //runs calulate score after 2 seconds 
                     setTimeout(calScore,3000); 
                 } else {
@@ -192,8 +196,9 @@ function checkAnswer(){
                 break;
              case 4:
                 if (checkedValue==Q4Correct){
-                    // changes header colour to green
+                    // changes header colour to green and boss to angry 
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
+                    document.getElementById("character").src = angryBoss; 
                     //runs calulate score after 2 seconds 
                     setTimeout(calScore,3000); 
                 } else {
