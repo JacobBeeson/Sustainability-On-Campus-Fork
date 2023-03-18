@@ -254,17 +254,6 @@ body {
     background-color: #111;
 }
 
-/*To make the character selector carousel look good*/
-.carousel-control.left, .carousel-control.right {
-	background-image:none !important;
-	filter:none !important;
-}
-
-.carousel-inner img {
-	margin: auto;
-}
-
-
 /*css for leaderboard */
 
 .leaderboard {
