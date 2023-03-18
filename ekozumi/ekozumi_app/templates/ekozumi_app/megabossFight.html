@@ -1,39 +1,70 @@
-<!--
-Whack-a-mole game html for enemy boss fight
-
-Author: Christian Wood
+<!-- 
+Megaboss fight page, where users must answer questions to defeat boss
+Author: Christian Wood, Lucas Enefer
 -->
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'ekozumi_app/whack-a-mole.css' %}">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekozumi</title>
-</head>
-<body>
-    <p>this is the megaboss fight</p>
-    <h1 class="health">HEALTH: <span>100</span></h1>
-    <h2 id="timer">Time before global warming kills you: <span id="seconds">60</span> seconds</h2>
-    <!-- startGame() has django variables passed into it, this will be the gamekeeper defined monster, which the plater had
-         dialogue with -->
-    <button type='button' id="startButton" onclick='startGame("{%static monster.monsterImage%}", "{%static monster.monsterAngryImage%}")'>Start Game</button>
 
-    <div class="ground">
-        <!-- Locations where the monater can appear -->
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-        <div class="holes"></div>
-    </div>
-    <div class="cursor"></div>
-    <script src="{% static 'ekozumi_app/whack-a-mole.js' %}"></script>
-</body>
+{% load static %}
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            var Q1="{{megaboss.megabossQ1}}";
+            var Q1A1="{{megaboss.megabossQ1CA}}";
+            var Q1A2="{{megaboss.megabossQ1WA1}}";
+            var Q1A3="{{megaboss.megabossQ1WA2}}";
+            var Q1A4="{{megaboss.megabossQ1WA3}}";
+            var Q1Correct=1;
+
+            var Q2= "{{megaboss.megabossQ2}}";
+            var Q2A1="{{megaboss.megabossQ2CA}}";
+            var Q2A2="{{megaboss.megabossQ2WA1}}";
+            var Q2A3="{{megaboss.megabossQ2WA2}}";
+            var Q2A4="{{megaboss.megabossQ2WA3}}"; 
+            var Q2Correct=2;
+
+            var Q3="{{megaboss.megabossQ3}}";
+            var Q3A1="{{megaboss.megabossQ3CA}}";
+            var Q3A2="{{megaboss.megabossQ3WA1}}";
+            var Q3A3="{{megaboss.megabossQ3WA2}}";
+            var Q3A4="{{megaboss.megabossQ3WA3}}"; 
+            var Q3Correct=3;
+
+            var Q4="{{megaboss.megabossQ4}}";
+            var Q4A1="{{megaboss.megabossQ4CA}}";
+            var Q4A2="{{megaboss.megabossQ4WA1}}";
+            var Q4A3="{{megaboss.megabossQ4WA2}}";
+            var Q4A4="{{megaboss.megabossQ4WA3}}"; 
+            var Q4Correct=4;
+        </script>
+        <script src="{% static 'ekozumi_app/megabossFight.js'%}"></script>
+    </head> 
+    <body  onload="loadQuiz()">
+        <div class="box">
+            <div class="box-header" id="box-header"><img id="character" src="{%static megaboss.megabossImage%}" alt="character image"></div>
+            <!-- keeps the page from reloading in submit (IMPORTANT)-->
+            <h2  id="Question"></h2>
+            <iframe name="votar" style="display:none;"></iframe>
+            <form id="form" target="votar">
+                <input type="radio" id="A1" name="answers" value="1">
+                <label for="A1" id="A1-label">1</label><br>
+                <input type="radio" id="A2" name="answers" value="2">
+                <label for="A2" id="A2-label">2</label><br>
+                <input type="radio" id="A3" name="answers" value="3">
+                <label for="A3" id="A3-label">3</label><br>
+                <input type="radio" id="A4" name="answers" value="4">
+                <label for="A4" id="A4-label">4</label><br>
+                <button onclick="checkAnswer()">submit</button>
+              </form>
+        </div>
+        <div id="footer" style="display: none;"> 
+            <div class="navbar">
+              <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
+              <button class="btn" id="btn" action="{% url 'logout' %}"><i class="fa fa-sign-out"></i></button>
+            </div>
+          </div>
+    </body>
 </html>
