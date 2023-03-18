@@ -10,31 +10,124 @@ function loadQuiz(){
     switch(round){
         case 1:
             document.getElementById('Question').innerHTML = Q1;
-            document.getElementById('A1-label').innerHTML = Q1A1;
-            document.getElementById('A2-label').innerHTML = Q1A2;
-            document.getElementById('A3-label').innerHTML = Q1A3;
-            document.getElementById('A4-label').innerHTML = Q1A4;
+            // randomly generates which pos correct answer is in 
+            Q1Correct = Math.floor(Math.random() * 3)+1;
+            switch(Q1Correct){
+                case 1:
+                    document.getElementById('A1-label').innerHTML = Q1A1;
+                    document.getElementById('A2-label').innerHTML = Q1A2;
+                    document.getElementById('A3-label').innerHTML = Q1A3;
+                    document.getElementById('A4-label').innerHTML = Q1A4;
+                    break;
+                case 2:
+                    document.getElementById('A1-label').innerHTML = Q1A2;
+                    document.getElementById('A2-label').innerHTML = Q1A1;
+                    document.getElementById('A3-label').innerHTML = Q1A3;
+                    document.getElementById('A4-label').innerHTML = Q1A4;
+                    break;
+                case 3:
+                    document.getElementById('A1-label').innerHTML = Q1A3;
+                    document.getElementById('A2-label').innerHTML = Q1A2;
+                    document.getElementById('A3-label').innerHTML = Q1A1;
+                    document.getElementById('A4-label').innerHTML = Q1A4;
+                    break;
+                case 4:
+                    document.getElementById('A1-label').innerHTML = Q1A4;
+                    document.getElementById('A2-label').innerHTML = Q1A2;
+                    document.getElementById('A3-label').innerHTML = Q1A3;
+                    document.getElementById('A4-label').innerHTML = Q1A1;
+                    break;
+            }
             break;
         case 2:
             document.getElementById('Question').innerHTML = Q2;
-            document.getElementById('A1-label').innerHTML = Q2A1;
-            document.getElementById('A2-label').innerHTML = Q2A2;
-            document.getElementById('A3-label').innerHTML = Q2A3;
-            document.getElementById('A4-label').innerHTML = Q2A4;
+            Q2Correct = Math.floor(Math.random() * 3)+1;
+            switch(Q2Correct){
+                case 1:
+                    document.getElementById('A1-label').innerHTML = Q2A1;
+                    document.getElementById('A2-label').innerHTML = Q2A2;
+                    document.getElementById('A3-label').innerHTML = Q2A3;
+                    document.getElementById('A4-label').innerHTML = Q2A4;
+                    break;
+                case 2:
+                    document.getElementById('A1-label').innerHTML = Q2A2;
+                    document.getElementById('A2-label').innerHTML = Q2A1;
+                    document.getElementById('A3-label').innerHTML = Q2A3;
+                    document.getElementById('A4-label').innerHTML = Q2A4;
+                    break;
+                case 3:
+                    document.getElementById('A1-label').innerHTML = Q2A3;
+                    document.getElementById('A2-label').innerHTML = Q2A2;
+                    document.getElementById('A3-label').innerHTML = Q2A1;
+                    document.getElementById('A4-label').innerHTML = Q2A4;
+                    break;
+                case 4:
+                    document.getElementById('A1-label').innerHTML = Q2A4;
+                    document.getElementById('A2-label').innerHTML = Q2A2;
+                    document.getElementById('A3-label').innerHTML = Q2A3;
+                    document.getElementById('A4-label').innerHTML = Q2A1;
+                    break;
+            }
             break;
         case 3:
             document.getElementById('Question').innerHTML = Q3;
-            document.getElementById('A1-label').innerHTML = Q3A1;
-            document.getElementById('A2-label').innerHTML = Q3A2;
-            document.getElementById('A3-label').innerHTML = Q3A3;
-            document.getElementById('A4-label').innerHTML = Q3A4;
+            Q3Correct = Math.floor(Math.random() * 3)+1;
+            switch(Q3Correct){
+                case 1:
+                    document.getElementById('A1-label').innerHTML = Q3A1;
+                    document.getElementById('A2-label').innerHTML = Q3A2;
+                    document.getElementById('A3-label').innerHTML = Q3A3;
+                    document.getElementById('A4-label').innerHTML = Q3A4;
+                    break;
+                case 2:
+                    document.getElementById('A1-label').innerHTML = Q3A2;
+                    document.getElementById('A2-label').innerHTML = Q3A1;
+                    document.getElementById('A3-label').innerHTML = Q3A3;
+                    document.getElementById('A4-label').innerHTML = Q3A4;
+                    break;
+                case 3:
+                    document.getElementById('A1-label').innerHTML = Q3A3;
+                    document.getElementById('A2-label').innerHTML = Q3A2;
+                    document.getElementById('A3-label').innerHTML = Q3A1;
+                    document.getElementById('A4-label').innerHTML = Q3A4;
+                    break;
+                case 4:
+                    document.getElementById('A1-label').innerHTML = Q3A4;
+                    document.getElementById('A2-label').innerHTML = Q3A2;
+                    document.getElementById('A3-label').innerHTML = Q3A3;
+                    document.getElementById('A4-label').innerHTML = Q3A1;
+                    break;
+            }
             break;
         case 4:
             document.getElementById('Question').innerHTML = Q4;
-            document.getElementById('A1-label').innerHTML = Q4A1;
-            document.getElementById('A2-label').innerHTML = Q4A2;
-            document.getElementById('A3-label').innerHTML = Q4A3;
-            document.getElementById('A4-label').innerHTML = Q4A4;
+            Q4Correct = Math.floor(Math.random() * 3)+1;
+            switch(Q4Correct){
+                case 1:
+                    document.getElementById('A1-label').innerHTML = Q4A1;
+                    document.getElementById('A2-label').innerHTML = Q4A2;
+                    document.getElementById('A3-label').innerHTML = Q4A3;
+                    document.getElementById('A4-label').innerHTML = Q4A4;
+                    break;
+                case 2:
+                    document.getElementById('A1-label').innerHTML = Q4A2;
+                    document.getElementById('A2-label').innerHTML = Q4A1;
+                    document.getElementById('A3-label').innerHTML = Q4A3;
+                    document.getElementById('A4-label').innerHTML = Q4A4;
+                    break;
+                case 3:
+                    document.getElementById('A1-label').innerHTML = Q4A3;
+                    document.getElementById('A2-label').innerHTML = Q4A2;
+                    document.getElementById('A3-label').innerHTML = Q4A1;
+                    document.getElementById('A4-label').innerHTML = Q4A4;
+                    break;
+                case 4:
+                    document.getElementById('A1-label').innerHTML = Q4A4;
+                    document.getElementById('A2-label').innerHTML = Q4A2;
+                    document.getElementById('A3-label').innerHTML = Q4A3;
+                    document.getElementById('A4-label').innerHTML = Q4A1;
+                    break;
+            }
             break;
         default:
             //save score to database 
