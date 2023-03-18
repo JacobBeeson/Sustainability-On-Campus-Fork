@@ -1,0 +1,43 @@
+<!-- 
+Leaderboard page, displays the top ten scorers
+
+Authors: Lucas Enefer, Chrstian Wood
+-->
+{% load static %}
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Ekozumi</title>
+    </head> 
+    <body>
+        <div class="top">
+            <h1> Ekozumi Leaderboard </h1>
+        </div>
+        <div class="box">
+            <table class="leaderboard">
+                <tr>
+                  <th>Username</th>
+                  <th>Score</th>
+                <!-- Top scorers are passed in through views, and displayed -->
+                </tr>
+                {% for user in topscorers %}
+                  <tr>
+                    <td>{{ user.user.username }}</td>
+                    <td>{{ user.score }}</td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </form>        
+        </div>
+        <div id="footer"> 
+            <div class="navbar">
+              <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../logout'"><i class="fa fa-sign-out"></i></button>
+            </div>
+          </div>
+    </body>
+</html>
