@@ -295,3 +295,12 @@ class ViewResponseTest(TestCase):
         """
         response = self.client.get('/ekozumi/leaderboard/')
         self.assertEqual(response.status_code, 200)
+    
+    def testLoseView(self):
+        """
+        test the fight outro page
+        """
+        response = self.client.post(reverse('lose'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        self.assertEqual(response.status_code, 200)
+

@@ -67,14 +67,14 @@ Author: Christian Wood, Lucas Enefer
                 <button onclick="checkAnswer()">submit</button>
               </form>
         </div>
-        <div id="footer" style="display: none;"> 
+        <div id="footer"> 
             <div class="navbar">
               <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
               <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
               <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
               <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
-              <button class="btn" id="btn" onclick="location.href='../logout'"><i class="fa fa-sign-out"></i></button>
+              <button class="btn" id="btn" action="{% url 'logout' %}"><i class="fa fa-sign-out"></i></button>
             </div>
-          </div>
+        </div>
     </body>
 </html>

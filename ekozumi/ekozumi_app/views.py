@@ -10,17 +10,17 @@ from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet, Monster, Megaboss, Location, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.contrib.auth import logout
+from urllib.parse import urlparse
 import django.utils.timezone
 from datetime import datetime
 
-ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png",
-                           "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png",
-                            "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png",
-                            "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png",
-                            "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png",
-                            "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png",
-                            "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
+ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"],
+               "Fox":["Images/fox-happy.png", "Images/fox-normal.png", "Images/fox-sad.png"],
+               "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"],
+               "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
+               "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
@@ -67,6 +67,13 @@ def registrationPage(request):
             # load the profile instance created by the signal
             user.save()
             raw_password = form.cleaned_data.get('password1')
+            
+            #send welcome email
+            subject = 'Welcome to Ekozumi!'
+            message = 'Your account has been registered with Ekozumi, have fun exploring!'
+            from_email = 'ekozumiap@gmail.com'
+            recipient_list = [user.email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             # login user after signing up
             user = authenticate(username=user.username, password=raw_password)
@@ -143,7 +150,7 @@ def zumiCreationPage(request):
             return redirect('home_page')
     else:
         form = ZumiCreationForm()
-    return render(request, "ekozumi_app/zumi_creation.html", {'form':form})
+    return render(request, "ekozumi_app/zumiCreation.html", {"form":form})
 
 @login_required()
 def puzzlePage(request):
@@ -212,7 +219,7 @@ def fightIntroPage(request):
         render() : If user has come from map fightintro.html is rendered,
                    If they are tring to access the url from somewhere else in the
                    app they are redirected to the home page
-    """ 
+    """
     # Checks the user has come from the map page
     previous_url = request.META.get('HTTP_REFERER')
     if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
@@ -253,7 +260,6 @@ def fightPage(request):
         somewhere else in the app they are redirected to the home page
     """
     # Checks user has come from the fight intro page
-    """
     previous_url = request.META.get('HTTP_REFERER')
     if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
         #checks if a megaboss is due
@@ -275,25 +281,7 @@ def fightPage(request):
             return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
     else:
         return redirect('home_page')
-    """
-    #checks if a megaboss is due
-    if datetime.today().weekday() == 6:
-        # Gets todays megaboss
-        try:
-            megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
-        # If it doesn't exist uses a placeholder
-        except Megaboss.DoesNotExist:
-            megaboss = defaultMegaboss
-        return render(request, "ekozumi_app/megabossFight.html", {"megaboss":megaboss})
-    else:
-        # Gets todays monster
-        try:
-            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-        # If it doesn't exist uses a placeholder
-        except Monster.DoesNotExist:
-            monster = defaultMonster
-        return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
-
+    
 @login_required()
 def fightOutroPage(request):
     """
@@ -348,7 +336,8 @@ def feedZumiPage(request):
     # Checks user has come from fight, and nowhere else
     # Stops zumi being fed at anytime
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_outro/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight_outro/"):
         # Feeds zumi
         current_user = request.user
         current_user.profile.score += 5
@@ -371,6 +360,27 @@ def leaderboardPage(request):
     """
     topscorers = Profile.objects.exclude(petID__isnull=True).order_by('-score')[0:10]
     return render(request, "ekozumi_app/leaderboard.html", {"topscorers":topscorers})
+
+@login_required()
+def losePage(request):
+    """
+    Page for when a player loses, allows players to
+    restart boss battle or return to home page.
+    Can only be accessed from fight.html
+
+    Args:
+        request (HttpRequest)
+
+    Returns:
+        redirect(): If player comes from /fight/ they are redirected to
+                    you youLose.html if not they return to home page
+    """
+    previous_url = request.META.get('HTTP_REFERER')
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
+        return render(request, "ekozumi_app/youLose.html")
+    else:
+        return redirect('home_page')
 
 @login_required
 def uploadDataPage(request):

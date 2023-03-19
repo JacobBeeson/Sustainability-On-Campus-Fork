@@ -11,14 +11,13 @@ import django.utils.timezone
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
-BADGER = "Badger"
+FOX = "Fox"
 FROG = "Frog"
-BAT = "Bat"
-WEASEL = "Weasel"
 RABBIT = "Rabbit"
+BLUETIT = "Bluetit"
 
-PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"),
-               (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
+PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (FOX, "Fox"),
+               (FROG, "Frog"), (RABBIT, "Rabbit"), (BLUETIT, "Bluetit"),]
 
 class Pet(models.Model):
     """
