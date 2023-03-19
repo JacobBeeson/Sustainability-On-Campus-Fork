@@ -11,14 +11,13 @@ import django.utils.timezone
 
 # Possible choices for a users pet
 HEDGEHOG = "Hedgehog"
-BADGER = "Badger"
+FOX = "Fox"
 FROG = "Frog"
-BAT = "Bat"
-WEASEL = "Weasel"
 RABBIT = "Rabbit"
+BLUETIT = "Bluetit"
 
-PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (BADGER, "Badger"),
-               (FROG, "Frog"), (BAT, "Bat"), (WEASEL, "Weasel"), (RABBIT, "Rabbit"),]
+PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (FOX, "Fox"),
+               (FROG, "Frog"), (RABBIT, "Rabbit"), (BLUETIT, "Bluetit"),]
 
 class Pet(models.Model):
     """
@@ -106,6 +105,90 @@ class Monster(models.Model):
 
     def __str__(self):
         return self.monsterName
+
+class Megaboss(models.Model):
+    """
+    - Megaboss database model
+    - Used in fightIntro.html, megabossFight.html, fightOutro.html
+
+    Args:
+        models.Model : Used to define each field
+    Attributes:
+        megabossID (AutoField)            : Primary key of megaboss,
+                                           automatically created on instantiation
+        megabossName (CharField)          : Name of megaboss
+        dayOfAppearance (DateField)      : Day megaboss will appear for battle,
+                                           only one megaboss can appear per week
+        megabossImage (CharField)         : Path to megaboss image
+        megabossAngryImage (CharField)    : Path to megaboss angry image
+        megabossIntroDialogue (CharField) : Sustainable dialogue, about megaboss
+        playerIntroDialogue (CharField)  : Player response before battle
+        megabossOutroDialogue (CharField) : megaboss after defeat text
+        playerOutroDialogue (CharField)  : Player victory text
+        megabossQ1 : Question one
+        megabossQ1CA : Q1 correct answer
+        megabossQ1WA1 : Q1 wrong answer 1
+        megabossQ1WA2 : Q1 wrong answer 2
+        megabossQ1WA3 : Q1 wrong answer 3
+        megabossQ2 : Question two
+        megabossQ2CA : Q2 correct answer
+        megabossQ2WA1 : Q2 wrong answer 1
+        megabossQ2WA2 : Q2 wrong answer 2
+        megabossQ2WA3 : Q2 wrong answer 3
+        megabossQ3 : Question three
+        megabossQ3CA : Q3 correct answer
+        megabossQ3WA1 : Q3 wrong answer 1
+        megabossQ3WA2 : Q3 wrong answer 2
+        megabossQ3WA3 : Q3 wrong answer 3
+        megabossQ4 : Question four
+        megabossQ4CA : Q4 correct answer
+        megabossQ4WA1 : Q4 wrong answer 1
+        megabossQ4WA2 : Q4 wrong answer 2
+        megabossQ4WA3 : Q4 wrong answer 3
+        megaboss1CorrectStats : number of users with just 1 right answer
+        megaboss2CorrectStats : number of users with just 2 right answer
+        megaboss3CorrectStats : number of users with just 3 right answer
+        megaboss4CorrectStats : number of users with just 4 right answer
+    Returns:
+        String : Displays name of megaboss on admin site
+    """
+
+    megabossID = models.AutoField(primary_key=True)
+    megabossName = models.CharField(max_length=50)
+    dayOfAppearance = models.DateField(unique=True)
+    megabossImage = models.CharField(max_length=50)
+    megabossAngryImage = models.CharField(max_length=50)
+    megabossIntroDialogue = models.CharField(max_length=500)
+    playerIntroDialogue = models.CharField(max_length=500)
+    megabossOutroDialogue = models.CharField(max_length=500)
+    playerOutroDialogue = models.CharField(max_length=500)
+    megabossQ1 = models.CharField(max_length=500)
+    megabossQ1CA = models.CharField(max_length=500)
+    megabossQ1WA1 = models.CharField(max_length=500)
+    megabossQ1WA2 = models.CharField(max_length=500)
+    megabossQ1WA3 = models.CharField(max_length=500)
+    megabossQ2 = models.CharField(max_length=500)
+    megabossQ2CA = models.CharField(max_length=500)
+    megabossQ2WA1 = models.CharField(max_length=500)
+    megabossQ2WA2 = models.CharField(max_length=500)
+    megabossQ2WA3 = models.CharField(max_length=500)
+    megabossQ3 = models.CharField(max_length=500)
+    megabossQ3CA = models.CharField(max_length=500)
+    megabossQ3WA1 = models.CharField(max_length=500)
+    megabossQ3WA2 = models.CharField(max_length=500)
+    megabossQ3WA3 = models.CharField(max_length=500)
+    megabossQ4 = models.CharField(max_length=500)
+    megabossQ4CA = models.CharField(max_length=500)
+    megabossQ4WA1 = models.CharField(max_length=500)
+    megabossQ4WA2 = models.CharField(max_length=500)
+    megabossQ4WA3 = models.CharField(max_length=500)
+    megaboss1CorrectStats = models.IntegerField(default=0)
+    megaboss2CorrectStats = models.IntegerField(default=0)
+    megaboss3CorrectStats = models.IntegerField(default=0)
+    megaboss4CorrectStats = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return self.megabossName
 
 class Location(models.Model):
     """

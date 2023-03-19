@@ -1,0 +1,36 @@
+<!-- 
+Pet creation page, once users have registered their account they will then
+be fowarded to this page to create their zumi
+
+Author: Christian Wood
+-->
+{% load static %}
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="zumi_creation.js"></script>
+        <title>Ekozumi</title>
+    </head> 
+    <body>
+        <div class="top">
+            <h1> EKOZUMI </h1>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h2>Create your Zumi</h2>
+            </div>
+            <form method="post" id="login">
+                <!-- ZumiCreationForm inserted here -->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <img src="{%static 'Images/characters.png'%}">
+                </div>
+                <button type="submit">Create Zumi</button>
+            </form>
+        </div>
+    </body>
+</html>

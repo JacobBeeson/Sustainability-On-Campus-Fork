@@ -1,0 +1,32 @@
+<!--
+Outro for the boss fight
+
+Author: Christian Wood
+-->
+
+{% load static %}
+<html lang="en">
+
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}"> 
+        <title>Ekozumi</title>
+    </head>
+
+    <body>
+        <p>This is the megaboss fight outro</p>
+        <div class="box2" style="top: auto; text-align: right;">
+            <img src="{%static monster.monsterImage%}" alt="" width="170" height="170"  style="float: right; ">
+            <!-- Game keeper defined sustainable dialogue, about environmental threat -->
+            {{monster.monsterOutroDialogue}}
+        </div>
+        <div class="box" style="margin-top: 40%;" >
+            you can now feed your hungry pet <br>
+            <button style="margin-top: 10%;" onclick="location.href='../feed'">feed pet</button>
+        </div>
+        <div class="box2" style="bottom: 0; position: absolute;  text-align: left;">
+            <img src="{%static zumi_source%}" alt="" width="120" height="120"  style="float: left;">
+            <!-- Players resonse to this sustainable threat -->
+            {{monster.playerOutroDialogue}}
+        </div>
+    </body>
+</html>

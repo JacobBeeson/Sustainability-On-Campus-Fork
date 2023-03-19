@@ -4,25 +4,21 @@
  */
 
 var anagram;
-function startTime()
-{
-    var today=new Date();
-    var h=today.getHours();
-    var m=today.getMinutes();
-    var s=today.getSeconds();
-    // add a zero in front of numbers<10
-    m=checkTime(m);
-    s=checkTime(s);
-    document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+function startTime(){
+    var midnight = new Date();
+    midnight.setHours( 24 );
+    midnight.setMinutes( 0 );
+    midnight.setSeconds( 0 );
+    midnight.setMilliseconds( 0 );
+
+    var h=Math.floor((midnight.getTime() - new Date().getTime())/(1000*60*60))
+    var m=checkTime(Math.floor((midnight.getTime() - new Date().getTime())%(1000*60*60)/(1000*60)));
+    var s=checkTime(Math.floor((midnight.getTime() - new Date().getTime())%(1000*60)/(1000)));
+    document.getElementById('txt').innerHTML="Daily challenge released in " + h+":"+m+":"+s;
     //updates clock with current time
     t=setTimeout('startTime()',500);
     //timer until time updates again, 500ms keeps time accurate but doesnt call method too often
-
-    if(true){//change to check if time and if puzzle done - puzzle appears when display is set to block
-        document.getElementById('puzzle').style.display = 'block';
-    }else{
-        document.getElementById('puzzle').style.display = 'none';
-    }
+    document.getElementById('puzzle').style.display = 'block';
 }
 
 function puzzle(){
@@ -40,11 +36,9 @@ function puzzle(){
     startTime();
 }
 
-function checkTime(i) 
-{
+function checkTime(i){
     //formats single digits
-    if (i<10)
-        {
+    if (i<10){
             i="0" + i;
         }
     return i;
@@ -55,6 +49,6 @@ function checkSolve(){
 
     if (answer == anagram.toUpperCase()){
         alert("You did it!")
-        document.getElementById('hint').innerHTML=hint;
+        document.getElementById('hint').innerHTML="Hint: " + hint;
     }
 }

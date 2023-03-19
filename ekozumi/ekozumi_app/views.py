@@ -7,7 +7,7 @@ Authors: Christian Wood, Oscar Klemenz
 
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, ZumiCreationForm
-from .models import Pet, Monster, Location, Profile
+from .models import Pet, Monster, Megaboss, Location, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -16,21 +16,29 @@ from urllib.parse import urlparse
 import django.utils.timezone
 from datetime import datetime
 
-ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png",
-                           "Images/hedge-hog-sad.png"], "Badger":["Images/hedge-hog-happy.png",
-                            "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"], "Frog":["Images/frog-happy.png",
-                            "Images/frog-normal.png", "Images/frog-sad.png"], "Bat":["Images/bat-happy.png",
-                            "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png",
-                            "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png",
-                            "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
-BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], "Pipe":["Images/pipe-normal.png",
-                        "Images/pipe-angry.png"]}
+ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-normal.png", "Images/hedge-hog-sad.png"],
+               "Fox":["Images/fox-happy.png", "Images/fox-normal.png", "Images/fox-sad.png"],
+               "Frog":["Images/frog-happy.png", "Images/frog-normal.png", "Images/frog-sad.png"],
+               "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
+               "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
                          monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
                          playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder",
                          playerOutroDialogue="Player placeholder")
+# Default megaboss is used if a game keeper has not created a megaboss for a given day
+defaultMegaboss = Megaboss(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
+                         megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
+                         playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
+                         playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                         megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
+                         megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
+                         megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
+                         megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
+                         megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
+                         megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
+                         megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
 # Default location is used if a game keeper has not created a location for a given day
 defaultLocation = Location(locationName="Innovation",
                            minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45,
@@ -142,7 +150,7 @@ def zumiCreationPage(request):
             return redirect('home_page')
     else:
         form = ZumiCreationForm()
-    return render(request, "ekozumi_app/zumi_creation.html", {'form':form})
+    return render(request, "ekozumi_app/zumiCreation.html", {"form":form})
 
 @login_required()
 def puzzlePage(request):
@@ -196,14 +204,14 @@ def mapPage(request):
     notFedToday = True
     if(current_zumi.lastFed.date() == django.utils.timezone.now().date()):
         notFedToday = False
-    print(notFedToday)
     return render(request, "ekozumi_app/map.html", {'image_source':zumi_image, 'location':location, 'notFedToday':notFedToday})
 
 @login_required()
 def fightIntroPage(request):
     """
     Introduction to the fight, against the environmental threat
-    player will recieve dialogue about a sustainable issue
+    player will recieve dialogue about a sustainable issue or be
+    introduced to a megaboss if accessed on a Friday
 
     Args:
         request (HttpRequest)
@@ -220,16 +228,62 @@ def fightIntroPage(request):
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
         zumi_image = ZUMI_IMAGES[zumi_type][1]
-        # Gets todays monster
-        try:
-            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-        # If it doesn't exist uses a placeholder
-        except Monster.DoesNotExist:
-            monster = defaultMonster
-        return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
+        #checks if a megaboss is due
+        if datetime.today().weekday() == 4:
+            # Gets todays megaboss
+            try:
+                megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Megaboss.DoesNotExist:
+                megaboss = defaultMegaboss
+            return render(request, "ekozumi_app/megabossFightIntro.html", {'zumi_source':zumi_image, "megaboss":megaboss})
+        else:
+            # Gets todays monster
+            try:
+                monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Monster.DoesNotExist:
+                monster = defaultMonster
+            return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
     else:
-        return redirect('home_page')   
+        return redirect('home_page')
 
+@login_required()
+def fightPage(request):
+    """
+    Whack a mole fight against the enemy or a megaboss battle
+
+    Args:
+        request (HttpRequest)
+    Returns:
+        render() : If user has come from the fight intro whack-a-mole.html or 
+        megabossFight.htmlare rendered. If they are trying to access the url from
+        somewhere else in the app they are redirected to the home page
+    """
+    # Checks user has come from the fight intro page
+    previous_url = request.META.get('HTTP_REFERER')
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight_intro/" or previous_path ==  "/ekozumi/lose/"):
+        #checks if a megaboss is due
+        if datetime.today().weekday() == 4:
+            # Gets todays megaboss
+            try:
+                megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Megaboss.DoesNotExist:
+                megaboss = defaultMegaboss
+            return render(request, "ekozumi_app/megabossFight.html", {"megaboss":megaboss})
+        else:
+            # Gets todays monster
+            try:
+                monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Monster.DoesNotExist:
+                monster = defaultMonster
+            return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
+    else:
+        return redirect('home_page')
+    
 @login_required()
 def fightOutroPage(request):
     """
@@ -238,9 +292,9 @@ def fightOutroPage(request):
     Args:
         request (HttpRequest)
     Returns:
-        render() : If user has come from the fight fightoutro.html is rendered,
-                   If they are tring to access the url from somewhere else in the
-                   app they are redirected to the home page
+        render() : If user has come from the fight fightOutro.html or 
+        megabossFightOutro.html are rendered. If they are tring to access
+        the url from somewhere else in the app they are redirected to the home page
     """
     # Checks the user has come from the fight page
     previous_url = request.META.get('HTTP_REFERER')
@@ -250,40 +304,23 @@ def fightOutroPage(request):
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
         zumi_image = ZUMI_IMAGES[zumi_type][1]
-        # Gets todays monster
-        try:
-            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-        # If it doesn't exist uses a placeholder
-        except Monster.DoesNotExist:
-            monster = defaultMonster
-        return render(request, "ekozumi_app/fightOutro.html",
-                      {'zumi_source':zumi_image, "monster":monster})
-    else:
-        return redirect('home_page')
-
-@login_required()
-def fightPage(request):
-    """
-    Whack a mole fight against the enemy
-
-    Args:
-        request (HttpRequest)
-    Returns:
-        render() : If user has come from the fight intro whack-a-mole.html is rendered,
-                   If they are tring to access the url from somewhere else in the
-                   app they are redirected to the home page
-    """
-    # Checks user has come from the fight intro page
-    previous_url = request.META.get('HTTP_REFERER')
-    previous_path = urlparse(previous_url).path
-    if( previous_path == "/ekozumi/fight_intro/" or previous_path ==  "/ekozumi/lose/"):
-        # Gets todays monster
-        try:
-            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-        # If it doesn't exist uses a placeholder
-        except Monster.DoesNotExist:
-            monster = defaultMonster
-        return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
+        #checks if a megaboss is due
+        if datetime.today().weekday() == 4:
+            # Gets todays megaboss
+            try:
+                megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Megaboss.DoesNotExist:
+                megaboss = defaultMegaboss
+            return render(request, "ekozumi_app/megabossFightOutro.html", {'zumi_source':zumi_image, "megaboss":megaboss})
+        else:
+            # Gets todays monster
+            try:
+                monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+            # If it doesn't exist uses a placeholder
+            except Monster.DoesNotExist:
+                monster = defaultMonster
+            return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, "monster":monster})
     else:
         return redirect('home_page')
 
