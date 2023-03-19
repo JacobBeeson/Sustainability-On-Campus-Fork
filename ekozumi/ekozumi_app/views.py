@@ -222,7 +222,8 @@ def fightIntroPage(request):
     """
     # Checks the user has come from the map page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/map/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/map/"):
         current_user = request.user
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
@@ -261,7 +262,8 @@ def fightPage(request):
     """
     # Checks user has come from the fight intro page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight_intro/" or previous_path ==  "/ekozumi/lose/"):
         #checks if a megaboss is due
         if datetime.today().weekday() == 4:
             # Gets todays megaboss
@@ -296,7 +298,8 @@ def fightOutroPage(request):
     """
     # Checks the user has come from the fight page
     previous_url = request.META.get('HTTP_REFERER')
-    if( previous_url == "http://127.0.0.1:8000/ekozumi/fight/"):
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
         current_user = request.user
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
@@ -381,19 +384,3 @@ def losePage(request):
         return render(request, "ekozumi_app/youLose.html")
     else:
         return redirect('home_page')
-
-@login_required
-def uploadDataPage(request):
-    """
-    Uploads users score to the database, and feeds their zumi
-    once the megaboss has been defeated.
-
-    Args:
-        request (HttpRequest)
-    """
-    # Get http request, print it
-    score = int(request.POST.get('score'))
-    current_user = request.user
-    current_user.profile.score += score
-    current_user.save()
-    return redirect('home_page')
