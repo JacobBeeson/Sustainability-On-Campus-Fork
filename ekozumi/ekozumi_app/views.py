@@ -224,7 +224,7 @@ def fightIntroPage(request):
         if datetime.today().weekday() == 4:
             # Gets todays megaboss
             try:
-                megbaoss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+                megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
             # If it doesn't exist uses a placeholder
             except Megaboss.DoesNotExist:
                 megaboss = defaultMegaboss
@@ -371,3 +371,19 @@ def leaderboardPage(request):
     """
     topscorers = Profile.objects.exclude(petID__isnull=True).order_by('-score')[0:10]
     return render(request, "ekozumi_app/leaderboard.html", {"topscorers":topscorers})
+
+@login_required
+def uploadDataPage(request):
+    """
+    Uploads users score to the database, and feeds their zumi
+    once the megaboss has been defeated.
+
+    Args:
+        request (HttpRequest)
+    """
+    # Get http request, print it
+    score = int(request.POST.get('score'))
+    current_user = request.user
+    current_user.profile.score += score
+    current_user.save()
+    return redirect('home_page')

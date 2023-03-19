@@ -8,6 +8,11 @@ Author: Christian Wood, Lucas Enefer
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {% csrf_token %}
+        <script>
+            var csrf_token = '{{ csrf_token }}';
+        </script>
         <script>
             var Q1="{{megaboss.megabossQ1}}";
             var Q1A1="{{megaboss.megabossQ1CA}}";
@@ -68,7 +73,7 @@ Author: Christian Wood, Lucas Enefer
               <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
               <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
               <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
-              <button class="btn" id="btn" action="{% url 'logout' %}"><i class="fa fa-sign-out"></i></button>
+              <button class="btn" id="btn" onclick="location.href='../logout'"><i class="fa fa-sign-out"></i></button>
             </div>
           </div>
     </body>

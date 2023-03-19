@@ -139,7 +139,8 @@ function loadQuiz(){
         default:
             //save score to database 
             console.log(score);
-
+            console.log("calling send data")
+            sendDataToDjango(score);
             //hidea form and displaya nav bar 
             document.getElementById('Question').innerHTML = "ahh i can't beleive you defeated me!!!";
             document.getElementById('form').style.display = "none";
@@ -236,4 +237,22 @@ function calScore(){
     attempts = 0
     round++
     loadQuiz();
+}
+
+function sendDataToDjango(score) {
+    console.log("Data sending");
+    $.ajax({
+        type: 'POST',
+        url: '../upload_data/',
+        data: {
+            'score': score,
+            'csrfmiddlewaretoken': csrf_token // include CSRF token in request
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log('Error:', response);
+        }
+    });
 }
