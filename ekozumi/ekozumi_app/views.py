@@ -384,3 +384,33 @@ def losePage(request):
         return render(request, "ekozumi_app/youLose.html")
     else:
         return redirect('home_page')
+ 
+@login_required()
+def uploadDataPage(request):
+    """
+    Uploads users score to the database, and feeds their zumi
+    once the megaboss has been defeated.
+
+    Args:
+        request (HttpRequest)
+    """
+    # Get http request, print it
+    score = int(request.POST.get('score'))
+    current_user = request.user
+    current_user.profile.score += score
+    current_user.save()
+    return redirect('home_page')
+def uploadDataPage(request):
+    """
+    Uploads users score to the database, and feeds their zumi
+    once the megaboss has been defeated.
+
+    Args:
+        request (HttpRequest)
+    """
+    # Get http request, print it
+    score = int(request.POST.get('score'))
+    current_user = request.user
+    current_user.profile.score += score
+    current_user.save()
+    return redirect('home_page')
