@@ -385,7 +385,7 @@ def losePage(request):
     else:
         return redirect('home_page')
 
-@login_required
+@login_required()
 def uploadDataPage(request):
     """
     Uploads users score to the database, and feeds their zumi
