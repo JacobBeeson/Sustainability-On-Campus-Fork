@@ -21,8 +21,6 @@ ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-norma
                             "Images/bat-normal.png", "Images/bat-sad.png"], "Weasel":["Images/weasel-happy.png",
                             "Images/weasel-normal.png", "Images/weasel-sad.png"], "Rabbit":["Images/rabbit-happy.png",
                             "Images/rabbit-normal.png", "Images/rabbit-sad.png"]}
-BADDIE_IMAGES = {"Ciggy":["Images/ciggy-normal.png", "Images/ciggy-angry.png"], "Pipe":["Images/pipe-normal.png",
-                        "Images/pipe-angry.png"]}
 
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
@@ -30,16 +28,16 @@ defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-n
                          playerIntroDialogue="Player placeholder", monsterOutroDialogue="Enemy Placeholder",
                          playerOutroDialogue="Player placeholder")
 # Default megaboss is used if a game keeper has not created a megaboss for a given day
-defaultMegaboss = Megaboss(megabossName="placeholder", megabossImage="Images/evil-battery-dude.png",
-                         megabossAngryImage="Images/evil-battery-dude.png", megabossIntroDialogue="Enemy Placeholder",
+defaultMegaboss = Megaboss(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
+                         megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
                          playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                         playerOutroDialogue="Player placeholder", megabossQ1="Placeholder", megabossQ1CA="Placeholder",
-                         megabossQ1WA1="Placeholder", megabossQ1WA2="Placeholder", megabossQ1WA3="Placeholder",
-                         megabossQ2="Placeholder", megabossQ2CA="Placeholder", megabossQ2WA1="Placeholder", 
-                         megabossQ2WA2="Placeholder", megabossQ2WA3="Placeholder", megabossQ3="Placeholder",
-                         megabossQ3CA="Placeholder", megabossQ3WA1="Placeholder", megabossQ3WA2="Placeholder",
-                         megabossQ3WA3="Placeholder", megabossQ4="Placeholder", megabossQ4CA="Placeholder",
-                         megabossQ4WA1="Placeholder", megabossQ4WA2="Placeholder", megabossQ4WA3="Placeholder",
+                         playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                         megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
+                         megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
+                         megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
+                         megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
+                         megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
+                         megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
                          megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
 # Default location is used if a game keeper has not created a location for a given day
 defaultLocation = Location(locationName="Innovation",
@@ -255,6 +253,7 @@ def fightPage(request):
         somewhere else in the app they are redirected to the home page
     """
     # Checks user has come from the fight intro page
+    """
     previous_url = request.META.get('HTTP_REFERER')
     if( previous_url == "http://127.0.0.1:8000/ekozumi/fight_intro/"):
         #checks if a megaboss is due
@@ -276,7 +275,24 @@ def fightPage(request):
             return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
     else:
         return redirect('home_page')
-
+    """
+    #checks if a megaboss is due
+    if datetime.today().weekday() == 6:
+        # Gets todays megaboss
+        try:
+            megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Megaboss.DoesNotExist:
+            megaboss = defaultMegaboss
+        return render(request, "ekozumi_app/megabossFight.html", {"megaboss":megaboss})
+    else:
+        # Gets todays monster
+        try:
+            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Monster.DoesNotExist:
+            monster = defaultMonster
+        return render(request, "ekozumi_app/whack-a-mole.html", {"monster":monster})
 
 @login_required()
 def fightOutroPage(request):

@@ -1,18 +1,24 @@
+/** Megaboss logic for megabossFight.html
+ * 
+ *  Author: Lucas Enefer, Christian Wood
+ */
+
 var score = 0;
 var round = 1;
 var attempts = 0;
 
 function loadQuiz(){
-    // sets colour and boss back to default 
+    var normalBoss=normalBoss;
+    var angryBoss=angryBoss;
+    // sets colour and boss back to default
     document.getElementById("box-header").style.backgroundColor = "#665851"
-    document.getElementById("character").src = normalBoss; 
 
     //checks which round it is and displays appropriate questions and answers 
     switch(round){
         case 1:
             document.getElementById('Question').innerHTML = Q1;
             // randomly generates which pos correct answer is in 
-            Q1Correct = Math.floor(Math.random() * 3)+1;
+            Q1Correct = Math.floor(Math.random() * 4)+1;
             switch(Q1Correct){
                 case 1:
                     document.getElementById('A1-label').innerHTML = Q1A1;
@@ -42,7 +48,7 @@ function loadQuiz(){
             break;
         case 2:
             document.getElementById('Question').innerHTML = Q2;
-            Q2Correct = Math.floor(Math.random() * 3)+1;
+            Q2Correct = Math.floor(Math.random() * 4)+1;
             switch(Q2Correct){
                 case 1:
                     document.getElementById('A1-label').innerHTML = Q2A1;
@@ -72,7 +78,7 @@ function loadQuiz(){
             break;
         case 3:
             document.getElementById('Question').innerHTML = Q3;
-            Q3Correct = Math.floor(Math.random() * 3)+1;
+            Q3Correct = Math.floor(Math.random() * 4)+1;
             switch(Q3Correct){
                 case 1:
                     document.getElementById('A1-label').innerHTML = Q3A1;
@@ -102,7 +108,7 @@ function loadQuiz(){
             break;
         case 4:
             document.getElementById('Question').innerHTML = Q4;
-            Q4Correct = Math.floor(Math.random() * 3)+1;
+            Q4Correct = Math.floor(Math.random() * 4)+1;
             switch(Q4Correct){
                 case 1:
                     document.getElementById('A1-label').innerHTML = Q4A1;
@@ -132,6 +138,7 @@ function loadQuiz(){
             break;
         default:
             //save score to database 
+            console.log(score);
 
             //hidea form and displaya nav bar 
             document.getElementById('Question').innerHTML = "ahh i can't beleive you defeated me!!!";
@@ -164,8 +171,8 @@ function checkAnswer(){
                     // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
                     document.getElementById("character").src = angryBoss; 
-                    //runs calulate score after 2 seconds 
-                    setTimeout(calScore,2000); 
+                    //runs calulate score after 1.5 seconds 
+                    setTimeout(calScore,1500); 
                 } else {
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
                 }
@@ -174,9 +181,10 @@ function checkAnswer(){
                 if (checkedValue==Q2Correct){
                     // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
+                    console.log(angryBoss);
                     document.getElementById("character").src = angryBoss; 
-                    //runs calulate score after 2 seconds 
-                    setTimeout(calScore,3000); 
+                    //runs calulate score after 1.5 seconds 
+                    setTimeout(calScore,1500); 
                 } else {
                     // changes header colour to red 
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
@@ -187,8 +195,8 @@ function checkAnswer(){
                     // changes header colour to green and boss to angry
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
                     document.getElementById("character").src = angryBoss; 
-                    //runs calulate score after 2 seconds 
-                    setTimeout(calScore,3000); 
+                    //runs calulate score after 1.5 seconds 
+                    setTimeout(calScore,1500); 
                 } else {
                     // changes header colour to red
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
@@ -199,8 +207,8 @@ function checkAnswer(){
                     // changes header colour to green and boss to angry 
                     document.getElementById("box-header").style.backgroundColor = "#33ff33"
                     document.getElementById("character").src = angryBoss; 
-                    //runs calulate score after 2 seconds 
-                    setTimeout(calScore,3000); 
+                    //runs calulate score after 1.5 seconds 
+                    setTimeout(calScore,1500); 
                 } else {
                     // changes header colour to red
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
@@ -210,7 +218,7 @@ function checkAnswer(){
     }
 }
 
-function calScore(attempts){
+function calScore(){
     // gives appropriate points based on number of attempts 
     switch(attempts){
         case 1:
@@ -224,6 +232,7 @@ function calScore(attempts){
             break;
     }
     // resets attempts and incriments round 
+    document.getElementById("character").src = normalBoss;
     attempts = 0
     round++
     loadQuiz();

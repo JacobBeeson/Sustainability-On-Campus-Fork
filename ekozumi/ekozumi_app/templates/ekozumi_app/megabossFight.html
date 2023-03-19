@@ -36,12 +36,17 @@ Author: Christian Wood, Lucas Enefer
             var Q4A3="{{megaboss.megabossQ4WA2}}";
             var Q4A4="{{megaboss.megabossQ4WA3}}"; 
             var Q4Correct=4;
+
+            var normalBoss="{%static megaboss.megabossImage%}";
+            var angryBoss="{%static megaboss.megabossAngryImage%}";
         </script>
         <script src="{% static 'ekozumi_app/megabossFight.js'%}"></script>
-    </head> 
-    <body  onload="loadQuiz()">
+    </head>
+    <body onload='loadQuiz()'>
         <div class="box">
-            <div class="box-header" id="box-header"><img id="character" src="{%static megaboss.megabossImage%}" alt="character image"></div>
+            <div class="box-header" id="box-header">
+                <img id="character" src="{%static megaboss.megabossImage%}" alt="character image">
+            </div>
             <!-- keeps the page from reloading in submit (IMPORTANT)-->
             <h2  id="Question"></h2>
             <iframe name="votar" style="display:none;"></iframe>
