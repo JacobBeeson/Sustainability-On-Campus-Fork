@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,8 +25,16 @@ SECRET_KEY = "django-insecure-ops18(&e)n-glv5xmw8wj7dpni+f%bsawb)s5o+te45!wc=b4y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# set to allow digitalocean to host app
+ALLOWED_HOSTS = ['sea-lion-app-9lfh6.ondigitalocean.app' '127.0.0.1']
 
+# Email sending
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_PORT = '2525'
+EMAIL_HOST_USER = '0b5a4983ce8bae'
+EMAIL_HOST_PASSWORD = '65332b774cd280'
+EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -116,7 +124,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+# used to serve static files on digitalocean
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

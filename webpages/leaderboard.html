@@ -1,9 +1,10 @@
 <!-- 
-Leaderboard page
+Leaderboard page, displays the top ten scorers
+
 Authors: Lucas Enefer, Chrstian Wood
 -->
 {% load static %}
-<html>
+<html lang="en">
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,6 +19,7 @@ Authors: Lucas Enefer, Chrstian Wood
                 <tr>
                   <th>Username</th>
                   <th>Score</th>
+                <!-- Top scorers are passed in through views, and displayed -->
                 </tr>
                 {% for user in topscorers %}
                   <tr>
@@ -34,6 +36,7 @@ Authors: Lucas Enefer, Chrstian Wood
               <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
               <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
               <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
+              <button class="btn" id="btn" action="{% url 'logout' %}"><i class="fa fa-sign-out"></i></button>
             </div>
           </div>
     </body>
