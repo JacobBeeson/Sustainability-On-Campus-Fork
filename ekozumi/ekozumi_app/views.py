@@ -101,7 +101,6 @@ def homePage(request):
     """
     Home page of our application, displays the users zumi and
     how hungry the zumi is, based on its visual emotion
-
     Args:
         request (HttpRequest)
     Returns:
@@ -113,13 +112,16 @@ def homePage(request):
     #if its been more than 48 hours since last fed zumi will be sad
     if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
         zumi_image = ZUMI_IMAGES[zumi_type][2]
+        zumi_hunger = HUNGER_IMAGES[2]
     #if its been more than 24 hours since last fed zumi will be normal
     elif current_zumi.lastFed + django.utils.timezone.timedelta(1) < django.utils.timezone.now():
         zumi_image = ZUMI_IMAGES[zumi_type][1]
+        zumi_hunger = HUNGER_IMAGES[1]
     #if its been under 24 hours since last fed zumi will be happy
     else:
         zumi_image = ZUMI_IMAGES[zumi_type][0]
-    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image})
+        zumi_hunger = HUNGER_IMAGES[0]
+    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image,'hunger_image_source':zumi_hunger})
 
 @login_required()
 def zumiCreationPage(request):
