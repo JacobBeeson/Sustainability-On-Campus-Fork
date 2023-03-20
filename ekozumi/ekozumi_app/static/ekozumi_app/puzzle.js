@@ -48,7 +48,6 @@ function checkSolve(){
     answer = (document.f1.nw.value).toUpperCase(); //to ignore case of letters
 
     if (answer == anagram.toUpperCase()){
-        alert("You did it!")
         document.getElementById('hint').innerHTML="Hint: " + hint;
     }
 }

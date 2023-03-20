@@ -20,7 +20,6 @@ function startTimer() {
     document.getElementById("seconds").textContent = pad(seconds);
     if (seconds == 0) {
       clearInterval(countdown);
-      alert("LOST GAME, Click 'ok' to return home");
       window.location = "../lose"
     }
   }, 1000);
@@ -54,7 +53,6 @@ function run(){
             }, 500)
         }else{
             hole.removeChild(img)
-            alert("YOU HAVE DEFEATED THE BOSS! Click 'ok' to progress");
             window.location = "../fight_outro";
         }
     })
