@@ -1,15 +1,10 @@
 /** Puzzle logic, for puzzle.html
- *  The puzzle is an anagram decided by the game keeper, if the player gets it correct
- *  they will be given a location hint, where a monster will be located
  * 
  *  Author: Elliot Wride, Christian Wood
  */
 
 var anagram;
 function startTime(){
-    /* - Logic for the timer that is displayed at the top of the webpage
-     * - Shows a countdown until the next puzzle will be displayed
-     */
     var midnight = new Date();
     midnight.setHours( 24 );
     midnight.setMinutes( 0 );
@@ -27,10 +22,6 @@ function startTime(){
 }
 
 function puzzle(){
-    /* - Shuffles the anagram for the day, which is decided by the game keeper
-     * - Anagram is inputted from django into puzzle.html to be used
-     * - Shuffled anagram is displayed on puzzle.html
-     */
     letters = [];
     for(var i = 0; i<anagram.length; i++){
         letters[i]=anagram.charAt(i);
@@ -54,12 +45,10 @@ function checkTime(i){
 }
 
 function checkSolve(){
-    /* - Checks if the solution to the anagram entered in the form by the user is correct
-     * - If correct the hint is displayed
-     */
     answer = (document.f1.nw.value).toUpperCase(); //to ignore case of letters
 
     if (answer == anagram.toUpperCase()){
+        alert("You did it!")
         document.getElementById('hint').innerHTML="Hint: " + hint;
     }
 }
