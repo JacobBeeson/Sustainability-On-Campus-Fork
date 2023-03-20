@@ -9,7 +9,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.db.utils import IntegrityError
 from .forms import SignUpForm, ZumiCreationForm
-from .models import Pet, Monster, Location, Megaboss
+from .models import Pet, Monster, Location
 
 # Create your tests here.
 class SignUpFormTest(TestCase):
@@ -111,7 +111,7 @@ class ZumiFeedTest(TestCase):
 
 class MonsterCreationTest(TestCase):
     """
-    Testing for the monster model
+    Testing for the momster model
     Checks to make sure game keepers can create monsters
     """
     def setUp(self):
@@ -158,59 +158,6 @@ class MonsterCreationTest(TestCase):
             self.fail()
         except IntegrityError:
             pass
-
-class MegaBossCreationTest(TestCase):
-    """
-    Testing for the mega boss model
-    Checks that game keepers can create megabosses
-    """
-    def setUp(self):
-        """
-        Sets up a valid mega boss for testing
-        """
-        Megaboss.objects.create(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
-                                dayOfAppearance=datetime.now().date(),
-                         megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
-                         playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                         playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
-                         megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
-                         megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
-                         megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
-                         megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
-                         megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
-                         megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
-                         megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
-        
-    def testValidMegabossName(self):
-        """
-        Validates that a megaboss and its name have been correctly created
-        """
-        megaboss = Megaboss.objects.get(megabossID=1)
-        megabossName = megaboss.megabossName
-        self.assertEqual("Placeholdermegaboss", megabossName)
-    
-    def testDuplicateMegabossDate(self):
-        """
-        Validates that game keepers cannot create
-        two megabosses on the same day
-        """
-        try:
-            Megaboss.objects.create(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
-                                    dayOfAppearance=datetime.now().date(),
-                            megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
-                            playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                            playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
-                            megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
-                            megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
-                            megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
-                            megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
-                            megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
-                            megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
-                            megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
-            self.fail()
-        except IntegrityError:
-            pass
-
 
 class LocationCreationTest(TestCase):
     """

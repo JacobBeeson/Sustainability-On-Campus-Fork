@@ -1,6 +1,5 @@
 """
 Defines the models for our database
-
 Authors: Christian Wood, Olivia Kerschen, Oscar Klemenz
 """
 
@@ -22,7 +21,7 @@ PET_CHOICES = [(HEDGEHOG,"Hedgehog"), (FOX, "Fox"),
 
 class Pet(models.Model):
     """
-    This model represents a players zumi
+    Players zumi
 
     Args:
         models.Model : Used to define each field
@@ -36,6 +35,8 @@ class Pet(models.Model):
         petType (CharField)     : Defined by PET_CHOICES dictionary, player has
                                   options of that dictionary for what kind of animal
                                   their pet is.
+    Returns:
+        String : Displays name of pet on admin site
     """
 
     petID = models.AutoField(primary_key=True)

@@ -1,5 +1,5 @@
 """
-Admin.py is used to register models on the admin panel,
+Admin is used to register models on the admin panel,
 this will then allow gamekeepers to access these models and
 modify them.
 
