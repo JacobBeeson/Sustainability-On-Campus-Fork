@@ -21,6 +21,8 @@ ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-norma
                "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
                "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
+HUNGER_IMAGES = ["Images/full_hunger.png","Images/half_hunger.png","Images/empty_hunger.png"]
+
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
                          monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
@@ -365,6 +367,7 @@ def losePage(request):
     Can only be accessed from fight.html
     Args:
         request (HttpRequest)
+
     Returns:
         redirect(): If player comes from /fight/ they are redirected to
                     you youLose.html if not they return to home page
