@@ -1,32 +1,21 @@
 <!-- 
 Intro for the boss fight
-
-Author: Christian Wood
+Author: Lucas Enefer
 -->
 {% load static %}
-<html lang="en">
-
+<html>
     <head>
         <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
-        <title>Ekozumi</title>
-    </head>
-
+    </head> 
     <body>
-        <p>This is the megaboss fight intro</p>
-        <div class="box2" style="top: auto; text-align: right;">
-            <img src="{%static monster.monsterImage%}" alt="" width="20%" height="20%"  style="float: right; ">
-            <!-- Game keeper defined sustainable dialogue, about environmental threat -->
-            {{monster.monsterIntroDialogue}}
-        </div>
         <div class="box">
+            <div class="box-header" id="box-header"><img id="character" src="{%static megaboss.megabossImage%}" alt="monster image"></div>
+            mWahahaha, you have finaly reached me...<br>
+            <h2>THE MEGA BOSS</h2><br>
+            answer my 4 sustanability questions correctly to defeat me!!<br>
             <a href="{% url 'fight' %}">
-            <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 
+                <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 
             </a>      
-        </div>
-        <div class="box2" style="bottom: 0; position: absolute; text-align: left;">
-            <img src="{%static zumi_source%}" alt="" width="20%" height="20%"  style="float: left;">
-            <!-- Players resonse to this sustainable threat -->
-            {{monster.playerIntroDialogue}}
         </div>
     </body>
 </html>
