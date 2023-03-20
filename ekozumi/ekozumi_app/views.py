@@ -166,11 +166,13 @@ def puzzlePage(request):
     """
     try:
         location=Location.objects.get(dayOfAppearance = datetime.now().date())
+        hint = location.locationHint
+        anagramWord = location.anagramWord
      # If it doesn't exist uses a placeholder
     except Location.DoesNotExist:
         hint = defaultLocation.locationHint
         anagramWord = defaultLocation.anagramWord
-    return render(request, "ekozumi_app/puzzle.html", {"hint":location.locationHint, "anagramWord":location.anagramWord})
+    return render(request, "ekozumi_app/puzzle.html", {"hint":hint, "anagramWord":anagramWord})
 
 @login_required()
 def mapPage(request):
