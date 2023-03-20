@@ -411,5 +411,10 @@ def introPage(request):
     """
     - Displays intro.html, which informs the user on how to play the game
     - view loaded after zumi creation
+    
+    Args:
+        request (HttpRequest)
+    Returns:
+        redirect() : intro.html
     """
     return render(request, "ekozumi_app/intro.html")
