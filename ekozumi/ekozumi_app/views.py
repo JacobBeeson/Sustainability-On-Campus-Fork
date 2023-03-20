@@ -408,4 +408,8 @@ def uploadDataPage(request):
 
 @login_required()
 def introPage(request):
+    """
+    - Displays intro.html, which informs the user on how to play the game
+    - view loaded after zumi creation
+    """
     return render(request, "ekozumi_app/intro.html")
