@@ -8,6 +8,9 @@ var round = 1;
 var attempts = 0;
 
 function loadQuiz(){
+    /* - Displays the megaboss quiz on the fight page
+     * - User will have to answer 4 quiz questions
+     */
     var normalBoss=normalBoss;
     var angryBoss=angryBoss;
     // sets colour and boss back to default
@@ -149,7 +152,8 @@ function loadQuiz(){
 }
 
 function getCheckedRadioValue() {
-    // returns which value selected 
+    /* Checks which check box the user selected for a quiz section
+     */
     var rads = document.getElementById('form'),
         i;
     for (i=0; i < rads.length; i++)
@@ -159,6 +163,9 @@ function getCheckedRadioValue() {
  }
 
 function checkAnswer(){
+    /* When the user clicks the submit button, a check is performed to see
+     * if the user got the correct answer
+     */
     var checkedValue = getCheckedRadioValue();
     //checks if answer was selected 
     if (checkedValue == null){
@@ -220,6 +227,8 @@ function checkAnswer(){
 }
 
 function calScore(){
+    /* Calculates how many points the user got
+     */
     // gives appropriate points based on number of attempts 
     switch(attempts){
         case 1:
@@ -240,6 +249,8 @@ function calScore(){
 }
 
 function sendDataToDjango(score) {
+    /* Uses JQuery to make a post request to django with the users score
+     */
     console.log("Data sending");
     $.ajax({
         type: 'POST',

@@ -1,5 +1,5 @@
 """
-Defines all forms which will be used in our application
+Defines the forms which will be used in our application
 
 Authors: Christian Wood, Oscar Klemenz
 """
@@ -49,7 +49,6 @@ class ZumiCreationForm(forms.Form):
     - Form for creating a new zumi for a user
     - Displayed on zumi_creation.html
 
-
     Args:
         forms : Form which the user fills out, which data is processed
                 from.
@@ -66,7 +65,7 @@ class ZumiCreationForm(forms.Form):
         """
         - Meta information about this form, model is set to Pet,
           a custom model created in .models
-        - Contains the fields, which will be shown to the user
+        - Contains the fields, which will be shown to the user (petName and petType)
         """
         model = Pet
         fields = ('petName', 'petType')
