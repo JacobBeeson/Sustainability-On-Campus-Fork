@@ -21,6 +21,8 @@ ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-norma
                "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
                "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
+HUNGER_IMAGES = ["Images/full_hunger.png","Images/half_hunger.png","Images/empty_hunger.png"]
+
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
                          monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
