@@ -22,6 +22,8 @@ ZUMI_IMAGES = {"Hedgehog":["Images/hedge-hog-happy.png", "Images/hedge-hog-norma
                "Rabbit":["Images/rabbit-happy.png", "Images/rabbit-normal.png", "Images/rabbit-sad.png"],
                "Bluetit":["Images/bluetit-happy.png", "Images/bluetit-normal.png", "Images/bluetit-sad.png"]}
 
+HUNGER_IMAGES = {"Images/full_hunger.png","Images/half_hunger.png","Images/empty_hunger.png"}
+
 # Default monster is used if a game keeper has not created a monster for a given day
 defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-normal.png",
                          monsterAngryImage="Images/ciggy-angry.png", monsterIntroDialogue="Enemy Placeholder",
@@ -101,13 +103,16 @@ def homePage(request):
     #if its been more than 48 hours since last fed zumi will be sad
     if current_zumi.lastFed + django.utils.timezone.timedelta(2) < django.utils.timezone.now():
         zumi_image = ZUMI_IMAGES[zumi_type][2]
+        zumi_hunger = HUNGER_IMAGES[2]
     #if its been more than 24 hours since last fed zumi will be normal
     elif current_zumi.lastFed + django.utils.timezone.timedelta(1) < django.utils.timezone.now():
         zumi_image = ZUMI_IMAGES[zumi_type][1]
+        zumi_hunger = HUNGER_IMAGES[1]
     #if its been under 24 hours since last fed zumi will be happy
     else:
         zumi_image = ZUMI_IMAGES[zumi_type][0]
-    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image})
+        zumi_hunger = HUNGER_IMAGES[0]
+    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image},{'hunger_image_source':zumi_hunger})
 
 @login_required()
 def zumiCreationPage(request):
