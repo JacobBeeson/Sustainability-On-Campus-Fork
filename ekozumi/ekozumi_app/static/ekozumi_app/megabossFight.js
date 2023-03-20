@@ -232,13 +232,13 @@ function calScore(){
     // gives appropriate points based on number of attempts 
     switch(attempts){
         case 1:
-            score += 10;
+            score += 300;
             break;
         case 2:
-            score += 5;
+            score += 200;
             break;
         case 3:
-            score += 2
+            score += 100;
             break;
     }
     // resets attempts and incriments round 

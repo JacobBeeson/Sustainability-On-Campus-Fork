@@ -60,6 +60,7 @@ function run(){
             }, 500)
         }else{
             hole.removeChild(img)
+            sendDataToDjango(seconds);
             window.location = "../fight_outro";
         }
     })
@@ -96,4 +97,22 @@ function startGame(i1,i2){
     elem.parentNode.removeChild(elem);
     startTimer()
     run();
+}
+
+function sendDataToDjango(seconds) {
+    console.log("Data sending");
+    $.ajax({
+        type: 'POST',
+        url: '../upload_data/',
+        data: {
+            'score': seconds,
+            'csrfmiddlewaretoken': csrf_token // include CSRF token in request
+        },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log('Error:', response);
+        }
+    });
 }

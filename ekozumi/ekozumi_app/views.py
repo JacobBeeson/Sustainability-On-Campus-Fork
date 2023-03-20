@@ -42,9 +42,9 @@ defaultMegaboss = Megaboss(megabossName="Placeholdermegaboss", megabossImage="Im
                          megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
                          megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
 # Default location is used if a game keeper has not created a location for a given day
-defaultLocation = Location(locationName="Innovation",
+defaultLocation = Location(locationName="Weekend",
                            minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45,
-                           locationHint="Get Innovative", anagramWord="Forestry")
+                           locationHint="Wait until monday for the next hint", anagramWord="Forestry")
 
 def registrationPage(request):
     """
