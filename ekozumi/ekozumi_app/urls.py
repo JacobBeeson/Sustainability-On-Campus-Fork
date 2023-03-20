@@ -15,7 +15,6 @@ urlpatterns = [
     path("", auth_views.LoginView.as_view(template_name='ekozumi_app/login.html'), name="login"),
     path("home/", views.homePage, name="home_page"),
     path("zumi_creation/", views.zumiCreationPage, name="zumi_creation"),
-    path("intro/", views.introPage, name="intro_page"),
     path("puzzle/", views.puzzlePage, name="puzzle"),
     path("map/", views.mapPage, name="map"),
     path("logout/", views.logoutPage, name="logout"),
@@ -25,5 +24,6 @@ urlpatterns = [
     path("lose/", views.losePage, name="lose"),
     path("feed/", views.feedZumiPage, name="feed"),
     path("leaderboard/", views.leaderboardPage, name="leaderboard"),
-    path("upload_data/", views.uploadDataPage, name="upload_data")
+    path("upload_data/", views.uploadDataPage, name="upload_data"),
+    path("intro/", views.introPage, name="intro")
 ]
