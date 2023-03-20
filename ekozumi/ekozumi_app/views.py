@@ -112,7 +112,7 @@ def homePage(request):
     else:
         zumi_image = ZUMI_IMAGES[zumi_type][0]
         zumi_hunger = HUNGER_IMAGES[0]
-    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image},{'hunger_image_source':zumi_hunger})
+    return render(request, "ekozumi_app/home.html", {'image_source':zumi_image,'hunger_image_source':zumi_hunger})
 
 @login_required()
 def zumiCreationPage(request):
