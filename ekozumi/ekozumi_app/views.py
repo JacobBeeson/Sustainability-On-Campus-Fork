@@ -156,7 +156,7 @@ def zumiCreationPage(request):
             current_user.profile.petID=pet
             current_user.save()
 
-            return redirect('home_page')
+            return redirect('intro')
     else:
         form = ZumiCreationForm()
     return render(request, "ekozumi_app/zumiCreation.html", {"form":form})
@@ -405,3 +405,16 @@ def uploadDataPage(request):
     current_user.profile.score += score
     current_user.save()
     return redirect('home_page')
+
+@login_required()
+def introPage(request):
+    """
+    - Displays intro.html, which informs the user on how to play the game
+    - view loaded after zumi creation
+    
+    Args:
+        request (HttpRequest)
+    Returns:
+        redirect() : intro.html
+    """
+    return render(request, "ekozumi_app/intro.html")

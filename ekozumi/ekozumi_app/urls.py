@@ -24,5 +24,6 @@ urlpatterns = [
     path("lose/", views.losePage, name="lose"),
     path("feed/", views.feedZumiPage, name="feed"),
     path("leaderboard/", views.leaderboardPage, name="leaderboard"),
-    path("upload_data/", views.uploadDataPage, name="upload_data")
+    path("upload_data/", views.uploadDataPage, name="upload_data"),
+    path("intro/", views.introPage, name="intro")
 ]
