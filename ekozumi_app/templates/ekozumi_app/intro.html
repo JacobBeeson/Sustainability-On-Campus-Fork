@@ -1,0 +1,38 @@
+<!--
+How to play page, once users have created a zumi they will be show this so that
+they can be informed on how to play.
+
+Author: Olivia Kerschen
+-->
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+    </head> 
+    <body>
+        <div class="top">
+            <h1> EKOZUMI </h1>
+        </div>
+        <div class="box" style="max-width: 82%; top: 5">
+            <div class="box-header">
+                <h2>How to play:</h2>
+            </div>
+            <p>
+            An anagram puzzle is released everyday, solve it to reveal a hint for that day's miniboss' location<br><br>
+
+            Explore around campus while checking the map to find the miniboss' location. Once you are in the correct 
+            location a button will appear and you will be able to battle the boss<br><br>
+
+            Pay attention to what they are saying, as at the end of the week  you may fight
+            a megaboss where your knowledge of the sustainability issues discussed will be tested<br><br>
+
+            Have fun!
+                
+            Note: You must have location services enabled on your browser
+            </p>
+            <button onclick="location.href='../home'">start</button>           
+        </div>
+
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!--
+Whack-a-mole game html for enemy boss fight
+
+Author: Jacob Beeson
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'ekozumi_app/whack-a-mole.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% csrf_token %}
+    <script>
+        var csrf_token = '{{ csrf_token }}';
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekozumi</title>
+</head>
+<body>
+    <h1 class="health">HEALTH: <span>100</span></h1>
+    <h2 id="timer">Time before global warming kills you: <span id="seconds">60</span> seconds</h2>
+    <!-- startGame() has django variables passed into it, this will be the gamekeeper defined monster, which the plater had
+         dialogue with -->
+    <button type='button' id="startButton" onclick='startGame("{%static monster.monsterImage%}", "{%static monster.monsterAngryImage%}")'>Start Game</button>
+
+    <div class="ground">
+        <!-- Locations where the monater can appear -->
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+        <div class="holes"></div>
+    </div>
+    <div class="cursor"></div>
+    <script src="{% static 'ekozumi_app/whack-a-mole.js' %}"></script>
+</body>
+</html>

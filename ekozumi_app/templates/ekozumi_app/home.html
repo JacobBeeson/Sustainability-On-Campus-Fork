@@ -1,0 +1,40 @@
+<!-- 
+Character homepage, users can see their pet, and navigate to game pages
+
+Author: Olivia Kerschen
+-->
+
+{% load static %}
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <title>Ekozumi</title>
+    </head>
+  <body>
+
+    <div class="top">
+      <h1>EKOZUMI HOME</h1>
+    </div>
+    <div class="box">
+        <div class="box-header">
+          <!-- Name of the pet of the user who is logged in -->
+          <h2>{{user.profile.petID.petName}}</h2>
+        </div>
+        <!-- Image source defined in views.py, image depends on how well fed zumi is -->
+        <img id="character" src="{%static image_source%}" alt="character image"><br>
+        <img id="hunger" src="{%static hunger_image_source%}" alt="hunger bar">    
+    </div>
+
+    <div id="footer"> 
+      <div class="navbar">
+        <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
+        <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+        <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+        <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
+        <button class="btn" id="btn" onclick="location.href='../logout'"><i class="fa fa-sign-out"></i></button>
+      </div>
+    </div>
+
+  </body>
+</html>

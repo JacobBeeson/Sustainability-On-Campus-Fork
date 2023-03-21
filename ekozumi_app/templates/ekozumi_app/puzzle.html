@@ -1,0 +1,53 @@
+<!-- 
+Puzzle page, where users have to figure out an anagram to get a hint
+
+Authors: Elliot Wride, Christian Wood
+-->
+{% load static %}
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Game keeper defined variables, the anaragram the player must solve, and the location
+             hint they will recieve upon completion -->
+        <script>
+            var hint="{{hint}}";
+            var anagram="{{anagramWord}}";
+        </script>
+        <script type="text/javascript" src="{% static 'ekozumi_app/puzzle.js' %}"></script>
+        <title>Ekozumi</title>
+    </head>
+    <!-- puzzle() displays the anagram that the user must complete -->
+    <body onload="puzzle()">
+        <div id="txt"></div>
+        <div class="top">
+            <h1 id="puzzle-notice">
+                New Anagram Puzzle Releases Daily!
+            </h1>
+        </div>
+        <div class="box" id="puzzle">
+            <div class="box-header" ><h2 id="anagram">A</h2></div>
+            <label> Enter answer here</label>
+            <form action="" name="f1">
+            <div class="element-input">
+                <input class="large" type="text" name="nw" style ="margin-bottom: 10px;">
+            </div>
+            <div class="submit"> 
+                <!-- OnClick the users answer is checked by puzzle.js -->
+                <input id="button" type="button"  value="Submit" onclick="checkSolve()">
+            </div>
+            </form>
+            <label id="hint" ></label>
+        </div> 
+
+        <div id="footer"> 
+            <div class="navbar">
+                <button class="btn" id="btn" onclick="location.href='../home'"><i class="fa fa-home"></i></button>
+                <button class="btn" id="btn" onclick="location.href='../puzzle'"><i class="fa fa-puzzle-piece"></i></button>
+                <button class="btn" id="btn" onclick="location.href='../map'"><i class="fa fa-street-view"></i></button>
+                <button class="btn" id="btn" onclick="location.href='../leaderboard'"><i class="fa fa-trophy"></i></button>
+                <button class="btn" id="btn" onclick="location.href='../logout'"><i class="fa fa-sign-out"></i></button>
+            </div>
+        </div>
+    </body>
+</html>

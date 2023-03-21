@@ -1,0 +1,21 @@
+<!-- 
+Intro for the boss fight
+Author: Lucas Enefer
+-->
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+    </head> 
+    <body>
+        <div class="box">
+            <div class="box-header" id="box-header"><img id="character" src="{%static megaboss.megabossImage%}" alt="monster image"></div>
+            {{megaboss.megabossIntroDialogue}}<br>
+            <h2>{{megaboss.megabossName}}</h2><br>
+            answer my 4 sustanability questions correctly to defeat me!!<br>
+            <a href="{% url 'fight' %}">
+                <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 
+            </a>      
+        </div>
+    </body>
+</html>
