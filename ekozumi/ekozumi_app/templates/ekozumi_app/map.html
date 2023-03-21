@@ -1,3 +1,4 @@
+
 <!-- 
 Map page, where users must navigate to certain geo locations,
 once they arrive in a certain location they can fight an enemy
@@ -5,41 +6,41 @@ once they arrive in a certain location they can fight an enemy
 Author: Lucas Enefer, Christian Wood, Oscar Klemenz
 -->
 
-{% load static %}
+
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="{% static 'ekozumi_app/Ekozumi_Stylesheet.css' %}">
+    <link rel="stylesheet" href="/static/ekozumi_app/Ekozumi_Stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Location of the daily sustainable location defined by the admin page -->
     <script>
-      var minLatitude={{location.minLatitude}};
-      var maxLatitude={{location.maxLatitude}};
-      var minLongitude={{location.minLongitude}};
-      var maxLongitude={{location.maxLongitude}};
-      var notFedToday = {{ notFedToday|yesno:"true,false"}};
+      var minLatitude=50.734;
+      var maxLatitude=50.736;
+      var minLongitude=-3.535;
+      var maxLongitude=-3.533;
+      var notFedToday = true;
     </script>
-    <script src="{% static 'ekozumi_app/map.js'%}"></script>
+    <script src="/static/ekozumi_app/map.js"></script>
     <title>Ekozumi</title>
   </head>
   <!-- Gets the location of the player, and checks they're in the correct location -->
   <body onload='getLocation()'>
     <div class="map-box">
-      <img src="{% static 'Images/map5.png'%}" id="map">
-      <div class="pet-pos" id="pet-pos"><img src="{%static image_source%}"></div>
+      <img src="/static/Images/map5.png" id="map">
+      <div class="pet-pos" id="pet-pos"><img src="/static/Images/frog-normal.png"></div>
     </div>
+    <div style="padding-bottom: 15%;">
     <div class="box" id="location-box">
       <div class="box-header">
         <h2>location</h2>
       </div>
       <p id="location">
-        {% if notFedToday %}
+        
           Looks like theres nothing here!
-        {% else %}  
-          Environmental threat has been defeated today!
-        {% endif %}
+        
       </p>
       <!-- Button only appears if user is in the correct location, button only clickable if boss battle hasn't already been completed today -->
-      <button id="battleButton" {% if notFedToday %} onclick="location.href='../fight_intro'" {% endif %}>Fight {% if notFedToday %}boss{%else%}already complete{%endif%}</button >
+      <button id="battleButton"  onclick="location.href='../fight_intro'" >Fight boss</button >
+    </div>
     </div>
 
     <div id="footer"> 
