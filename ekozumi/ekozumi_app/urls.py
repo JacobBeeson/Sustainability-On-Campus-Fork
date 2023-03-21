@@ -25,5 +25,6 @@ urlpatterns = [
     path("feed/", views.feedZumiPage, name="feed"),
     path("leaderboard/", views.leaderboardPage, name="leaderboard"),
     path("upload_monster_data/", views.uploadMonsterDataPage, name="upload_monster_data"),
-    path("upload_megaboss_data/", views.uploadMegabossDataPage, name="upload_megaboss_data")
+    path("upload_megaboss_data/", views.uploadMegabossDataPage, name="upload_megaboss_data"),
+    path("intro/", views.introPage, name="intro")
 ]
