@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-ops18(&e)n-glv5xmw8wj7dpni+f%bsawb)s5o+te45!wc=b4y
 DEBUG = True
 
 # set to allow digitalocean to host app
-ALLOWED_HOSTS = ['sea-lion-app-9lfh6.ondigitalocean.app', '127.0.0.1']
+ALLOWED_HOSTS = ['coral-app-asncb.ondigitalocean.app', '127.0.0.1']
 
 # Email sending
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
