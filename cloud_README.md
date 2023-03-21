@@ -9,7 +9,7 @@ It is important to note that DigitalOcean is a PAID service and there are costs 
 **Prerequisites**
 
 1. A GitHub account [https://github.com/](https://github.com/)
-2. A fork of our apps code from GitHub to your account
+2. A fork of our app's code from GitHub to your account
 3. A digitalocean account [https://www.digitalocean.com/](https://www.digitalocean.com/)
 
 **Deploying**
@@ -19,7 +19,7 @@ It is important to note that DigitalOcean is a PAID service and there are costs 
 1. Visit [https://cloud.digitalocean.com/apps](https://cloud.digitalocean.com/apps) and click Create App.
 2. Connect your GitHub account and allow DigitalOcean to access your repositories.
 3. Under the Repository section, select 'your\_account/appforkname' repository from the dropdown menu.
-4. Select the main branch and set source directory to 'ekozumi'.
+4. Select the main branch and set the source directory to 'ekozumi'.
 5. Choose whether to enable autoscaling. Then, click Next.
 
 **Step 2: Configure Run Command**
