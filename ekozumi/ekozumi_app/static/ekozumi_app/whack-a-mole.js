@@ -103,7 +103,7 @@ function sendDataToDjango(seconds) {
     console.log("Data sending");
     $.ajax({
         type: 'POST',
-        url: '../upload_data/',
+        url: '../upload_monster_data/',
         data: {
             'score': seconds,
             'csrfmiddlewaretoken': csrf_token // include CSRF token in request

@@ -121,9 +121,7 @@ class Megaboss(models.Model):
         megabossImage (CharField)         : Path to megaboss image
         megabossAngryImage (CharField)    : Path to megaboss angry image
         megabossIntroDialogue (CharField) : Sustainable dialogue, about megaboss
-        playerIntroDialogue (CharField)  : Player response before battle
         megabossOutroDialogue (CharField) : megaboss after defeat text
-        playerOutroDialogue (CharField)  : Player victory text
         megabossQ1 : Question one
         megabossQ1CA : Q1 correct answer
         megabossQ1WA1 : Q1 wrong answer 1
@@ -144,10 +142,9 @@ class Megaboss(models.Model):
         megabossQ4WA1 : Q4 wrong answer 1
         megabossQ4WA2 : Q4 wrong answer 2
         megabossQ4WA3 : Q4 wrong answer 3
-        megaboss1CorrectStats : number of users with just 1 right answer
-        megaboss2CorrectStats : number of users with just 2 right answer
-        megaboss3CorrectStats : number of users with just 3 right answer
-        megaboss4CorrectStats : number of users with just 4 right answer
+        timesFought : number of times fought
+        averageTime : average time taken for each fight
+        averageAttempts : average attempts taken for each fight
     Returns:
         String : Displays name of megaboss on admin site
     """
@@ -158,9 +155,7 @@ class Megaboss(models.Model):
     megabossImage = models.CharField(max_length=50)
     megabossAngryImage = models.CharField(max_length=50)
     megabossIntroDialogue = models.CharField(max_length=500)
-    playerIntroDialogue = models.CharField(max_length=500)
     megabossOutroDialogue = models.CharField(max_length=500)
-    playerOutroDialogue = models.CharField(max_length=500)
     megabossQ1 = models.CharField(max_length=500)
     megabossQ1CA = models.CharField(max_length=500)
     megabossQ1WA1 = models.CharField(max_length=500)
@@ -181,10 +176,9 @@ class Megaboss(models.Model):
     megabossQ4WA1 = models.CharField(max_length=500)
     megabossQ4WA2 = models.CharField(max_length=500)
     megabossQ4WA3 = models.CharField(max_length=500)
-    megaboss1CorrectStats = models.IntegerField(default=0)
-    megaboss2CorrectStats = models.IntegerField(default=0)
-    megaboss3CorrectStats = models.IntegerField(default=0)
-    megaboss4CorrectStats = models.IntegerField(default=0)
+    timesFought = models.IntegerField(default=0)
+    averageTime = models.IntegerField(default=0)
+    averageAttempts = models.IntegerField(default=0)
     
     def __str__(self):
         return self.megabossName
