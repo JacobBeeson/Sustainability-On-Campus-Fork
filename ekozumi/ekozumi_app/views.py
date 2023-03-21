@@ -32,15 +32,14 @@ defaultMonster = Monster(monsterName="placeholder", monsterImage="Images/ciggy-n
 # Default megaboss is used if a game keeper has not created a megaboss for a given day
 defaultMegaboss = Megaboss(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
                          megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
-                         playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                         playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                         megabossOutroDialogue="Enemy Placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
                          megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
                          megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
                          megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
                          megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
                          megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
                          megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
-                         megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
+                         timesFought=0, averageTime=0, averageAttempts=0)
 # Default location is used if a game keeper has not created a location for a given day
 defaultLocation = Location(locationName="Weekend",
                            minLatitude=50, maxLatitude=55, minLongitude=40, maxLongitude=45,
@@ -156,7 +155,7 @@ def zumiCreationPage(request):
             current_user.profile.petID=pet
             current_user.save()
 
-            return redirect('intro')
+            return redirect('home_page')
     else:
         form = ZumiCreationForm()
     return render(request, "ekozumi_app/zumiCreation.html", {"form":form})
@@ -231,6 +230,7 @@ def fightIntroPage(request):
                    If they are tring to access the url from somewhere else in the
                    app they are redirected to the home page
     """
+    
     # Checks the user has come from the map page
     previous_url = request.META.get('HTTP_REFERER')
     previous_path = urlparse(previous_url).path
@@ -258,7 +258,7 @@ def fightIntroPage(request):
             return render(request, "ekozumi_app/fightIntro.html", {'zumi_source':zumi_image, "monster":monster})
     else:
         return redirect('home_page')
-
+    
 @login_required()
 def fightPage(request):
     """
@@ -275,7 +275,7 @@ def fightPage(request):
     previous_path = urlparse(previous_url).path
     if( previous_path == "/ekozumi/fight_intro/" or previous_path ==  "/ekozumi/lose/"):
         #checks if a megaboss is due
-        if datetime.today().weekday() == 4:
+        if datetime.today().weekday() == 0:
             # Gets todays megaboss
             try:
                 megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
@@ -313,23 +313,13 @@ def fightOutroPage(request):
         current_zumi = current_user.profile.petID
         zumi_type = current_zumi.petType
         zumi_image = ZUMI_IMAGES[zumi_type][1]
-        #checks if a megaboss is due
-        if datetime.today().weekday() == 4:
-            # Gets todays megaboss
-            try:
-                megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
-            # If it doesn't exist uses a placeholder
-            except Megaboss.DoesNotExist:
-                megaboss = defaultMegaboss
-            return render(request, "ekozumi_app/megabossFightOutro.html", {'zumi_source':zumi_image, "megaboss":megaboss})
-        else:
-            # Gets todays monster
-            try:
-                monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
-            # If it doesn't exist uses a placeholder
-            except Monster.DoesNotExist:
-                monster = defaultMonster
-            return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, "monster":monster})
+        # Gets todays monsters
+        try:
+            monster = Monster.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Monster.DoesNotExist:
+            monster = defaultMonster
+        return render(request, "ekozumi_app/fightOutro.html", {'zumi_source':zumi_image, "monster":monster})
     else:
         return redirect('home_page')
 
@@ -392,29 +382,62 @@ def losePage(request):
         return redirect('home_page')
 
 @login_required()
-def uploadDataPage(request):
+def uploadMonsterDataPage(request):
     """
     Uploads users score to the database, and feeds their zumi
+    once the monster has been defeated.
+    Args:
+        request (HttpRequest)
+    """
+        # Checks the user has come from the fight page
+    previous_url = request.META.get('HTTP_REFERER')
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
+        # Get http request, print it
+        score = int(request.POST.get('score'))
+        current_user = request.user
+        current_user.profile.score += score
+        current_user.save()
+        return redirect('home_page')
+    else:
+        return redirect('home_page')
+
+@login_required()
+def uploadMegabossDataPage(request):
+    """
+    Uploads users score and time to the database, and feeds their zumi
     once the megaboss has been defeated.
     Args:
         request (HttpRequest)
     """
-    # Get http request, print it
-    score = int(request.POST.get('score'))
-    current_user = request.user
-    current_user.profile.score += score
-    current_user.save()
-    return redirect('home_page')
+    # Checks the user has come from the fight page
+    previous_url = request.META.get('HTTP_REFERER')
+    previous_path = urlparse(previous_url).path
+    if( previous_path == "/ekozumi/fight/"):
+        # Get http request, print it
+        score = int(request.POST.get('score'))
+        attempts = int(request.POST.get('attempts'))
+        seconds = int(request.POST.get('seconds'))
 
-@login_required()
-def introPage(request):
-    """
-    - Displays intro.html, which informs the user on how to play the game
-    - view loaded after zumi creation
-    
-    Args:
-        request (HttpRequest)
-    Returns:
-        redirect() : intro.html
-    """
-    return render(request, "ekozumi_app/intro.html")
+        try:
+            megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
+        # If it doesn't exist uses a placeholder
+        except Megaboss.DoesNotExist:
+            megaboss = defaultMegaboss
+
+        megaboss.averageAttempts = (megaboss.averageAttempts*megaboss.timesFought + attempts)/(megaboss.timesFought+1)
+        megaboss.averageTime = (megaboss.averageTime*megaboss.timesFought + seconds)/(megaboss.timesFought+1)
+        megaboss.timesFought += 1
+        megaboss.save()
+
+        current_user = request.user
+        current_user.profile.score += score
+        current_user.save()
+
+        current_zumi = current_user.profile.petID
+        current_zumi.lastFed = django.utils.timezone.now()
+        current_zumi.save()
+
+        return redirect('home_page')
+    else:
+            return redirect('home_page')

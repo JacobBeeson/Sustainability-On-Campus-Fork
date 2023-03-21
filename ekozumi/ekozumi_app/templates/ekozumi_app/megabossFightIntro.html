@@ -10,8 +10,8 @@ Author: Lucas Enefer
     <body>
         <div class="box">
             <div class="box-header" id="box-header"><img id="character" src="{%static megaboss.megabossImage%}" alt="monster image"></div>
-            mWahahaha, you have finaly reached me...<br>
-            <h2>THE MEGA BOSS</h2><br>
+            {{megaboss.megabossIntroDialogue}}<br>
+            <h2>{{megaboss.megabossName}}</h2><br>
             answer my 4 sustanability questions correctly to defeat me!!<br>
             <a href="{% url 'fight' %}">
                 <button style="position: relative;  vertical-align: middle; margin-top: 30;"  onclick="location.href='../fight'">FIGHT!</button> 

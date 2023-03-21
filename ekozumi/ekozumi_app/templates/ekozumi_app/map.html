@@ -27,21 +27,19 @@ Author: Lucas Enefer, Christian Wood, Oscar Klemenz
       <img src="{% static 'Images/map5.png'%}" id="map">
       <div class="pet-pos" id="pet-pos"><img src="{%static image_source%}"></div>
     </div>
-    <div style="padding-bottom: 15%;">
-      <div class="box" id="location-box">
-        <div class="box-header">
-          <h2>location</h2>
-        </div>
-        <p id="location">
-          {% if notFedToday %}
-            Looks like theres nothing here!
-          {% else %}  
-            Environmental threat has been defeated today!
-          {% endif %}
-        </p>
-        <!-- Button only appears if user is in the correct location, button only clickable if boss battle hasn't already been completed today -->
-        <button id="battleButton" {% if notFedToday %} onclick="location.href='../fight_intro'" {% endif %}>Fight {% if notFedToday %}boss{%else%}already complete{%endif%}</button >
+    <div class="box" id="location-box">
+      <div class="box-header">
+        <h2>location</h2>
       </div>
+      <p id="location">
+        {% if notFedToday %}
+          Looks like theres nothing here!
+        {% else %}  
+          Environmental threat has been defeated today!
+        {% endif %}
+      </p>
+      <!-- Button only appears if user is in the correct location, button only clickable if boss battle hasn't already been completed today -->
+      <button id="battleButton" {% if notFedToday %} onclick="location.href='../fight_intro'" {% endif %}>Fight {% if notFedToday %}boss{%else%}already complete{%endif%}</button >
     </div>
 
     <div id="footer"> 

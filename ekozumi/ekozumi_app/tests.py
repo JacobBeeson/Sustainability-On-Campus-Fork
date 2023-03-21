@@ -356,12 +356,4 @@ class ViewResponseTest(TestCase):
         response = self.client.post(reverse('lose'), {},
                                     HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
         self.assertEqual(response.status_code, 200)
-        
-    def testIntroView(self):
-        """
-        tests the intro page
-        """
-        response = self.client.post('/ekozumi/intro/')
-        self.assertEqual(response.status_code, 200)
-        
 

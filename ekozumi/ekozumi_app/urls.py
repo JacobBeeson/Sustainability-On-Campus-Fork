@@ -1,6 +1,6 @@
 """
 Defines all of the URL patterns for our application, in each path
-the string is what should lead the URL 127.0.0.1:8000/ekozumi/
+the string is what should lead the URL domain_name/ekozumi/
 
 Authors: Christian Wood, Oscar Klemenz
 """
@@ -24,6 +24,6 @@ urlpatterns = [
     path("lose/", views.losePage, name="lose"),
     path("feed/", views.feedZumiPage, name="feed"),
     path("leaderboard/", views.leaderboardPage, name="leaderboard"),
-    path("upload_data/", views.uploadDataPage, name="upload_data"),
-    path("intro/", views.introPage, name="intro")
+    path("upload_monster_data/", views.uploadMonsterDataPage, name="upload_monster_data"),
+    path("upload_megaboss_data/", views.uploadMegabossDataPage, name="upload_megaboss_data")
 ]

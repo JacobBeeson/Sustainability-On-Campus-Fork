@@ -5,7 +5,9 @@
 
 var score = 0;
 var round = 1;
-var attempts = 0;
+var attempts = 1;
+var seconds = 0;
+var countdown
 
 function loadQuiz(){
     /* - Displays the megaboss quiz on the fight page
@@ -19,6 +21,7 @@ function loadQuiz(){
     //checks which round it is and displays appropriate questions and answers 
     switch(round){
         case 1:
+            startTimer();
             document.getElementById('Question').innerHTML = Q1;
             // randomly generates which pos correct answer is in 
             Q1Correct = Math.floor(Math.random() * 4)+1;
@@ -143,9 +146,10 @@ function loadQuiz(){
             //save score to database 
             console.log(score);
             console.log("calling send data")
-            sendDataToDjango(score);
+            clearInterval(countdown);
+            sendDataToDjango(score, seconds);
             //hidea form and displaya nav bar 
-            document.getElementById('Question').innerHTML = "ahh i can't beleive you defeated me!!!";
+            document.getElementById('Question').innerHTML = outroText;
             document.getElementById('form').style.display = "none";
             document.getElementById("footer").style.display = "block"           
     }   
@@ -171,7 +175,6 @@ function checkAnswer(){
     if (checkedValue == null){
         alert("please choose an answer");
     } else {
-        attempts++
         //checks if answer is correct for round 
         switch(round){
             case 1:
@@ -183,6 +186,7 @@ function checkAnswer(){
                     setTimeout(calScore,1500); 
                 } else {
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
+                    attempts++
                 }
                 break;
             case 2:
@@ -196,6 +200,7 @@ function checkAnswer(){
                 } else {
                     // changes header colour to red 
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
+                    attempts++
                 }
                 break;
             case 3:
@@ -208,6 +213,7 @@ function checkAnswer(){
                 } else {
                     // changes header colour to red
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
+                    attempts++
                 }
                 break;
              case 4:
@@ -220,6 +226,7 @@ function checkAnswer(){
                 } else {
                     // changes header colour to red
                     document.getElementById("box-header").style.backgroundColor = "#ff0000"
+                    attempts++
                 }
                 break;
         }
@@ -243,20 +250,27 @@ function calScore(){
     }
     // resets attempts and incriments round 
     document.getElementById("character").src = normalBoss;
-    attempts = 0
     round++
     loadQuiz();
 }
 
-function sendDataToDjango(score) {
+function startTimer() {
+    countdown = setInterval(function() {
+        seconds++;
+    }, 1000);
+}
+
+function sendDataToDjango(score, seconds) {
     /* Uses JQuery to make a post request to django with the users score
      */
     console.log("Data sending");
     $.ajax({
         type: 'POST',
-        url: '../upload_data/',
+        url: '../upload_megaboss_data/',
         data: {
-            'score': score,
+            'score' : score,
+            'attempts' : attempts,
+            'seconds' : seconds,
             'csrfmiddlewaretoken': csrf_token // include CSRF token in request
         },
         success: function(response) {
