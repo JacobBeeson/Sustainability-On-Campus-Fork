@@ -171,15 +171,14 @@ class MegaBossCreationTest(TestCase):
         Megaboss.objects.create(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
                                 dayOfAppearance=datetime.now().date(),
                          megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
-                         playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                         playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                         megabossOutroDialogue="Enemy Placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
                          megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
                          megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
                          megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
                          megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
                          megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
                          megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
-                         megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
+                         timesFought=0, averageTime=0, averageAttempts=0)
         
     def testValidMegabossName(self):
         """
@@ -197,16 +196,15 @@ class MegaBossCreationTest(TestCase):
         try:
             Megaboss.objects.create(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
                                     dayOfAppearance=datetime.now().date(),
-                            megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
-                            playerIntroDialogue="Player placeholder", megabossOutroDialogue="Enemy Placeholder",
-                            playerOutroDialogue="Player placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
-                            megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
-                            megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
-                            megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
-                            megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
-                            megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
-                            megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
-                            megaboss1CorrectStats=0, megaboss2CorrectStats=0, megaboss3CorrectStats=0, megaboss4CorrectStats=0)
+                             megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
+                             megabossOutroDialogue="Enemy Placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                             megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
+                             megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
+                             megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
+                             megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
+                             megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
+                             megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
+                             timesFought=0, averageTime=0, averageAttempts=0)
             self.fail()
         except IntegrityError:
             pass
