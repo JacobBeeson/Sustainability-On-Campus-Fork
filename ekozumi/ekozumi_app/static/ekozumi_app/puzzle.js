@@ -46,6 +46,11 @@ function puzzle(){
 }
 
 function checkTime(i){
+    /* Checks the current time
+     * 
+     * Args:
+     *      i: Previous time
+     */
     //formats single digits
     if (i<10){
             i="0" + i;

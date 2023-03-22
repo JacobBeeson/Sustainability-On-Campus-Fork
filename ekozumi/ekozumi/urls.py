@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 # Initial search pattern, any url which leads with ekozumi/ will take user
 # to ekozumi app
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ekozumi/", include('ekozumi_app.urls')),
+    # Force redirect, when users just enter our link/clicks on view site from admin page
+    path("", lambda request: redirect('/ekozumi/'))
 ]

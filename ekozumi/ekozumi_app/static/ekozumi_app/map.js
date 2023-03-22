@@ -4,6 +4,9 @@
  */
 
 function getLocation(){
+    /* Get the location of the user
+     * and passes it to the show position function
+     */
     document.getElementById('battleButton').style.visibility = 'hidden';
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -14,6 +17,13 @@ function getLocation(){
 }
 
 function showPosition(position){
+    /* Takes the position of the user, and calculates where to show the character
+     * on map.html, and checks if the user is in the area of a boss, preloaded by
+     * the game keeper.
+     * 
+     * Args:
+     *      position: Position of the user (x, y coordinates)
+     */
     /* works out what perecentage from the bottom and the left the user is */
     var x_coordinate =  Math.round(((position.coords.longitude + 3.540081)/0.015715)*100)
     var y_coordinate =  Math.round(((position.coords.latitude-50.731797)/0.011093)*100)
