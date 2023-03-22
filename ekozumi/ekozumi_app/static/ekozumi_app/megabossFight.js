@@ -12,6 +12,7 @@ var countdown
 function loadQuiz(){
     /* - Displays the megaboss quiz on the fight page
      * - User will have to answer 4 quiz questions
+     * - Displays appropriate questions for each round in a random order
      */
     var normalBoss=normalBoss;
     var angryBoss=angryBoss;
@@ -168,7 +169,7 @@ function getCheckedRadioValue() {
 
 function checkAnswer(){
     /* When the user clicks the submit button, a check is performed to see
-     * if the user got the correct answer
+     * if the user got the correct answer.
      */
     var checkedValue = getCheckedRadioValue();
     //checks if answer was selected 
@@ -234,7 +235,8 @@ function checkAnswer(){
 }
 
 function calScore(){
-    /* Calculates how many points the user got
+    /* Calculates how many points the user got, score is based on how
+     * many attempts it took them
      */
     // gives appropriate points based on number of attempts 
     switch(attempts){
@@ -255,6 +257,11 @@ function calScore(){
 }
 
 function startTimer() {
+    /* Starts a timer, which is used to calculate how long a player
+     * has spent answering the questions.
+     * (One of the metrics to plot)
+     * 
+     */
     countdown = setInterval(function() {
         seconds++;
     }, 1000);
