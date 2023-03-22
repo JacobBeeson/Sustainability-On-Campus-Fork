@@ -1,6 +1,7 @@
 """
 Views load HTML webpages, and perform any logic needed for post requests
 and displaying user specific information
+
 Authors: Christian Wood, Oscar Klemenz
 """
 
@@ -263,6 +264,7 @@ def fightIntroPage(request):
 def fightPage(request):
     """
     Whack a mole fight against the enemy or a megaboss battle
+
     Args:
         request (HttpRequest)
     Returns:
@@ -298,6 +300,7 @@ def fightPage(request):
 def fightOutroPage(request):
     """
     Outro dialogue for the fight
+
     Args:
         request (HttpRequest)
     Returns:
@@ -329,6 +332,7 @@ def feedZumiPage(request):
     Page updates the last time the user has fed their zumi,
     only allows the user to feed zumi if they have come from the
     fight outro page.
+
     Args:
         request (HttpRequest)
     Returns:
@@ -353,6 +357,7 @@ def leaderboardPage(request):
     """
     Displays the top 10 scores of users across campus, scoring metric
     based upon how many times a user has fed their zumi.
+
     Args:
         request (HttpRequest)
     Returns:
@@ -367,6 +372,7 @@ def losePage(request):
     Page for when a player loses, allows players to
     restart boss battle or return to home page.
     Can only be accessed from fight.html
+
     Args:
         request (HttpRequest)
 
@@ -386,15 +392,20 @@ def uploadMonsterDataPage(request):
     """
     Uploads users score to the database, and feeds their zumi
     once the monster has been defeated.
+
     Args:
         request (HttpRequest)
     """
-        # Checks the user has come from the fight page
+    # Checks the user has come from the fight page
     previous_url = request.META.get('HTTP_REFERER')
     previous_path = urlparse(previous_url).path
     if( previous_path == "/ekozumi/fight/"):
-        # Get http request, print it
-        score = int(request.POST.get('score'))
+        try:
+            # Get http request score data
+            score = int(request.POST.get('score'))
+        except TypeError:
+            #Score is null so add nothing
+            score = 0
         current_user = request.user
         current_user.profile.score += score
         current_user.save()
@@ -407,6 +418,7 @@ def uploadMegabossDataPage(request):
     """
     Uploads users score and time to the database, and feeds their zumi
     once the megaboss has been defeated.
+
     Args:
         request (HttpRequest)
     """
@@ -414,10 +426,17 @@ def uploadMegabossDataPage(request):
     previous_url = request.META.get('HTTP_REFERER')
     previous_path = urlparse(previous_url).path
     if( previous_path == "/ekozumi/fight/"):
-        # Get http request, print it
-        score = int(request.POST.get('score'))
-        attempts = int(request.POST.get('attempts'))
-        seconds = int(request.POST.get('seconds'))
+        
+        try:
+            # Get http request score data
+            score = int(request.POST.get('score'))
+            attempts = int(request.POST.get('attempts'))
+            seconds = int(request.POST.get('seconds'))
+        except TypeError:
+            # Error checking: If request contains no data default to zero
+            score = 0
+            attempts = 0
+            seconds = 0
 
         try:
             megaboss = Megaboss.objects.get(dayOfAppearance = datetime.now().date())
@@ -440,14 +459,14 @@ def uploadMegabossDataPage(request):
 
         return redirect('home_page')
     else:
-            return redirect('home_page')
+        return redirect('home_page')
 
 
 @login_required()
 def introPage(request):
     """
-    - Displays intro.html, which informs the user on how to play the game
-    - view loaded after zumi creation
+    Displays intro.html, which informs the user on how to play the game, 
+    view is loaded after zumi creation
     
     Args:
         request (HttpRequest)

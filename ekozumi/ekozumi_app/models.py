@@ -36,6 +36,8 @@ class Pet(models.Model):
         petType (CharField)     : Defined by PET_CHOICES dictionary, player has
                                   options of that dictionary for what kind of animal
                                   their pet is.
+        Returns:
+            String : Displays name of pet on admin site
     """
 
     petID = models.AutoField(primary_key=True)
