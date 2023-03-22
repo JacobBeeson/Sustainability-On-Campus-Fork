@@ -258,7 +258,7 @@ class ViewResponseTest(TestCase):
     def setUp(self):
         """
         Forces user to be logged in, as some pages will force redirect user
-        if not logged in, also creates a pet for the user
+        if not logged in, also creates a pet for the user, and a default megaboss
         """
         # User form
         form = SignUpForm(data={"username":'testUser', "email":"testEmail@email.com",
@@ -272,6 +272,18 @@ class ViewResponseTest(TestCase):
         user.profile.petID=pet
 
         self.client.force_login(user)
+
+        Megaboss.objects.create(megabossName="Placeholdermegaboss", megabossImage="Images/cigarette-megaboss-normal.png",
+                        dayOfAppearance=datetime.now().date(),
+                    megabossAngryImage="Images/cigarette-megaboss-angry.png", megabossIntroDialogue="Enemy Placeholder",
+                    megabossOutroDialogue="Enemy Placeholder", megabossQ1="Question 1", megabossQ1CA="Correct answer",
+                    megabossQ1WA1="Incorrect 1", megabossQ1WA2="Incorrect 2", megabossQ1WA3="Incorrect 3",
+                    megabossQ2="Question 2", megabossQ2CA="Correct answer", megabossQ2WA1="Incorrect 1", 
+                    megabossQ2WA2="Incorrect 2", megabossQ2WA3="Incorrect 3", megabossQ3="Question 3",
+                    megabossQ3CA="Correct answer", megabossQ3WA1="Incorrect 1", megabossQ3WA2="Incorrect 2",
+                    megabossQ3WA3="Incorrect 3", megabossQ4="Question 4", megabossQ4CA="Correct answer",
+                    megabossQ4WA1="Incorrect 1", megabossQ4WA2="Incorrect 2", megabossQ4WA3="Incorrect 3",
+                    timesFought=0, averageTime=0, averageAttempts=0)
 
     def testLoginView(self):
         """
@@ -354,6 +366,27 @@ class ViewResponseTest(TestCase):
         response = self.client.post(reverse('lose'), {},
                                     HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
         self.assertEqual(response.status_code, 200)
+    
+    def testUploadMonsterData(self):
+        """
+        test upload monster data page
+
+        Note: Check for a 302 here, as we perform a redirect which has status code 302
+        """
+        response = self.client.post(reverse('upload_monster_data'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        self.assertEqual(response.status_code, 302)
+    
+    def testUploadMonsterData(self):
+        """
+        test upload megaboss data page
+
+        Note: Check for a 302 here, as we perform a redirect which has status code 302
+        """
+        response = self.client.post(reverse('upload_megaboss_data'), {},
+                                    HTTP_REFERER='http://127.0.0.1:8000/ekozumi/fight/')
+        self.assertEqual(response.status_code, 302)
+
        
     def testIntroView(self):
         """
