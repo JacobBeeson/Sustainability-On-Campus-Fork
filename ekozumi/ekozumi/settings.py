@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ops18(&e)n-glv5xmw8wj7dpni+f%bsawb)s5o+te45!wc=b4y"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # set to allow digitalocean to host app
 ALLOWED_HOSTS = ['coral-app-asncb.ondigitalocean.app', '127.0.0.1']
