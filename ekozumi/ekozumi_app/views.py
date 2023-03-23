@@ -10,7 +10,6 @@ from .forms import SignUpForm, ZumiCreationForm
 from .models import Pet, Monster, Megaboss, Location, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from django.contrib.auth import logout
 from urllib.parse import urlparse
 import django.utils.timezone
@@ -71,13 +70,6 @@ def registrationPage(request):
             # Save the new user profile to database
             user.save()
             raw_password = form.cleaned_data.get('password1')
-            
-            #send welcome email
-            subject = 'Welcome to Ekozumi!'
-            message = 'Your account has been registered with Ekozumi, have fun exploring!'
-            from_email = 'ekozumiap@gmail.com'
-            recipient_list = [user.email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             # login user after signing up
             user = authenticate(username=user.username, password=raw_password)
