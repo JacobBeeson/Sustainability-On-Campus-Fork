@@ -28,14 +28,6 @@ DEBUG = True
 # set to allow digitalocean to host app
 ALLOWED_HOSTS = ['coral-app-asncb.ondigitalocean.app', '127.0.0.1']
 
-# Email sending
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_PORT = '2525'
-EMAIL_HOST_USER = '0b5a4983ce8bae'
-EMAIL_HOST_PASSWORD = '65332b774cd280'
-EMAIL_USE_TLS = True
-
 # Application definition
 
 INSTALLED_APPS = [
